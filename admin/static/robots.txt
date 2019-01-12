@@ -1,0 +1,12 @@
+User-Agent: *
+Disallow: 
+Disallow: /profile
+Disallow: /profile/accounts
+Disallow: /profile/applications
+Disallow: /profile/payout
+Disallow: /profile/settings
+Disallow: /profile/contact
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Sitemap: https://www.ewalletbooster.com/sitemap.xml
