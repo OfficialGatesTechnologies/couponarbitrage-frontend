@@ -50,7 +50,7 @@ export default withRouter(class manage_admin_accounts extends Component {
     getUserRow = (accountid) => {
       
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        axios.get(apiUrl + 'admin/user/admin-row?_id=' + accountid)
+        axios.get(apiUrl + 'admin/account/admin-row?_id=' + accountid)
             .then(res => {
                 var userData = res.data.results;
                
