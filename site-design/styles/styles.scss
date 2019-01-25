@@ -1,0 +1,195 @@
+// We can import bulma into the project using Sass.
+
+
+// $navbar-item-img-max-height: 90%;
+
+// import bulma and other stylesheets after updating variables
+@import "../node_modules/bulma/bulma";
+@import '../node_modules/bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio.min.css';
+@import '../node_modules/bulma-extensions/bulma-tooltip/dist/css/bulma-tooltip.min.css';
+@import '../node_modules/bulma-extensions/bulma-switch/dist/css/bulma-switch.min.css';
+@import '../node_modules/bulma-extensions/bulma-accordion/dist/css/bulma-accordion.min.css';
+ 
+ 
+ 
+//  Mobile Responsive
+
+ @media(max-width:768px){
+    
+    
+    .arb-section{
+        padding: 60px 0px !important;
+    }
+    .gamb-lt {
+        display: block !important;
+        position: relative !important;
+        text-align: center !important;
+    }
+    .search-box {
+        margin: 0 auto !important;
+        max-width: 250px;
+    }
+    
+ }
+ @media (max-width: 991px){
+    .ban-form{
+        position: relative !important;
+        right: 0px !important;
+    }
+    .txt-banner{
+        bottom: initial !important;
+        top: 4% !important;
+    }
+    .arb-wrap, .sharbing-wrap, .gamb-wrap, .turn-wrap {
+        margin: 0 auto !important;
+        max-width: 670px !important;
+    }
+    .join-us-wrap{
+        margin: 0 auto !important;
+        max-width: 520px !important;
+    }
+    .gamb-lt {
+        display: block !important;
+        position: relative !important;
+        text-align: center !important;
+    }
+    .turn-lt {
+        display: block !important;
+        position: relative !important;
+    }
+    .join-lt, .arb-lt, .sharb-rt{
+        float: none !important;
+        text-align: center;
+        display: block;
+        width: 100% !important;
+    }
+    .join-lt ul, .arb-lt ul, .sharb-rt ul{
+        // max-width: 500px;
+        text-align: left;
+        margin: auto;
+    }
+    .footer{
+        text-align: center;
+    }
+    .turn-section{
+        clear: both;
+    }
+    .sm-block{
+        display: block;
+    }
+    .footer{
+        padding-top: 30px !important;
+    }
+    .footer-bot{
+        margin-top: 30px !important;
+    }
+    
+ }
+ 
+//  Tablet Responsive
+@media(max-width:1023px) and (min-width:769px){
+    .ban-form{
+        position: relative !important;
+        right: 0px !important;
+    }
+    .txt-banner{
+        bottom: initial !important;
+        top: 4% !important;
+    }
+    .join-us{
+        display: inline-block;
+        width: 100%;
+    }
+        
+    .gamb-lt {
+        display: block !important;
+        position: relative !important;
+        text-align: center !important;
+    }
+    .gamb-image-tap, .turn-lt-tap {
+        display: block !important;
+    }
+    
+    .turn-lt {
+        display: block !important;
+        position: relative !important;
+    }
+    
+    .join-lt ul, .arb-lt ul, .sharb-rt ul{
+        // max-width: 500px;
+        text-align: left;
+        margin: auto;
+    }
+    .footer{
+        text-align: center;
+    }
+    .turn-section{
+        clear: both;
+    }
+
+}
+@media(max-width:1087px){
+    .sm-menu{
+        position: relative;
+        right: 2%;
+        top: 20px;
+    }
+    .header-bot-in .sm-menu{
+        top: 0px;
+    }
+    .header-bot-in .navbar-menu.is-active ul{
+        text-align: left;
+    }
+    .header-bot-in ul li{
+        display: block !important;
+    }
+    .header-bot-in ul li > a.navbar-item, .header-bot-in ul li > a.navbar-link {
+        color: #000 !important;
+    }
+    .header-bot-in .navbar-link:not(.is-arrowless)::after {
+        border-color: #000 !important;
+    }
+    .navbar-menu.is-active{
+        border-top: 1px solid #f5f5f5;
+    }
+    .navbar-menu.is-active .navbar-dropdown{
+        border-top: none;
+        animation: none;
+    }
+    .max-log-img{
+        position: relative;
+        left: 2%;
+    }
+    .ban-form{
+        position: relative !important;
+        right: 0px !important;
+    }
+    .txt-banner{
+        bottom: initial !important;
+        top: 16%;
+    }
+}
+//  Desktop Responsive
+@media(max-width:1215px) and (min-width:1024px){
+    .ban-form {
+        position: absolute;
+        top: 0;
+        right: 20px !important;
+    }
+    .txt-banner{
+        left: 5% !important;
+    }
+}
+
+//  Widescreen Responsive
+
+@media(max-width:1407px) and (min-width:1216px){
+    .ban-form {
+        position: absolute;
+        top: 0;
+        right: 80px !important;
+    }
+    .txt-banner{
+        left: 8% !important;
+    }
+}
