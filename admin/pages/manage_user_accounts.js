@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
-import { site_name, apiUrl, hearAboutUs,getCountries } from '../utils/Common';
+import { site_name, apiUrl, hearAboutUs, getCountries } from '../utils/Common';
 import { withRouter } from 'next/router';
 import _ from 'lodash';
 import Router from 'next/router'
 import axios from 'axios';
 import Link from 'next/link';
 import toastr from 'toastr';
- 
+
 export default withRouter(class manage_user_accounts extends Component {
 
     constructor(props) {
@@ -66,20 +66,20 @@ export default withRouter(class manage_user_accounts extends Component {
                     Router.push(`/login`);
                 }
             })
-        
+
         if (accoutId) {
             this.getUserRow(accoutId);
         }
     }
 
     getUserRow = (accountid) => {
-        
-        
+
+
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
         axios.get(apiUrl + 'admin/user/user-row?_id=' + accountid)
             .then(res => {
                 var userData = res.data.results;
-                
+
                 this.setState({ userData: userData, editForm: true })
             }).catch((error) => {
                 if (error) {
@@ -145,13 +145,12 @@ export default withRouter(class manage_user_accounts extends Component {
                 message: "Please enter the phone number..",
                 doValidate: () => {
                     const accountPhone = _.trim(_.get(userData, 'accountPhone', ""));
-
                     if (accountPhone.length > 0) {
                         return true;
                     }
                     return false;
                 }
-            }, 
+            },
 
 
         };
@@ -183,9 +182,9 @@ export default withRouter(class manage_user_accounts extends Component {
         const { changePass } = this.state;
         let fieldNeedToValidate = [];
         if (changePass || this.state.editForm === false) {
-            fieldNeedToValidate = ['name', 'username', 'email',  'password', 'cpassword', 'accountPhone'];
+            fieldNeedToValidate = ['name', 'username', 'email', 'password', 'cpassword', 'accountPhone'];
         } else {
-            fieldNeedToValidate = ['name', 'username', 'email',  'accountPhone'];
+            fieldNeedToValidate = ['name', 'username', 'email', 'accountPhone'];
         }
         this.formValidation(fieldNeedToValidate, (isValid) => {
             if (isValid) {
@@ -205,7 +204,7 @@ export default withRouter(class manage_user_accounts extends Component {
         }).then((result) => {
             let sucMsg = result.data.msg;
             toastr.success(sucMsg, '');
-            Router.push(`/user-accounts`);
+            Router.push(`/user_accounts`);
         }).catch(error => {
 
             let errorMsg = error.response.data.msg;
@@ -223,7 +222,7 @@ export default withRouter(class manage_user_accounts extends Component {
         }).then((result) => {
             let sucMsg = result.data.msg;
             toastr.success(sucMsg, '');
-             Router.push(`/user-accounts`);
+            Router.push(`/user_accounts`);
         }).catch(error => {
             let errorMsg = error.response.data.msg;
             toastr.error(errorMsg, 'Error!');
@@ -259,8 +258,8 @@ export default withRouter(class manage_user_accounts extends Component {
             errors['cpassword'] = null;
         }
     }
-    
-    
+
+
 
     render() {
         const { userData, changePass, error, editForm } = this.state;
@@ -298,7 +297,7 @@ export default withRouter(class manage_user_accounts extends Component {
                                             </Link>
                                         </li>
                                         <li>
-                                        <Link href="/user_accounts" as="/user-accounts" prefetch>
+                                            <Link href="/user_accounts" as="/user-accounts" prefetch>
                                                 <a href="#">Users</a>
                                             </Link>
                                         </li>
@@ -330,7 +329,7 @@ export default withRouter(class manage_user_accounts extends Component {
                             </div>
                         </div>
                         <div className="columns">
-                            
+
                             <div className="column is-6">
                                 <div className="control">
                                     <label className="label has-text-grey">Username </label>
@@ -346,7 +345,7 @@ export default withRouter(class manage_user_accounts extends Component {
                                 </div>
                             </div>
                         </div>
-                        
+
 
                         {
                             this.state.editForm ? <div className="columns">
@@ -373,17 +372,16 @@ export default withRouter(class manage_user_accounts extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">Country </label>
                                     <div className="select is-fullwidth">
-                                        <select name="accountCountry" onChange={this.handleInputChange}>
+                                        <select value={`${(userData.accountCountry) ? userData.accountCountry : null}`} name="accountCountry" onChange={this.handleInputChange}>
                                             <option value="">Select Country</option>
                                             {/* userData.email this.state.editForm */}
                                             {getCountries().map(country => (
 
-                                                
-                                
-                                 <option selected={`${(this.state.editForm && userData.accountCountry ==country.code )}`} value={country.code}>{country.name}</option>
-                              ))}
-                                            <option value="Administrator">Administrator</option>
-                                            <option value="SubAdmin">Sub Admin</option>
+
+
+                                                <option  value={country.code}>{country.name}</option>
+                                            ))}
+                                           
                                         </select>
                                         <p className="help is-danger">{_.get(error, 'accountCountry')}</p>
                                     </div>
@@ -397,12 +395,12 @@ export default withRouter(class manage_user_accounts extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">Where did you hear about us?  </label>
                                     <div className="select is-fullwidth">
-                                        <select name="accountReferrence" onChange={this.handleInputChange}>
+                                        <select value={`${(userData.accountReferrence) ? userData.accountReferrence : null}`} name="accountReferrence" onChange={this.handleInputChange}>
                                             <option value="">Where did you hear about us?</option>
                                             {hearAboutUs().map(aboutus => (
-                                 <option selected={`${(this.state.editForm && userData.accountReferrence ==aboutus.code )}`} value={aboutus.code}>{aboutus.name}</option>
-                              ))}
-                                        
+                                                <option  value={aboutus.code}>{aboutus.name}</option>
+                                            ))}
+
                                         </select>
                                         <p className="help is-danger">{_.get(error, 'accountReferrence')}</p>
                                     </div>
@@ -410,7 +408,7 @@ export default withRouter(class manage_user_accounts extends Component {
                             </div>
 
                         </div>
- 
+
                         <h3 className="title is-size-5 has-text-grey-dark is-marginless">Payment Details  </h3>
                         <hr></hr>
                         <div className="columns">
@@ -437,7 +435,7 @@ export default withRouter(class manage_user_accounts extends Component {
                                     <p className="help is-danger">{_.get(error, 'accountPaypalEmail')}</p>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <h3 className="title is-size-5 has-text-grey-dark is-marginless">Payout by bank transfer - BACS  </h3>
                         <hr></hr>
@@ -467,17 +465,17 @@ export default withRouter(class manage_user_accounts extends Component {
                                     <p className="help is-danger">{_.get(error, 'bankAccountSortCode')}</p>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div className="columns">
                             <div className="column is-6">
                                 <div className="control">
                                     <label className="label has-text-grey">Sharbs Software </label>
                                     <div className="select is-fullwidth">
-                                        <select name="paymentStatus" onChange={this.handleInputChange}>
+                                        <select value={`${( userData.paymentStatus) ? userData.paymentStatus : ''}`} name="paymentStatus" onChange={this.handleInputChange}>
                                             <option value="">Select Status</option>
-                                            <option selected={`${(this.state.editForm && userData.paymentStatus ==1 )}`} value="1">Active</option>
-                                            <option selected={`${(this.state.editForm && userData.paymentStatus ==0 )}`} value="0">In-Active</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">In-Active</option>
                                         </select>
                                         <p className="help is-danger">{_.get(error, 'paymentStatus')}</p>
                                     </div>
@@ -488,10 +486,10 @@ export default withRouter(class manage_user_accounts extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">VIP User </label>
                                     <div className="select is-fullwidth">
-                                        <select name="uservip" onChange={this.handleInputChange}>
+                                        <select value={`${( userData.uservip) ? userData.uservip : ''}`} name="uservip" onChange={this.handleInputChange}>
                                             <option value="">Select Status</option>
-                                            <option selected={`${(this.state.editForm && userData.uservip ==1 )}`} value="1">Active</option>
-                                            <option selected={`${(this.state.editForm && userData.uservip ==0 )}`} value="0">In-Active</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">In-Active</option>
                                         </select>
                                         <p className="help is-danger">{_.get(error, 'uservip')}</p>
                                     </div>
@@ -504,17 +502,17 @@ export default withRouter(class manage_user_accounts extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">Cut Odds permission ? </label>
                                     <div className="select is-fullwidth">
-                                        <select name="cutodds_auth" onChange={this.handleInputChange}>
+                                        <select value={`${( userData.cutodds_auth) ? userData.cutodds_auth : ''}`} name="cutodds_auth" onChange={this.handleInputChange}>
                                             <option value="">Select Status</option>
-                                            <option selected={`${(this.state.editForm && userData.cutodds_auth ==1 )}`} value="1">Active</option>
-                                            <option selected={`${(this.state.editForm && userData.cutodds_auth ==0 )}`} value="0">In-Active</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">In-Active</option>
                                         </select>
                                         <p className="help is-danger">{_.get(error, 'cutodds_auth')}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            
+
 
                         </div>
                         <div className="columns">

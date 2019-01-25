@@ -9,8 +9,8 @@ export const ADMINMODULES = [
         'id': 1,
         'isChecked': false,
         'submodules': [
-            { 'name': 'My Account', 'url': '/myaccount','as': 'myaccount', 'id': 'my-account' },
-            { 'name': 'Admin Account List', 'url': '/admin_accounts', 'as': 'admin_accounts','id': 'admin_accounts' }
+            { 'name': 'My Account', 'url': '/myaccount','as': '/myaccount', 'id': 'my-account' },
+            { 'name': 'Admin Account List', 'url': '/admin_accounts', 'as': '/admin_accounts','id': 'admin_accounts' }
         ]
     },
     {
@@ -22,9 +22,9 @@ export const ADMINMODULES = [
         'submodules': [
             { 'name': 'Add New User', 'url': '/manage_user_accounts','as': '/manage-user', 'id': 'admin-accounts1' },
             { 'name': 'User Accounts List', 'url': '/user_accounts ','as': '/user-accounts',  'id': 'admin-accounts2' },
-            { 'name': 'User Accounts Track List', 'url': '/user-tracks', 'id': 'admin-accounts3' },
-            { 'name': 'Turnover Registration Request', 'url': '/turnover-request', 'id': 'admin-accounts5' },
-            { 'name': 'User Intrested', 'url': '/user-interested', 'id': 'admin-accounts6' }
+            { 'name': 'User Accounts Track List', 'url': '/user_tracking', 'as':'/user_tracking', 'id': 'admin-accounts3' },
+            { 'name': 'Turnover Registration Request', 'url': '/turnover_registration','as':'turnover_registration', 'id': 'admin-accounts5' },
+            { 'name': 'User Intrested', 'url': '/user_interested','as':'/user_interested', 'id': 'admin-accounts6' }
         ]
     },
     {
@@ -34,11 +34,11 @@ export const ADMINMODULES = [
         'id': 3,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Cashback Categories', 'url': '/my-account', 'id': 'admin-accounts7' },
-            { 'name': 'Cashback Stores', 'url': '/admin-accounts', 'id': 'admin-accounts8' },
+            { 'name': 'Cashback Categories', 'url': '/cashback_categories', 'as':'/cashback_categories', 'id': 'admin-accounts7' },
+            { 'name': 'Cashback Stores', 'url': '/cashback_stores','as':'/cashback_stores', 'id': 'admin-accounts8' },
             { 'name': 'Cashback Offers', 'url': '/admin-accounts', 'id': 'admin-accounts9' },
             { 'name': 'Cashback Vouchers Codes', 'url': '/admin-accounts', 'id': 'admin-accounts10' },
-            { 'name': 'Cashback Sites', 'url': '/admin-accounts', 'id': 'admin-accounts11' }
+            { 'name': 'Cashback Sites', 'url': '/cashback_sites', 'as':'cashback_sites', 'id': 'admin-accounts11' }
         ]
     },
     {
@@ -116,7 +116,7 @@ export const ADMINMODULES = [
         'isChecked': false,
         'submodules': [
             { 'name': 'Unconfirmed Claims', 'url': '/menu-manager', 'id': 'admin-accounts7' },
-            { 'name': 'Unapproved Claims', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Unapproved Claims', 'url': '/article', 'id': 'admin-accounts7' },
 
 
         ]
@@ -129,8 +129,8 @@ export const ADMINMODULES = [
         'id': 10,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Unconfirmed Claims', 'url': '/menu-manager', 'id': 'admin-accounts7' },
-            { 'name': 'Unapproved Claims', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Add New Menu', 'url': '/manage_menu', 'id': 'admin-accounts7' },
+            { 'name': 'Menu List', 'url': '/menus', 'id': 'admin-accounts7' },
 
 
         ]
@@ -145,7 +145,17 @@ export const ADMINMODULES = [
         'id': 11,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Mail Templates', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            { 'name': 'Mail Templates', 'url': '/email_templates','as':'/email_templates', 'id': 'admin-accounts7' },
+            // { 'name': 'Store Reviews', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            // { 'name': 'Banners List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            // { 'name': 'Affiliate Banners List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            // { 'name': 'FAQ List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            // { 'name': 'Subscribers List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            // { 'name': 'Newsletters List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            // { 'name': 'Page List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+             { 'name': 'Affiliate Networks', 'url': '/affiliate_networks', 'as':'/affiliate_networks', 'id': 'admin-accounts7' },
+            // { 'name': 'Turnover Static Text', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            // { 'name': 'Tags', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
 
         ]
     },

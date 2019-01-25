@@ -7,8 +7,9 @@ import Link from 'next/link';
 import toastr from 'toastr'
 import { BounceLoader } from 'react-spinners';
 import Pagination from "react-js-pagination";
-import ReactTooltip from 'react-tooltip'
-export default withRouter(class Admin_accounts extends Component {
+import ReactTooltip from 'react-tooltip';
+
+export default withRouter(class Menus extends Component {
 
     constructor(props) {
         super(props);
@@ -23,7 +24,7 @@ export default withRouter(class Admin_accounts extends Component {
             searchStatus: '',
             sortClass: 'fa-sort',
             sortOrder: 'desc',
-            sortKey: 'timestamp',
+            sortKey: 'registerDate',
         }
 
     }
@@ -36,7 +37,7 @@ export default withRouter(class Admin_accounts extends Component {
         const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/account/list?pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/menu/list?pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (sortOrder) { listUrl += '&sortOrder=' + sortOrder + '&sortKey=' + sortKey; }
@@ -56,12 +57,12 @@ export default withRouter(class Admin_accounts extends Component {
         toastr.clear();
         const { activePage } = this.state;
         var updateStatus = true;
-        if (action == 'delete' && !window.confirm('Are you sure want to delete this account?')) {
+        if (action == 'delete' && !window.confirm('Are you sure want to delete?')) {
             updateStatus = false;
         }
         if (updateStatus) {
             axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-            axios.post(apiUrl + 'admin/account/update-accounts', {
+            axios.post(apiUrl + 'admin/menu/update-menus-status', {
                 action: action,
                 _id: id,
             }).then((result) => {
@@ -107,16 +108,17 @@ export default withRouter(class Admin_accounts extends Component {
     resetSearch = (e) => {
         e.preventDefault();
         document.getElementById('searchForm').reset();
-        this.setState({ searchKey: '', searchBy: '' ,searchStatus:''});
+        this.setState({ searchKey: '', searchBy: '', searchStatus: '' });
         setTimeout(() => { this.getList(1); }, 100);
     }
+
 
     render() {
         return (
             <div>
                 <Head>
                     <meta charSet="utf-8" />
-                    <title>{site_name} - Admin Accounts </title>
+                    <title>{site_name} - Menu Items List </title>
                 </Head>
                 <div className="page-wrapper" id="page-wrapper">
                     <div className="columns">
@@ -129,11 +131,11 @@ export default withRouter(class Admin_accounts extends Component {
                                                 <a href="#">Dashboard</a>
                                             </Link>
                                         </li>
-                                        <li className="is-active"><a href="#">Administrators</a></li>
-                                        <li className="is-active"><a href="#">Admin Account List</a></li>
+                                        <li className="is-active"><a href="#">Menu Manager</a></li>
+                                        <li className="is-active"><a href="#">Menu Items List</a></li>
                                     </ul>
-                                    <Link href="/manage_admin_accounts" as="manage-admin">
-                                        <a className="ad-new" >Add New Account</a>
+                                    <Link href="/manage_menu" as="manage_menu">
+                                        <a className="ad-new" >Add New Menu Item</a>
                                     </Link>
                                 </nav>
 
@@ -146,69 +148,69 @@ export default withRouter(class Admin_accounts extends Component {
                         <section className="hero is-light mg-b-20">
                             <div className="hero-body pd-tb-10">
                                 <div className="container1">
-                                <form id="searchForm">
-                                    <div className="columns mg-b-0">
-                                        <div className="column">
-                                            <div className="control">
-                                                <label className="label">Search Key</label>
-                                                <input className="input" type="text" name="searchKey" placeholder="Search Key" onChange={this.handleInputChange}></input>
-                                            </div>
-
-                                        </div>
-                                        <div className="column">
-                                            <div className="control">
-                                                <label className="label">Search By</label>
-                                                <div className="select is-fullwidth">
-                                                    <select name="searchBy" onChange={this.handleInputChange}>
-                                                        <option value="">Search By</option>
-
-                                                        <option value="username">Username</option>
-                                                        <option value="email">Email</option>
-                                                    </select>
+                                    <form id="searchForm">
+                                        <div className="columns mg-b-0">
+                                            <div className="column">
+                                                <div className="control">
+                                                    <label className="label">Search Key</label>
+                                                    <input className="input" type="text" name="searchKey" placeholder="Search Key" onChange={this.handleInputChange}></input>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                        <div className="column">
-                                            <div className="control">
-                                                <label className="label">Status</label>
-                                                <div className="select is-fullwidth">
-                                                    <select name="searchStatus" onChange={this.handleInputChange}>
-                                                        <option value="all">All</option>
-                                                        <option value="Disabled">Disabled</option>
-                                                        <option value="Enabled">Enabled</option>
-                                                    </select>
+                                            </div>
+                                            <div className="column">
+                                                <div className="control">
+                                                    <label className="label">Search By</label>
+                                                    <div className="select is-fullwidth">
+                                                        <select name="searchBy" onChange={this.handleInputChange}>
+                                                            <option value="">Search By</option>
+
+                                                            <option value="name">Title</option>
+
+                                                        </select>
+                                                    </div>
                                                 </div>
+
+                                            </div>
+                                            <div className="column">
+                                                <div className="control">
+                                                    <label className="label">Status</label>
+                                                    <div className="select is-fullwidth">
+                                                        <select name="searchStatus" onChange={this.handleInputChange}>
+                                                            <option value="all">All</option>
+                                                            <option value="Disabled">Disabled</option>
+                                                            <option value="Enabled">Enabled</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                         </div>
-
-                                    </div>
-                                    <p className="buttons">
-                                        <a className="button is-theme is-rounded" onClick={this.handleSearch}>
-                                            <span className="icon is-small">
-                                                <i className="fas fa-search"></i>
-                                            </span>
-                                            <span>Search</span>
-                                        </a>
-                                        <a className="button is-danger is-outlined is-rounded" onClick={this.resetSearch}>
-                                            <span>Reset</span>
-                                            <span className="icon is-small">
-                                                <i className="fas fa-times"></i>
-                                            </span>
-                                        </a>
-                                    </p> </form>
+                                        <p className="buttons">
+                                            <a className="button is-theme is-rounded" onClick={this.handleSearch}>
+                                                <span className="icon is-small">
+                                                    <i className="fas fa-search"></i>
+                                                </span>
+                                                <span>Search</span>
+                                            </a>
+                                            <a className="button is-danger is-outlined is-rounded" onClick={this.resetSearch}>
+                                                <span>Reset</span>
+                                                <span className="icon is-small">
+                                                    <i className="fas fa-times"></i>
+                                                </span>
+                                            </a>
+                                        </p> </form>
                                 </div>
 
-                               
+
                             </div>
                         </section>
                         <div className="table-responsive dash-table-res">
                             <div className="level">
-                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Admin Account  List </h2>
+                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Menu Items  List </h2>
                                 <div>
 
-                                    
+
                                 </div>
 
                             </div>
@@ -217,10 +219,9 @@ export default withRouter(class Admin_accounts extends Component {
                                 <thead>
                                     <tr className="bg-light">
                                         <th>#</th >
-                                        <th onClick={this.handleSort.bind(this, 'username', this.state.sortOrder)} >User Name <i className={`fa ${(this.state.sortKey == "username") ? this.state.sortClass : "fa-sort"}`}></i></th>
-                                        <th onClick={this.handleSort.bind(this, 'email', this.state.sortOrder)} >Email <i className={`fa ${(this.state.sortKey == "email") ? this.state.sortClass : "fa-sort"}`}></i></th>
-                                        <th onClick={this.handleSort.bind(this, 'type', this.state.sortOrder)} >Account Type <i className={`fa ${(this.state.sortKey == "type") ? this.state.sortClass : "fa-sort"}`}></i></th>
-                                        <th onClick={this.handleSort.bind(this, 'timestamp', this.state.sortOrder)} >Created <i className={`fa ${(this.state.sortKey == "timestamp") ? this.state.sortClass : "fa-sort"}`}></i></th>
+                                        <th onClick={this.handleSort.bind(this, 'name', this.state.sortOrder)} >Menu Item Name <i className={`fa ${(this.state.sortKey == "name") ? this.state.sortClass : "fa-sort"}`}></i></th>
+                                        <th onClick={this.handleSort.bind(this, 'type', this.state.sortOrder)} >Type <i className={`fa ${(this.state.sortKey == "type") ? this.state.sortClass : "fa-sort"}`}></i></th>
+                                        <th onClick={this.handleSort.bind(this, 'access', this.state.sortOrder)} >Access Level <i className={`fa ${(this.state.sortKey == "access") ? this.state.sortClass : "fa-sort"}`}></i></th>
                                         <th >Status</th>
                                         <th style={{ width: '200px' }}>Action</th>
                                     </tr>
@@ -257,24 +258,32 @@ const TableListContent = (props) => {
 
             {
                 (props.loading) ?
-                    <tr><td colSpan="8" ><BounceLoader css="margin: 0 auto;" sizeUnit={"px"} size={30} color={'#123abc'} loading={true} />
+                    <tr key="loading"><td colSpan="8" ><BounceLoader css="margin: 0 auto;" sizeUnit={"px"} size={30} color={'#123abc'} loading={true} />
                     </td></tr>
                     : (props.arrlist.length > 0) ?
                         props.arrlist.map(function (dataRow, i) {
 
-                            var enabledBtn = (dataRow.isDisabled == 0) ? true : false;
-                            var disbaledBtn = (dataRow.isDisabled == 1) ? true : false;
+                            var enabledBtn = (dataRow.menuDisabled == 0) ? true : false;
+                            var disbaledBtn = (dataRow.menuDisabled == 1) ? true : false;
 
-                            return <tr>
+                            return <tr key={sNo + i}>
                                 <td>{sNo + i}</td>
-                                <td>{dataRow.username} </td>
-                                <td>{dataRow.email} </td>
-                                <td>{dataRow.type ? dataRow.type : '--'}</td>
-                                <td>{dataRow.timestamp.slice(0, 10)}</td>
+                                <td>{dataRow.name}
+                                    {
+                                        dataRow.defaultMenuItem === 1 ?
+                                            <p style={{ color: "red" }}><small>Default menu item cannot be delete.</small></p>
+                                            : ''
+                                    }
+
+
+                                </td>
+                                <td>{dataRow.type} </td>
+                                <td>{dataRow.access == 0 ? 'Public' : 'Registered'}</td>
+
 
                                 <td>
                                     {
-                                        dataRow.isDisabled === 0 ?
+                                        dataRow.menuDisabled === 0 ?
                                             <label className="tag is-success tooltip is-tooltip-bottom " data-tooltip="Approved ">
                                                 Enabled</label> : <label className="tag is-danger tooltip is-tooltip-bottom " data-tooltip="Approved ">
                                                 Disabled</label>
@@ -293,28 +302,29 @@ const TableListContent = (props) => {
                                                 <i className="fas fa-check"></i>
                                             </span>
                                         </button>
-                                        <Link href={`/manage_admin_accounts?id=${dataRow._id}`} as={`/update-admin/${dataRow._id}`}>
+                                        <Link href={`/manage_menu?id=${dataRow._id}`} as={`/update-menu/${dataRow._id}`}>
                                             <a data-tip="Edit" className="button is-info is-small tooltip" data-tooltip="Edit">  <span className="icon has-text-white">
                                                 <i className="fas fa-pencil-alt"></i>
                                             </span></a>
                                         </Link>
-                                        <Link href={`/view_admin_accounts?id=${dataRow._id}`} as={`/view-admin/${dataRow._id}`}>
-                                            <a  data-tip="View" className="button is-link is-small tooltip" data-tooltip="View">
+
+                                        {
+                                            dataRow.defaultMenuItem === 0 ? <button data-tip="Delete" onClick={props.updateAccount.bind(this, 'delete', dataRow._id)} className="button is-danger is-small tooltip" data-tooltip="Delete">
                                                 <span className="icon has-text-white">
-                                                    <i className="fas fa-eye"></i>
+                                                    <i className="fas fa-trash-alt"></i>
                                                 </span>
-                                            </a>
-                                        </Link>
-                                        <button data-tip="Delete" onClick={props.updateAccount.bind(this, 'delete', dataRow._id)} className="button is-danger is-small tooltip" data-tooltip="Delete">
-                                            <span className="icon has-text-white">
-                                                <i className="fas fa-trash-alt"></i>
-                                            </span>
-                                        </button>
+                                            </button> : ''
+                                        }
+
+
+
+
+                                        <ReactTooltip />
                                     </div>
-                                    <ReactTooltip />
+
                                 </td>
                             </tr>
-                        }) : <tr><td colSpan="8" style={{ 'textAlign': 'center' }} >No records found.</td></tr>
+                        }) : <tr key="norecords"><td colSpan="8" style={{ 'textAlign': 'center' }} >No records found.</td></tr>
 
 
             }

@@ -29,7 +29,7 @@ export default class MyApp extends App {
 
   componentDidMount() {
 
-    console.log(this.props.router.pathname);
+   
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
     axios.get(apiUrl + 'admin/auth/check-auth')
       .then(res => {
@@ -60,7 +60,7 @@ export default class MyApp extends App {
                 <i className="fas fa-tachometer-alt" style={{ fontSize: '1.5em' }}></i>
               </NavIcon>
               <NavText>
-                <Link href="/dashboard" prefetch>Dashboard</Link>
+                <Link href="/dashboard" prefetch><a>Dashboards</a></Link>
 
               </NavText>
             </NavItem>

@@ -33,8 +33,7 @@ export default withRouter(class manage_admin_accounts extends Component {
         const accoutId = this.props.router.query.id
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
         axios.get(apiUrl + 'admin/auth/check-auth')
-            .then(() => {
-               
+            .then(() => { 
             })
             .catch((error) => {
                 if (error) {
@@ -53,11 +52,9 @@ export default withRouter(class manage_admin_accounts extends Component {
         axios.get(apiUrl + 'admin/account/admin-row?_id=' + accountid)
             .then(res => {
                 var userData = res.data.results;
-               
                 this.setState({   userData: userData })
             }).catch((error) => {
                 if (error) {
-                   
                     toastr.error('Invalid URI', 'Error!');
                     Router.push(`/admin_accounts`);
                 }
