@@ -1,7 +1,7 @@
  
  
 import Head from 'next/head';
-import HomeIndex from '../components/landingPage/HomeIndex';
+import HomeIndex from '../components/landing-page/home-index';
 import {site_name} from '../utils/Common';
  
  

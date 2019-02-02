@@ -9,6 +9,8 @@
 @import '../node_modules/bulma-extensions/bulma-tooltip/dist/css/bulma-tooltip.min.css';
 @import '../node_modules/bulma-extensions/bulma-switch/dist/css/bulma-switch.min.css';
 @import '../node_modules/bulma-extensions/bulma-accordion/dist/css/bulma-accordion.min.css';
+@import '../node_modules/bulma-extensions/bulma-carousel/dist/css/bulma-carousel.min.css';
+
  
  
  
@@ -134,8 +136,18 @@
         right: 2%;
         top: 20px;
     }
+    .sm-menu.shar-sm-menu{
+        top: 10px;
+    }
     .header-bot-in .sm-menu{
         top: 0px;
+    }
+    .navbar-menu.shar-menu-nav{
+        background: transparent;
+        border-top: none !important;
+    }
+    .sharb-nav ul{
+        display: block !important;
     }
     .header-bot-in .navbar-menu.is-active ul{
         text-align: left;
@@ -193,3 +205,4 @@
         left: 8% !important;
     }
 }
+

@@ -2,8 +2,8 @@
 
 import Head from 'next/head';
 import { site_name } from '../utils/Common';
-import HeaderIn from '../components/HeaderIn';
-import Footer from '../components/Footer';
+import HeaderIn from '../components/header-in';
+import Footer from '../components/footer';
 import Link from 'next/link';
 const Login = (props) => (
     <div>
@@ -72,7 +72,7 @@ const Login = (props) => (
                         </div>
                     </div>
                     <div className="log-form-bot full-width">
-                        <Link href="/signup"><a>Sign up</a></Link>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<Link href="/forgotPassword"><a>Forgot your password?</a></Link>
+                        <Link href="/signup"><a>Sign up</a></Link>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<Link href="/forgot-password"><a>Forgot your password?</a></Link>
                     </div>
                 </div>
             </div>

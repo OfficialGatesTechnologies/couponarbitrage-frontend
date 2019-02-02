@@ -4,8 +4,8 @@ import Head from 'next/head';
 
 import {site_name} from '../utils/Common';
 
-import HeaderIn from '../components/HeaderIn';
-import Footer from '../components/Footer';
+import HeaderIn from '../components/header-in';
+import Footer from '../components/footer';
 import Link from 'next/link';
 
 const Contact = (props) => (

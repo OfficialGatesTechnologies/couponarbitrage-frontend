@@ -1,11 +1,9 @@
-
-
 import Head from 'next/head';
 
 import { site_name } from '../utils/Common';
 
-import HeaderIn from '../components/HeaderIn';
-import Footer from '../components/Footer';
+import HeaderIn from '../components/header-in';
+import Footer from '../components/footer';
 import Link from 'next/link';
 const Cashback_Bonuses = (props) => (
     <div>
@@ -54,23 +52,23 @@ const Cashback_Bonuses = (props) => (
                                 <div className="cbk-top-cat">
                                     <div className="top-cat-ttl has-text-centered">TOP 10 Retailers</div>
                                     <ol>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">18bet-Sportsbook (Finland, Norway, Sweden)-£15</a></Link></li>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">Virgin Games-Casino-£25</a></Link></li>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">AvaTrade-Trading & Investing-£80</a></Link></li>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">888-Casino-£15</a></Link></li>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">Winner-Casino (Nordic & Germany Only)-£25</a></Link></li>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">JackpotJoy-Bingo-£15</a></Link></li>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">18bet-Sportsbook (Finland, Norway, Sweden)-£15</a></Link></li>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">Sporting Index-Sportsbook-£15</a></Link></li>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">Oddstorm-Sports Arbitrage Software-£350</a></Link></li>
-                                        <li><Link href="javascript:void(0);"><a target="_blank">Mr Spin-Casino-£15</a></Link></li>
+                                        <li><Link href=""><a target="_blank">18bet-Sportsbook (Finland, Norway, Sweden)-£15</a></Link></li>
+                                        <li><Link href=""><a target="_blank">Virgin Games-Casino-£25</a></Link></li>
+                                        <li><Link href=""><a target="_blank">AvaTrade-Trading & Investing-£80</a></Link></li>
+                                        <li><Link href=""><a target="_blank">888-Casino-£15</a></Link></li>
+                                        <li><Link href=""><a target="_blank">Winner-Casino (Nordic & Germany Only)-£25</a></Link></li>
+                                        <li><Link href=""><a target="_blank">JackpotJoy-Bingo-£15</a></Link></li>
+                                        <li><Link href=""><a target="_blank">18bet-Sportsbook (Finland, Norway, Sweden)-£15</a></Link></li>
+                                        <li><Link href=""><a target="_blank">Sporting Index-Sportsbook-£15</a></Link></li>
+                                        <li><Link href=""><a target="_blank">Oddstorm-Sports Arbitrage Software-£350</a></Link></li>
+                                        <li><Link href=""><a target="_blank">Mr Spin-Casino-£15</a></Link></li>
                                     </ol>
 
                                 </div>
                             </div>
                             <div className="column">
                                 <div className="cbk-banner-link">
-                                    <Link href="/HeartBingoCashback"><a><img src="static/images/banner/cbk-banner.png" alt="banner" /></a></Link>
+                                    <Link href="/heart-bingo-cashback"><a><img src="static/images/banner/cbk-banner.png" alt="banner" /></a></Link>
                                 </div>
                             </div>
                         </div>
@@ -79,13 +77,13 @@ const Cashback_Bonuses = (props) => (
                         <h1>Cashback Categories</h1>
                         <div className="cbk-at-list">
                             <ul>
-                                <li><Link href="javascript:void(0);"><a>Arbitrage & Matched Betting</a></Link></li>
+                                <li><Link href=""><a>Arbitrage & Matched Betting</a></Link></li>
                                 <li><Link href="/HeartBingoCashback"><a>Bingo</a></Link></li>
-                                <li><Link href="javascript:void(0);"><a>Bookmaker</a></Link></li>
-                                <li><Link href="javascript:void(0);"><a>Casino</a></Link></li>
-                                <li><Link href="javascript:void(0);"><a>Lottery & Games</a></Link></li>
-                                <li><Link href="javascript:void(0);"><a>Poker</a></Link></li>
-                                <li><Link href="javascript:void(0);"><a>Trading & Investing</a></Link></li>
+                                <li><Link href=""><a>Bookmaker</a></Link></li>
+                                <li><Link href=""><a>Casino</a></Link></li>
+                                <li><Link href=""><a>Lottery & Games</a></Link></li>
+                                <li><Link href=""><a>Poker</a></Link></li>
+                                <li><Link href=""><a>Trading & Investing</a></Link></li>
                             </ul>
                         </div>
                         <div className="cbk-srch-off">
@@ -171,7 +169,7 @@ const Cashback_Bonuses = (props) => (
                                                             <h4 className="offer-content-title">Dr Slot - Casino</h4>
                                                             <div className="text-center mg-auto">
                                                                 <p className="price-box">£15</p>
-                                                                <Link href="javascript:void(0);"><a className="price-btn">Claim Cashback</a></Link>
+                                                                <Link href=""><a className="price-btn">Claim Cashback</a></Link>
                                                             </div>
 
                                                         </div>
@@ -196,7 +194,7 @@ const Cashback_Bonuses = (props) => (
                                                             <h4 className="offer-content-title">Dr Slot - Casino</h4>
                                                             <div className="text-center mg-auto">
                                                                 <p className="price-box">£15</p>
-                                                                <Link href="javascript:void(0);"><a className="price-btn">Claim Cashback</a></Link>
+                                                                <Link href=""><a className="price-btn">Claim Cashback</a></Link>
                                                             </div>
 
                                                         </div>
@@ -221,7 +219,7 @@ const Cashback_Bonuses = (props) => (
                                                             <h4 className="offer-content-title">Dr Slot - Casino</h4>
                                                             <div className="text-center mg-auto">
                                                                 <p className="price-box">£15</p>
-                                                                <Link href="javascript:void(0);"><a className="price-btn">Claim Cashback</a></Link>
+                                                                <Link href=""><a className="price-btn">Claim Cashback</a></Link>
                                                             </div>
 
                                                         </div>
@@ -247,7 +245,7 @@ const Cashback_Bonuses = (props) => (
                                                             <h4 className="offer-content-title">Dr Slot - Casino</h4>
                                                             <div className="text-center mg-auto">
                                                                 <p className="price-box">£15</p>
-                                                                <Link href="javascript:void(0);"><a className="price-btn">Claim Cashback</a></Link>
+                                                                <Link href=""><a className="price-btn">Claim Cashback</a></Link>
                                                             </div>
 
                                                         </div>

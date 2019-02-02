@@ -29,6 +29,7 @@
     "country-data": "0.0.31",
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
+    "ion-rangeslider": "^2.3.0",
     "isomorphic-unfetch": "^3.0.0",
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
@@ -53,6 +54,7 @@
     "react-svg-gauge": "^1.0.8",
     "react-telephone-input": "^4.73.0",
     "react-vis": "^1.10.4",
+    "react-wow": "^1.0.0",
     "recharts": "^1.1.0"
   },
   "devDependencies": {
