@@ -56,7 +56,7 @@ export default withRouter(class Cashback_categories extends Component {
         toastr.clear();
         const { activePage } = this.state;
         var updateStatus = true;
-        if (action == 'delete' && !window.confirm('Are you sure want to delete this account?')) {
+        if (action == 'delete' && !window.confirm('Are you sure want to delete?')) {
             updateStatus = false;
         }
         if (updateStatus) {

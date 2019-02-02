@@ -210,7 +210,7 @@ export default withRouter(class manage_menu extends Component {
 
         const tragetFile = document.getElementById('imageFile').files[0];
         data.append('file', tragetFile);
-        data.set('menuData', menuData);
+ 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
         axios.post(apiUrl + 'admin/menu/update-menu', data, config).then((result) => {
             let sucMsg = result.data.msg;

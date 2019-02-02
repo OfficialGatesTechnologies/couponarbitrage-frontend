@@ -7,6 +7,8 @@ import Router from 'next/router'
 import axios from 'axios';
 import Link from 'next/link';
 import toastr from 'toastr';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import Image from 'react-image-resizer';
 
 export default withRouter(class manage_cashback_stores extends Component {
 
@@ -53,8 +55,8 @@ export default withRouter(class manage_cashback_stores extends Component {
                 payment_performance: '',
                 meta_title: "",
                 meta_keywords: "",
-                meta_description: '',
-            },
+                meta_description: '', 
+            }, 
             errors: {
                 aid: null,
                 cat_id: null,
@@ -89,7 +91,6 @@ export default withRouter(class manage_cashback_stores extends Component {
                     Router.push(`/login`);
                 }
             })
-
         if (editId) {
             this.getCatRow(editId);
         }
@@ -101,7 +102,7 @@ export default withRouter(class manage_cashback_stores extends Component {
     getCatRow = (editId) => {
 
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        axios.get(apiUrl + 'admin/cashback-offer/cat-row?_id=' + editId)
+        axios.get(apiUrl + 'admin/cashback-offer/store-row?_id=' + editId)
             .then(res => {
                 var storeData = res.data.results;
 
@@ -270,46 +271,66 @@ export default withRouter(class manage_cashback_stores extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
+        const { storeData } = this.state;
         let fieldNeedToValidate = [];
-        fieldNeedToValidate = ['aid', 'cat_id', 'network_id', 'title', 'uploadType', 'link', 'details', 'value'];
+        fieldNeedToValidate = ['aid', 'cat_id', 'network_id', 'title', 'uploadType', 'link', 'value'];
         this.state.showUploadtype ? fieldNeedToValidate.push(this.state.showUploadtype) : '';
-
+        !storeData.details_default?fieldNeedToValidate.push('details'):fieldNeedToValidate.pop('details');
+        console.log(fieldNeedToValidate);
         this.formValidation(fieldNeedToValidate, (isValid) => {
             if (isValid) {
                 toastr.clear();
-                !this.state.editForm ? this.createUseraccount() : this.updateUserAccount();
+                !this.state.editForm ? this.createStores() : this.updateStores();
 
             }
         });
 
     }
-    createUseraccount = () => {
+    createStores = () => {
         const { storeData } = this.state;
+
+        const data = new FormData();
+        _.forOwn(storeData, (value, key) => {
+            data.set(key, value);
+        });
+        var tragetFile = '';
+        const fileExist = document.getElementById('imageFile');
+        if (typeof fileExist !== 'undefined' && fileExist !== null) {
+            tragetFile = fileExist.files[0];
+        }
+        data.append('file', tragetFile);
+
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        axios.post(apiUrl + 'admin/cashback-offer/create-cat', {
-            storeData: storeData,
-        }).then((result) => {
+        axios.post(apiUrl + 'admin/cashback-offer/create-store', data).then((result) => {
             let sucMsg = result.data.msg;
             toastr.success(sucMsg, '');
-            Router.push(`/cashback_stores`);
+              Router.push(`/cashback_stores`);
         }).catch(error => {
             let errorMsg = error.response.data.msg;
             toastr.error(errorMsg, 'Error!');
         });
     }
-    updateUserAccount = () => {
+    updateStores = () => {
         const { storeData } = this.state;
+
+        const data = new FormData();
+        _.forOwn(storeData, (value, key) => {
+            data.set(key, value);
+        });
+        var tragetFile = '';
+        const fileExist = document.getElementById('imageFile');
+        if (typeof fileExist !== 'undefined' && fileExist !== null) {
+            tragetFile = fileExist.files[0];
+        }
+        data.append('file', tragetFile);
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        axios.post(apiUrl + 'admin/cashback-offer/update-cat', {
-            storeData: storeData,
-        }).then((result) => {
+        axios.post(apiUrl + 'admin/cashback-offer/update-store', data).then((result) => {
             let sucMsg = result.data.msg;
             toastr.success(sucMsg, '');
             Router.push(`/cashback_stores`);
         }).catch(error => {
             let errorMsg = error.response.data.msg;
             toastr.error(errorMsg, 'Error!');
-
         });
     }
 
@@ -320,25 +341,36 @@ export default withRouter(class manage_cashback_stores extends Component {
         let fieldNeedToValidate = [fieldName];
         errors[fieldName] = null;
         this.formValidation(fieldNeedToValidate);
-
     }
     handleInputChange = (e) => {
         const { storeData } = this.state;
         const target = e.target;
+        var index = e.nativeEvent.target.selectedIndex;
+        if (index && target.name === 'aid') {
+            storeData['aidname'] = e.nativeEvent.target[index].text;
+        }
         const value = target.value;
         const name = target.name;
         storeData[name] = value;
         this.setState({
             storeData: storeData
         })
-        if (name == 'uploadType') {
-            this.setState({ showUploadtype: value });
-        }
+         
     }
+    handleDateChange = (fieldName, e) => {
+        const { storeData } = this.state;
+        storeData[fieldName] = e.toLocaleDateString();
+        this.setState({
+            storeData: storeData
+        })
 
-
-
-
+    }
+    handleCheckBoxChange = (fieldName,e) =>{
+        const { storeData } = this.state;
+        storeData[fieldName] = e.target.checked?1:0;
+        // details_default: "",   merchant_tc_default: "",
+        this.setState({storeData: storeData});
+    }
     render() {
         const { storeData, error } = this.state;
 
@@ -460,8 +492,9 @@ export default withRouter(class manage_cashback_stores extends Component {
                         <div className="columns">
                             <div className="column is-12">
                                 <div className="control">
-                                    <label className="label has-text-grey">Description </label>
-                                    <textarea className={"textarea " + (_.get(error, 'details') ? ' is-danger' : '')} name="details" onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} value={storeData.details} ></textarea>
+                                    <label className="label has-text-grey">Description  </label>
+                                    <label className="label has-text-grey">Set Default? <input type="checkbox" name="details_default" onChange={this.handleCheckBoxChange.bind(this,'details_default')} checked={storeData.details_default} />  </label>
+                                    <textarea disabled={storeData.details_default} className={"textarea " + (_.get(error, 'details') ? ' is-danger' : '')} name="details" onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} value={storeData.details} ></textarea>
                                     <p className="help is-danger">{_.get(error, 'details')}</p>
                                 </div>
                             </div>
@@ -482,7 +515,7 @@ export default withRouter(class manage_cashback_stores extends Component {
                                 </div>
                             </div>
                             {
-                                this.state.showUploadtype == 'internal_banner' ? <div className="column is-4">
+                                storeData.uploadType == 'internal_banner' ? <div className="column is-4">
                                     <div className="control">
                                         <label className="label has-text-grey">Choose Internal  </label>
                                         <div className="select is-fullwidth">
@@ -509,25 +542,27 @@ export default withRouter(class manage_cashback_stores extends Component {
 
 
                             {
-                                this.state.showUploadtype == 'imageFile' ?
+                                storeData.uploadType == 'imageFile' ?
                                     <div className="column is-3">
                                         <div className="control">
                                             <label className="label has-text-grey">Upload</label>
-                                            <div class="file has-name is-right">
-                                                <label class="file-label">
-                                                    <input class="file-input" type="file" name="imageFile" />
-                                                    <span class="file-cta">
-                                                        <span class="file-icon">
-                                                            <i class="fas fa-upload"></i>
-                                                        </span>
-                                                        <span class="file-label">
-                                                            Choose a file…</span>
-                                                    </span>
-                                                    <span class="file-name">
-                                                        Choose a file…
-                                            </span>
-                                                </label>
-                                            </div>
+                                            {
+                                      this.state.editForm &&   storeData.imageFile ?
+                                            <Image
+                                                src={`${apiUrl}resources/cashbackbanners/${storeData.imageFile}`}
+                                                width={100}
+                                                height={70}
+
+                                            /> : ''
+                                    }
+
+                                            <input type="file" name="imageFile" id="imageFile" onChange={this.handleInputChange} />
+
+
+
+
+
+
                                             <p className="help is-danger">{_.get(error, 'imageFile')}</p>
                                         </div>
                                     </div> : null
@@ -538,7 +573,7 @@ export default withRouter(class manage_cashback_stores extends Component {
 
                         </div>
                         {
-                            this.state.showUploadtype == 'banner' ? <div className="columns">
+                            storeData.uploadType == 'banner' ? <div className="columns">
                                 <div className="column is-12">
                                     <div className="control">
                                         <label className="label has-text-grey">Banner  </label>
@@ -591,31 +626,34 @@ export default withRouter(class manage_cashback_stores extends Component {
                             <div className="column is-6">
                                 <div className="control">
                                     <label className="label has-text-grey">Merchant Terms & Conditions </label>
-                                    <textarea className={"textarea " + (_.get(error, 'merchant_tc') ? ' is-danger' : '')} name="merchant_tc" onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} value={storeData.merchant_tc} ></textarea>
+                                    <label className="label has-text-grey">Set Default? <input type="checkbox" name="merchant_tc_default" onChange={this.handleCheckBoxChange.bind(this,'merchant_tc_default')} checked={storeData.merchant_tc_default} />  </label>
+                                    <textarea disabled={storeData.merchant_tc_default} className={"textarea " + (_.get(error, 'merchant_tc') ? ' is-danger' : '')} name="merchant_tc" onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} value={storeData.merchant_tc} ></textarea>
                                     <p className="help is-danger">{_.get(error, 'merchant_tc')}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="columns">
 
-                            <div className="column is-4">
+                            <div className="column is-3">
                                 <div className="control">
                                     <label className="label has-text-grey">Vaild From</label>
-                                    <input className={"input " + (_.get(error, 'vaild_from') ? ' is-danger' : '')} type="text" name="vaild_from" placeholder="From" value={storeData.vaild_from} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
+                                    <DayPickerInput value ={storeData.vaild_from} inputProps={{ class: "input" }} onDayChange={this.handleDateChange.bind(this, 'vaild_from')} />
+
                                     <p className="help is-danger">{_.get(error, 'vaild_from')}</p>
                                     <p style={{ fontSize: '10px', color: "#00F" }}>Leave it blank for active from now</p>
                                 </div>
                             </div>
 
-                            <div className="column is-4">
+                            <div className="column is-3">
                                 <div className="control">
                                     <label className="label has-text-grey">Vaild To</label>
-                                    <input className={"input " + (_.get(error, 'valid_to') ? ' is-danger' : '')} type="text" name="valid_to" placeholder="To" value={storeData.valid_to} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
+                                    <DayPickerInput value ={storeData.valid_to} inputProps={{ class: "input" }} onDayChange={this.handleDateChange.bind(this, 'valid_to')} />
+
                                     <p className="help is-danger">{_.get(error, 'valid_to')}</p>
                                     <p style={{ fontSize: '10px', color: "#00F" }}>Leave it blank for never expires</p>
                                 </div>
                             </div>
-                            <div className="column is-4">
+                            <div className="column is-6">
                                 <div className="control">
                                     <label className="label has-text-grey">Youtube Video</label>
                                     <input className={"input " + (_.get(error, 'youtube_video') ? ' is-danger' : '')} type="text" name="youtube_video" placeholder="Youtube URL" value={storeData.youtube_video} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
@@ -680,10 +718,9 @@ export default withRouter(class manage_cashback_stores extends Component {
                                     <label className="label has-text-grey">Manual Chase Possible ?</label>
                                     <div className="select is-fullwidth">
                                         <select value={`${(storeData.manual_chase_required) ? storeData.manual_chase_required : null}`} name="manual_chase_required" onChange={this.handleInputChange}>
-                                            <option value="">Select Type</option>
-                                            <option value="banner">Banner</option>
-                                            <option value="internal_banner">Choose Inernal</option>
-                                            <option value="imageFile">Upload</option>
+                                            <option value="">Select</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">In-Active</option>
                                         </select>
                                         <p className="help is-danger">{_.get(error, 'cat_parent')}</p>
                                     </div>
@@ -731,13 +768,67 @@ export default withRouter(class manage_cashback_stores extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="columns">
+                            <div className="column is-3">
+                                <div className="control">
+                                    <label className="label has-text-grey">Send Mail?</label>
+                                    <div className="select is-fullwidth">
+                                        <select value={`${(storeData.send_mail) ? storeData.send_mail : null}`} name="send_mail" onChange={this.handleInputChange}>
+                                            <option value="">Select</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                        <p className="help is-danger">{_.get(error, 'send_mail')}</p>
+                                    </div>
 
+                                </div>
+                            </div>
+                            <div className="column is-3">
+                                <div className="control">
+                                    <label className="label has-text-grey">VIP ?</label>
+                                    <div className="select is-fullwidth">
+                                        <select value={`${(storeData.vip_store) ? storeData.vip_store : null}`} name="vip_store" onChange={this.handleInputChange}>
+                                            <option value="">Select</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                        <p className="help is-danger">{_.get(error, 'vip_store')}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div className="column is-3">
+                                <div className="control">
+                                    <label className="label has-text-grey">Top 10 List ?</label>
+                                    <div className="select is-fullwidth">
+                                        <select value={`${(storeData.top_list) ? storeData.top_list : null}`} name="top_list" onChange={this.handleInputChange}>
+                                            <option value="">Select</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                        <p className="help is-danger">{_.get(error, 'top_list')}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="column is-3">
+                                <div className="control">
+                                    <label className="label has-text-grey">Home Page ? </label>
+                                    <div className="select is-fullwidth">
+                                        <select value={`${(storeData.home_list) ? storeData.home_list : null}`} name="home_list" onChange={this.handleInputChange}>
+                                            <option value="">Select</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                        <p className="help is-danger">{_.get(error, 'home_list')}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div className="columns">
                             <div className="column is-6">
                                 <p className="buttons">
-
                                     <button onClick={this.handleSubmit} className="button is-theme">Submit </button>
-
                                 </p>
                             </div>
 

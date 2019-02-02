@@ -9,8 +9,8 @@ export const ADMINMODULES = [
         'id': 1,
         'isChecked': false,
         'submodules': [
-            { 'name': 'My Account', 'url': '/myaccount','as': '/myaccount', 'id': 'my-account' },
-            { 'name': 'Admin Account List', 'url': '/admin_accounts', 'as': '/admin_accounts','id': 'admin_accounts' }
+            { 'name': 'My Account', 'url': '/myaccount', 'as': '/myaccount', 'id': 'my-account' },
+            { 'name': 'Admin Account List', 'url': '/admin_accounts', 'as': '/admin_accounts', 'id': 'admin_accounts' }
         ]
     },
     {
@@ -20,11 +20,11 @@ export const ADMINMODULES = [
         'id': 2,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Add New User', 'url': '/manage_user_accounts','as': '/manage-user', 'id': 'admin-accounts1' },
-            { 'name': 'User Accounts List', 'url': '/user_accounts ','as': '/user-accounts',  'id': 'admin-accounts2' },
-            { 'name': 'User Accounts Track List', 'url': '/user_tracking', 'as':'/user_tracking', 'id': 'admin-accounts3' },
-            { 'name': 'Turnover Registration Request', 'url': '/turnover_registration','as':'turnover_registration', 'id': 'admin-accounts5' },
-            { 'name': 'User Intrested', 'url': '/user_interested','as':'/user_interested', 'id': 'admin-accounts6' }
+            { 'name': 'Add New User', 'url': '/manage_user_accounts', 'as': '/manage-user', 'id': 'manage_user_accounts' },
+            { 'name': 'User Accounts List', 'url': '/user_accounts ', 'as': '/user-accounts', 'id': 'user_accounts' },
+            { 'name': 'User Accounts Track List', 'url': '/user_tracking', 'as': '/user_tracking', 'id': 'user_tracking' },
+            { 'name': 'Turnover Registration Request', 'url': '/turnover_registration', 'as': 'turnover_registration', 'id': 'turnover_registration' },
+            { 'name': 'User Intrested', 'url': '/user_interested', 'as': '/user_interested', 'id': 'user_interested' }
         ]
     },
     {
@@ -34,11 +34,11 @@ export const ADMINMODULES = [
         'id': 3,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Cashback Categories', 'url': '/cashback_categories', 'as':'/cashback_categories', 'id': 'admin-accounts7' },
-            { 'name': 'Cashback Stores', 'url': '/cashback_stores','as':'/cashback_stores', 'id': 'admin-accounts8' },
-            { 'name': 'Cashback Offers', 'url': '/admin-accounts', 'id': 'admin-accounts9' },
-            { 'name': 'Cashback Vouchers Codes', 'url': '/admin-accounts', 'id': 'admin-accounts10' },
-            { 'name': 'Cashback Sites', 'url': '/cashback_sites', 'as':'cashback_sites', 'id': 'admin-accounts11' }
+            { 'name': 'Cashback Categories', 'url': '/cashback_categories', 'as': '/cashback_categories', 'id': 'cashback_categories' },
+            { 'name': 'Cashback Stores', 'url': '/cashback_stores', 'as': '/cashback_stores', 'id': 'cashback_stores' },
+            { 'name': 'Cashback Offers', 'url': '/cashback_offers','as':'/cashback_offers', 'id': 'cashback_offers' },
+            { 'name': 'Cashback Vouchers Codes', 'url': '/cashback_vouchers','as':'/cashback_vouchers', 'id': 'cashback_vouchers' },
+            { 'name': 'Cashback Sites', 'url': '/cashback_sites', 'as': 'cashback_sites', 'id': 'cashback_sites' }
         ]
     },
     {
@@ -48,9 +48,15 @@ export const ADMINMODULES = [
         'id': 4,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Unconfirmed Claims', 'url': '/menu-manager', 'id': 'admin-accounts7' },
-            { 'name': 'Unapproved Claims', 'url': '/menus', 'id': 'admin-accounts7' },
-
+            { 'name': 'Unconfirmed Claims', 'url': '/cashback_claims?status=unconfirmed','as': '/cashback_claims/unconfirmed', 'id': 'cashback_claims/unconfirmed' },
+            { 'name': 'Unapproved Claims', 'url': '/cashback_claims?status=unapproved','as': '/cashback_claims/unapproved', 'id': 'cashback_claims/unapproved' },
+            { 'name': 'Finished Claims', 'url': '/cashback_claims?status=finished','as': '/cashback_claims/finished', 'id': 'cashback_claims/finished' },
+            { 'name': 'Payable Claims', 'url': '/cashback_claims?status=payable','as': '/cashback_claims/payable', 'id': 'cashback_claims/payable' },
+            { 'name': 'Paid Claims', 'url': '/cashback_claims?status=paid','as': '/cashback_claims/paid','id': 'cashback_claims/paid' },
+            { 'name': 'More information requested', 'url': '/cashback_claims?status=more_info','as': '/cashback_claims/more_info', 'id': 'cashback_claims/more_info' },        
+            { 'name': 'Cancelled Claims', 'url': '/cashback_claims?status=cancelled','as': '/cashback_claims/cancelled','id': 'cashback_claims/cancelled' },
+          //  { 'name': 'Total Liability', 'url': '/menus', 'id': 'admin-accounts7' },
+           
 
         ]
     },
@@ -61,8 +67,13 @@ export const ADMINMODULES = [
         'id': 5,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Unconfirmed Claims', 'url': '/menu-manager', 'id': 'admin-accounts7' },
-            { 'name': 'Unapproved Claims', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Unconfirmed Claims', 'url': '/revenue_cashback_claims?status=unconfirmed','as': '/revenue_cashback_claims/unconfirmed', 'id': 'cashback_claims/unconfirmed' },
+            { 'name': 'Unapproved Claims', 'url': '/revenue_cashback_claims?status=unapproved','as': '/revenue_cashback_claims/unapproved', 'id': 'cashback_claims/unapproved' },
+            { 'name': 'Finished Claims', 'url': '/revenue_cashback_claims?status=finished','as': '/revenue_cashback_claims/finished', 'id': 'cashback_claims/finished' },
+            { 'name': 'Payable Claims', 'url': '/revenue_cashback_claims?status=payable','as': '/revenue_cashback_claims/payable', 'id': 'cashback_claims/payable' },
+            { 'name': 'Paid Claims', 'url': '/revenue_cashback_claims?status=paid','as': '/revenue_cashback_claims/paid','id': 'cashback_claims/paid' },
+            { 'name': 'More information requested', 'url': '/revenue_cashback_claims?status=more_info','as': '/revenue_cashback_claims/more_info', 'id': 'cashback_claims/more_info' },        
+            { 'name': 'Cancelled Claims', 'url': '/revenue_cashback_claims?status=cancelled','as': '/revenue_cashback_claims/cancelled','id': 'cashback_claims/cancelled' },
 
 
         ]
@@ -145,7 +156,7 @@ export const ADMINMODULES = [
         'id': 11,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Mail Templates', 'url': '/email_templates','as':'/email_templates', 'id': 'admin-accounts7' },
+            { 'name': 'Mail Templates', 'url': '/email_templates', 'as': '/email_templates', 'id': 'admin-accounts7' },
             // { 'name': 'Store Reviews', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
             // { 'name': 'Banners List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
             // { 'name': 'Affiliate Banners List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
@@ -153,9 +164,9 @@ export const ADMINMODULES = [
             // { 'name': 'Subscribers List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
             // { 'name': 'Newsletters List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
             // { 'name': 'Page List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
-             { 'name': 'Affiliate Networks', 'url': '/affiliate_networks', 'as':'/affiliate_networks', 'id': 'admin-accounts7' },
+            { 'name': 'Affiliate Networks', 'url': '/affiliate_networks', 'as': '/affiliate_networks', 'id': 'admin-accounts7' },
             // { 'name': 'Turnover Static Text', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
-            // { 'name': 'Tags', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+             { 'name': 'Tags', 'url': '/tags', 'as': '/tags','id': 'admin-accounts7' },
 
         ]
     },
@@ -181,7 +192,12 @@ export const getCryptedPassword = (password, salt) => {
 
 }
 
+export const checkDate = (toDate) => {
 
+    var date = new Date();
+    var mydate = new Date(toDate);
+    return date < mydate ? true : false;
+}
 
 export const getCountries = () => {
     const countries = [

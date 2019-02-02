@@ -8,7 +8,7 @@ import toastr from 'toastr'
 import { BounceLoader } from 'react-spinners';
 import Pagination from "react-js-pagination";
 import ReactTooltip from 'react-tooltip';
-export default withRouter(class Affiliate_networks extends Component {
+export default withRouter(class Tags extends Component {
 
     constructor(props) {
         super(props);
@@ -36,7 +36,7 @@ export default withRouter(class Affiliate_networks extends Component {
         const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/masterdata/affiliate-list?pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/masterdata/tag-list?pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (sortOrder) { listUrl += '&sortOrder=' + sortOrder + '&sortKey=' + sortKey; }
@@ -52,16 +52,16 @@ export default withRouter(class Affiliate_networks extends Component {
 
             })
     }
-    updateSite = (action, id) => {
+    updateTags = (action, id) => {
         toastr.clear();
         const { activePage } = this.state;
         var updateStatus = true;
-        if (action == 'delete' && !window.confirm('Are you sure want to delete?')) {
+        if (action == 'delete' && !window.confirm('Are you sure want to delete this account?')) {
             updateStatus = false;
         }
         if (updateStatus) {
             axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-            axios.post(apiUrl + 'admin/masterdata/update-affiliate-status', {
+            axios.post(apiUrl + 'admin/masterdata/update-tag-status', {
                 action: action,
                 _id: id,
             }).then((result) => {
@@ -117,7 +117,7 @@ export default withRouter(class Affiliate_networks extends Component {
             <div>
                 <Head>
                     <meta charSet="utf-8" />
-                    <title>{site_name} - Affiliate Networks   </title>
+                    <title>{site_name} - Tags   </title>
                 </Head>
                 <div className="page-wrapper" id="page-wrapper">
                     <div className="columns">
@@ -131,10 +131,10 @@ export default withRouter(class Affiliate_networks extends Component {
                                             </Link>
                                         </li>
                                         <li className="is-active"><a href="#">Master Data</a></li>
-                                        <li className="is-active"><a href="#">Affiliate Networks   List</a></li>
+                                        <li className="is-active"><a href="#">Tags   List</a></li>
                                     </ul>
-                                    <Link href="/manage_affiliate_networks">
-                                        <a className="ad-new" >Add New Affiliate Networks </a>
+                                    <Link href="/manage_tags">
+                                        <a className="ad-new" >Add New Tag </a>
                                     </Link>
                                 </nav>
 
@@ -162,14 +162,14 @@ export default withRouter(class Affiliate_networks extends Component {
                                                     <div className="select is-fullwidth">
                                                         <select name="searchBy" onChange={this.handleInputChange}>
                                                             <option value="">Search By</option>
-                                                            <option value="title">Name</option>
-                                                           
+                                                            <option value="tagName">Name</option>
+
                                                         </select>
                                                     </div>
                                                 </div>
 
                                             </div>
-                                    
+
 
                                         </div>
                                         <p className="buttons">
@@ -193,9 +193,9 @@ export default withRouter(class Affiliate_networks extends Component {
                         </section>
                         <div className="table-responsive dash-table-res">
                             <div className="level">
-                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Affiliate Networks    List </h2>
+                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Tags    List </h2>
                                 <div>
-                                    
+
 
                                 </div>
 
@@ -205,13 +205,13 @@ export default withRouter(class Affiliate_networks extends Component {
                                 <thead>
                                     <tr className="bg-light">
                                         <th style={{ width: '25px' }}>#</th >
-                                      
-                                        <th onClick={this.handleSort.bind(this, 'title', this.state.sortOrder)} >Site Name   <i className={`fa ${(this.state.sortKey == "title") ? this.state.sortClass : "fa-sort"}`}></i></th>
-                                        <th>Click Ref</th>
+
+                                        <th onClick={this.handleSort.bind(this, 'tagName', this.state.sortOrder)} >Name   <i className={`fa ${(this.state.sortKey == "tagName") ? this.state.sortClass : "fa-sort"}`}></i></th>
+
                                         <th style={{ width: '200px' }}>Action</th>
                                     </tr>
                                 </thead>
-                                <TableListContent updateSite={this.updateSite} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} />
+                                <TableListContent updateTags={this.updateTags} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} />
 
                             </table>
                             <nav className="pagination is-rounded" role="navigation" aria-label="pagination">
@@ -248,26 +248,26 @@ const TableListContent = (props) => {
                     : (props.arrlist.length > 0) ?
                         props.arrlist.map(function (dataRow, i) {
 
-                            
+
 
                             return <tr>
                                 <td>{sNo + i}</td>
-                               
-                                <td>{dataRow.title}</td>
-                              
-                                <td>{dataRow.identifier}</td>
 
-                                
+                                <td>{dataRow.tagName}</td>
+
+
+
+
                                 <td>
                                     <div className="buttons">
-                                        
-                                        <Link href={`/manage_affiliate_networks?id=${dataRow._id}`} as={`/update_site/${dataRow._id}`}>
+
+                                        <Link href={`/manage_tags?id=${dataRow._id}`} as={`/update_site/${dataRow._id}`}>
                                             <a data-tip="Edit" className="button is-info is-small tooltip" data-tooltip="Edit">  <span className="icon has-text-white">
                                                 <i className="fas fa-pencil-alt"></i>
                                             </span></a>
                                         </Link>
-                                       
-                                        <button data-tip="Delete" onClick={props.updateSite.bind(this, 'delete', dataRow._id)} className="button is-danger is-small tooltip" data-tooltip="Delete">
+
+                                        <button data-tip="Delete" onClick={props.updateTags.bind(this, 'delete', dataRow._id)} className="button is-danger is-small tooltip" data-tooltip="Delete">
                                             <span className="icon has-text-white">
                                                 <i className="fas fa-trash-alt"></i>
                                             </span>

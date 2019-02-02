@@ -15,6 +15,13 @@ module.exports = routes()
 .add('update-menu','/update-menu/:id','manage_menu')
 .add('update_cat','/update_cat/:id','manage_cashback_categories')
 .add('update_site','/update_site/:id','manage_cashback_sites')
- 
-                       
- 
+.add('update_cashback_stores','/update_cashback_stores/:id','manage_cashback_stores')
+.add('view_cashback_stores','/view_cashback_stores/:id','view_cashback_stores')
+.add('update_cashback_offer','/update_cashback_offer/:id','manage_cashback_offer')
+.add('view_cashback_offer','/view_cashback_offer/:id','view_cashback_offer')
+.add('update_cashback_voucher','/update_cashback_voucher/:id','manage_cashbackvoucher')
+.add('view_cashback_voucher','/view_cashback_voucher/:id','view_cashback_voucher')   
+.add('cashback_claims','/cashback_claims/:status','cashback_claims')
+.add('manage_cashback_claims','/manage_cashback_claims/:id','manage_cashback_claims')   
+.add('revenue_cashback_claims','/revenue_cashback_claims/:status','revenue_cashback_claims')
+.add('manage_revenue_cashback_claims','/manage_revenue_cashback_claims/:id','manage_revenue_cashback_claims')
