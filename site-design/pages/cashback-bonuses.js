@@ -77,13 +77,13 @@ const Cashback_Bonuses = (props) => (
                         <h1>Cashback Categories</h1>
                         <div className="cbk-at-list">
                             <ul>
-                                <li><Link href=""><a>Arbitrage & Matched Betting</a></Link></li>
-                                <li><Link href="/HeartBingoCashback"><a>Bingo</a></Link></li>
-                                <li><Link href=""><a>Bookmaker</a></Link></li>
-                                <li><Link href=""><a>Casino</a></Link></li>
-                                <li><Link href=""><a>Lottery & Games</a></Link></li>
-                                <li><Link href=""><a>Poker</a></Link></li>
-                                <li><Link href=""><a>Trading & Investing</a></Link></li>
+                                <li><Link href="/heart-bingo-cashback"><a>Arbitrage & Matched Betting</a></Link></li>
+                                <li><Link href="/heart-bingo-cashback"><a>Bingo</a></Link></li>
+                                <li><Link href="/heart-bingo-cashback"><a>Bookmaker</a></Link></li>
+                                <li><Link href="/heart-bingo-cashback"><a>Casino</a></Link></li>
+                                <li><Link href="/heart-bingo-cashback"><a>Lottery & Games</a></Link></li>
+                                <li><Link href="/heart-bingo-cashback"><a>Poker</a></Link></li>
+                                <li><Link href="/heart-bingo-cashback"><a>Trading & Investing</a></Link></li>
                             </ul>
                         </div>
                         <div className="cbk-srch-off">
@@ -123,36 +123,48 @@ const Cashback_Bonuses = (props) => (
                                 <div className="cbk-clm-list">
                                     <h2>Latest Offers</h2>
                                     <div className="cbk-clm-list-in" id="list-view">
-                                        <div className="cbk-clm-img"><img src="static/images/others/cbk-clm-01.png" alt="image" /></div>
+                                        <div className="cbk-clm-img">
+                                        <Link href=""><a>
+                                        <img src="static/images/others/cbk-clm-01.png" alt="image" />
+                                            </a></Link>
+                                        </div>
                                         <div className="cbk-clm-cnt">
                                             <h4 className="offer-content-title">Dr Slot - Casino</h4>
                                             <p>Dr Slot is a brand new mobile slot and casino site from the operators of mFortune, with a completely unique selection of never before seen slot games. As at mFortune, if you register on desktop a text message is sent to your phone with an activation link, and each slot game is an app in itself. That’s as far as the resemblance goes though – all the slot games are different to those at mFortune and other Intouch sites and…</p>
                                         </div>
                                         <div className="cbk-clm-act">
                                             <p>£15</p>
-                                            <Link href="/HeartBingoCashback"><a>Claim Cashback</a></Link>
+                                            <Link href="/heart-bingo-cashback"><a>Claim Cashback</a></Link>
                                         </div>
                                     </div>
                                     <div className="cbk-clm-list-in" id="list-view">
-                                        <div className="cbk-clm-img"><img src="static/images/others/cbk-clm-01.png" alt="image" /></div>
+                                        <div className="cbk-clm-img">
+                                        <Link href=""><a>
+                                        <img src="static/images/others/cbk-clm-02.png" alt="image" />
+                                            </a></Link>
+                                        </div>
                                         <div className="cbk-clm-cnt">
-                                            <h4 className="offer-content-title">Dr Slot - Casino</h4>
+                                            <h4 className="offer-content-title">Mr Spin</h4>
                                             <p>Dr Slot is a brand new mobile slot and casino site from the operators of mFortune, with a completely unique selection of never before seen slot games. As at mFortune, if you register on desktop a text message is sent to your phone with an activation link, and each slot game is an app in itself. That’s as far as the resemblance goes though – all the slot games are different to those at mFortune and other Intouch sites and…</p>
                                         </div>
                                         <div className="cbk-clm-act">
                                             <p>£15</p>
-                                            <Link href="/HeartBingoCashback"><a>Claim Cashback</a></Link>
+                                            <Link href="/heart-bingo-cashback"><a>Claim Cashback</a></Link>
                                         </div>
                                     </div>
                                     <div className="cbk-clm-list-in" id="list-view">
-                                        <div className="cbk-clm-img"><img src="static/images/others/cbk-clm-01.png" alt="image" /></div>
+                                        <div className="cbk-clm-img">
+                                        <Link href=""><a>
+                                        <img src="static/images/others/cbk-clm-01.png" alt="image" />
+                                            </a></Link>
+                                       </div>
                                         <div className="cbk-clm-cnt">
                                             <h4 className="offer-content-title">Dr Slot - Casino</h4>
                                             <p>Dr Slot is a brand new mobile slot and casino site from the operators of mFortune, with a completely unique selection of never before seen slot games. As at mFortune, if you register on desktop a text message is sent to your phone with an activation link, and each slot game is an app in itself. That’s as far as the resemblance goes though – all the slot games are different to those at mFortune and other Intouch sites and…</p>
                                         </div>
                                         <div className="cbk-clm-act">
                                             <p>£15</p>
-                                            <Link href="/HeartBingoCashback"><a>Claim Cashback</a></Link>
+                                            <Link href="/heart-bingo-cashback"><a>Claim Cashback</a></Link>
                                         </div>
                                     </div>
 

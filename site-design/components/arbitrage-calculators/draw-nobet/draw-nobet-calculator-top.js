@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../../styles/styles.scss'
 import { withRouter } from 'next/router';
 
+
 export default withRouter(class DrawNoBetCalculatorTop extends Component {
 
     state = {

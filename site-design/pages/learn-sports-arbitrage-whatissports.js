@@ -21,7 +21,7 @@ const LearnSportsArbitrage_whatissports = (props) => (
                 <ul>
                     <li><Link href="/"><a>Home</a></Link></li>
                     
-                    <li><Link href="/LearnSportsArbitrage"><a>Learn Sports Arbitrage</a></Link></li>
+                    <li><Link href="/learn-sports-arbitrage"><a>Learn Sports Arbitrage</a></Link></li>
                     <li><Link href="javascript:void(0);"><a>What is Sports Arbitrage?</a></Link></li>
                 </ul>
             </div>

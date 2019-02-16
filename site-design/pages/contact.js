@@ -39,7 +39,7 @@ const Contact = (props) => (
                             </div>
                             <div className="mob-type mail-type">
                                 <img src="static/images/icons/mail-box.png" alt="i" />
-                            <a href="mailto:support@couponarbitrage.com"><span>support@couponarbitrage.com</span></a>
+                           <Link href="mailto:support@couponarbitrage.com"><a><span>support@couponarbitrage.com</span></a></Link> 
                             </div>
                         </div>
                     </div>

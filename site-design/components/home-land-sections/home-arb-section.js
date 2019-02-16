@@ -21,7 +21,7 @@ export default withRouter(class HomeArbsection extends Component {
                 <div className="arb-wrap">
                         <div className="columns is-desktop">
                             <div className="column is-5 is-pulled-left arb-lt">
-                            <Link href=""><a href="#!"><h2>FREE ARBS</h2></a></Link>
+                                <a href="#!"><h2>FREE ARBS</h2></a>
                                 <span className="arb-title-line">&nbsp;</span>
                                 <h3>Online Arbitrage Interface allows you to make
                                     guaranteed profits from online sports betting:</h3>
@@ -34,9 +34,7 @@ export default withRouter(class HomeArbsection extends Component {
                             </div>
                             <div className="column is-7 is-pulled-right arb-lt">
                             <div className=" arb-rt">
-                               <Link href=""> 
-                               <a ><img src="/static/images/arb-lap.png" alt="arb-image" /></a>
-                               </Link>
+                                <a ><img src="/static/images/arb-lap.png" alt="arb-image" /></a>
                             </div>
                             </div>
                         </div>

@@ -21,7 +21,7 @@ const EcopayzCashbackScheme_page = (props) => (
 
             <div className="fwid banner-wrap inner-wrap">
                 <div className="innerban-text">
-                    <h4><a href="/">Home</a>&nbsp; / &nbsp;<b>Trunover Cashback</b>&nbsp; /&nbsp;<b>Ecopayz Cashback Scheme</b></h4>
+                    <h4><Link href="/"><a>Home</a></Link>&nbsp; / &nbsp;<b>Trunover Cashback</b>&nbsp; /&nbsp;<b>Ecopayz Cashback Scheme</b></h4>
                 </div>
                 <div className="banner-layer innerban-layer">&nbsp;</div>
                 <div className="innerban-img"> <img src="/static/images/banner/eco-innerbanner.png" alt="Ecopayz Cashback Scheme" /></div>
@@ -125,6 +125,7 @@ const EcopayzCashbackScheme_page = (props) => (
                                                                     <div className="bg"></div>
                                                                 </div>
                                                             </div>
+                                                            {/* <input className="knob knob_cou input" type="text" /> */}
                                                             <input className="knob knob_cou" data-width="200" data-readOnly="true" data-displayInput="true" value="0" data-thickness=".3" data-fgColor="#76B127" />
                                                             <div className="circle-text"><i className="icon-circletxt c-primary-3">&nbsp;</i>Couponarbitrage Cashback </div>
                                                         </div>
@@ -166,7 +167,7 @@ const EcopayzCashbackScheme_page = (props) => (
                                     <h3 className="is-no-border bor-0">Application Form</h3>
                                 </div>
                                 <div className="titl level-right">
-                                <span className="is-small fon-10">Existing Ecopayz Customer Info <a href="#" data-toggle="tooltip" title="" data-placement="top" className="tooltip-icon" data-original-title="Existing Ecopayz users may apply but we cannot guarantee you will be accepted onto the bonus scheme"><img src="/static/images/icons/info-round.png" alt="info" /></a></span>
+                                <span className="is-small fon-10">Existing Ecopayz Customer Info <Link href="#"><a data-toggle="tooltip" title="" data-placement="top" className="tooltip-icon" data-original-title="Existing Ecopayz users may apply but we cannot guarantee you will be accepted onto the bonus scheme"><img src="/static/images/icons/info-round.png" alt="info" /></a></Link></span>
                                 </div>
                               </div>
                               </div>

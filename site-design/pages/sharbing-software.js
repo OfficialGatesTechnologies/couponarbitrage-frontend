@@ -5,7 +5,7 @@ import {site_name} from '../utils/Common';
 import Link from 'next/link';
 
 const SharbingSoftware = (props) => (
-    
+   
     <div>   
         <Head>
             <meta charSet="utf-8" />
@@ -43,7 +43,7 @@ const SharbingSoftware = (props) => (
                         <li className=""><Link href="#Simple-Price"><a className="navbar-item">Simple Price</a></Link></li>
                         <li className=""> <Link href="#FAQs"><a className="navbar-item">FAQ's</a></Link> </li>                       
                         <li className=""> <Link href="#Subscribe"><a className="navbar-item">Subscribe Now</a></Link></li>
-                        <li className=""> <Link href=""><a className="navbar-item">Sign in</a></Link></li>
+                        <li className=""> <Link href="/login"><a className="navbar-item">Sign in</a></Link></li>
                         </ul>
                         
                         
@@ -476,34 +476,34 @@ const SharbingSoftware = (props) => (
                            
                             <div className="testimonialslide">
                                 <div className="column is-10 is-offset-1">
-                                <div class='carousel carousel-animated carousel-animate-slide'>
-                                <div class='carousel-container'>
+                                <div className="carousel carousel-animated carousel-animate-slide">
+                                <div className="carousel-container">
                                 <ul className="control-dots">
                                         <li className="dot" value="0" role="button" tabindex="0"></li>
                                         <li className="dot" value="1" role="button" tabindex="0"></li>
                                         <li className="dot selected" value="2" role="button" tabindex="0"></li>
                                         <li className="dot" value="3" role="button" tabindex="0"></li>
                                     </ul>
-                                    <div class='carousel-item has-background is-active'>
+                                    <div className="carousel-item has-background is-active">
                                     
                                     <div className="testimonialitem">
                                                         <p>I must say the whole app is very sleek and impressive. The speed and reliability of the sharbs provided has saved me tons of time searching manually – money well spent.</p>
                                                         <h3>- J. Forshaw -</h3>
                                                     </div>
                                     </div>
-                                    <div class='carousel-item has-background'>
+                                    <div className="carousel-item has-background">
                                     <div className="testimonialitem">
                                                         <p>There are so many arbitrage alert programs out there but your sharbing app definitely offers something unique. I’ve made my subscription cost back in one day of sharbing!</p>
                                                         <h3>- E. Chandler -</h3>
                                                     </div>
                                     </div>
-                                    <div class='carousel-item has-background'>
+                                    <div className="carousel-item has-background">
                                     <div className="testimonialitem">
                                                         <p>Loving this app! Shop arb section is brilliant…only wish you could add more sports</p>
                                                         <h3>- L. Harrison -</h3>
                                                     </div>
                                     </div>
-                                    <div class='carousel-item has-background'>
+                                    <div className="carousel-item has-background">
                                     <div className="testimonialitem">
                                                         <p>Loving this app! Shop arb section is brilliant…only wish you could add more sports</p>
                                                         <h3>- L. Harrison -</h3>
@@ -751,7 +751,9 @@ const SharbingSoftware = (props) => (
         </body>
          
     </div>
+                                
   )
+                               
 
 export default SharbingSoftware;
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../styles/styles.scss'
 import { withRouter } from 'next/router';
 
+
 export default withRouter(class BackLayCalculatorForm extends Component {
 
     state = {
@@ -85,7 +86,7 @@ export default withRouter(class BackLayCalculatorForm extends Component {
                     </tr>
                     <tr >
                         <td></td>
-                        <td colspan="2"><label className="control-label-01 back-all">Selections on same exchange</label>
+                        <td colSpan="2"><label className="control-label-01 back-all">Selections on same exchange</label>
                         {/* <input type="checkbox" className="dis-inblock dis-vt" name="s_exchange_radio" id="s_exchange_radio" /> */}
                         <div className="checkbox join-check-wrap">
                         <label>
@@ -106,7 +107,7 @@ export default withRouter(class BackLayCalculatorForm extends Component {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td colspan="2" align="right" valign="middle" className="has-text-right"><label className="control-label-01 back-all" style={{fontWeight:  'Bold'}}>Back Bet Stake &pound;</label></td>
+                            <td colSpan="2" align="right" valign="middle" className="has-text-right"><label className="control-label-01 back-all" style={{fontWeight:  'Bold'}}>Back Bet Stake &pound;</label></td>
                             <td><input type="text" className="input default-txbx" id="back_bet_amount" value="0.00" /></td>
                     </tr>
                     <tr>
@@ -114,19 +115,19 @@ export default withRouter(class BackLayCalculatorForm extends Component {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td colspan="2" align="right" valign="middle" className="has-text-right"><label className="control-label-01 back-all " style={{fontWeight:  'Bold'}}>Laybet Liability &pound;</label></td>
+                        <td colSpan="2" align="right" valign="middle" className="has-text-right"><label className="control-label-01 back-all " style={{fontWeight:  'Bold'}}>Laybet Liability &pound;</label></td>
                         <td><input type="text" className="input default-txbx" value="0.00" id="laybet_amount"/></td>
                     </tr>
                     <tr>
                     <td></td>
                         <td></td>
                         <td></td>
-                        <td colspan="3" align="right" valign="middle" className="has-text-right">
+                        <td colSpan="3" align="right" valign="middle" className="has-text-right">
                         <label className="control-label-01 back-all mg-tp-8" style={{fontWeight:  'Bold'}}>Total Stake &pound;</label>  </td>
                         <td><input type="text" className="input default-txbx" value="0.00" id="total_stake" /></td>
                     </tr>
                     <tr>
-                        <td colspan="7" align="center" className="text-center">
+                        <td colSpan="7" align="center" className="text-center">
                         <input type="reset" className="btn purple-btn normal-btn rst" value="Reset" />
                         <input type="button" className="btn green-btn normal-btn" value="Calculate" onClick="calculateBackRay()" />
                         </td>

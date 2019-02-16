@@ -91,7 +91,8 @@ export default withRouter(class BannerForm extends Component {
                                         <div className="checkbox join-check-wrap">
                                             <label>
                                              <input type="checkbox" name="termsCond" value="1" id="termsCond" className="fm-check" />                       <span className="cr"><i className="cr-icon fas fa-check"></i></span>
-                                               <span className="has-text-white">I accept the</span> <a target="_BLANK" href="#!">terms and conditions</a>
+                                               <span className="has-text-white">I accept the</span>
+                                               <Link href=""><a target="_BLANK">terms and conditions</a></Link>
                                             </label>
                                                 <div className="full-width">
                                                 <span className="err_msg err_msg_add" id="err_termsCond"></span>

@@ -20,10 +20,16 @@ export default withRouter(class HomeGamlingsection extends Component {
                 <div className="gamb-wrap">
                 <div className="gamb-lt">
                                 <div className="gam-image-desk">
-                                    <a ><img src="/static/images/gamb-lap.png" alt="gambling-image" /></a>
+                                <Link href="">
+                                <a ><img src="/static/images/gamb-lap.png" alt="gambling-image" /></a>
+                                </Link>
+                                    
                                 </div>
                                 <div className="gamb-image-tap">
-                                    <a ><img src="/static/images/gamb-lap-02.png" alt="gambling-image" /></a>
+                                <Link href="">
+                                <a ><img src="/static/images/gamb-lap-02.png" alt="gambling-image" /></a>
+                                </Link>
+                                    
                                 </div>
                 </div>
                 <div className="container">
@@ -37,7 +43,10 @@ export default withRouter(class HomeGamlingsection extends Component {
                             </div> */}
                             <div className="column is-pulled-left">
                             <div className="gamb-rt">
+                            <Link href="">
                             <a ><h2>GAMBLING CASHBACK</h2></a>
+                            </Link>
+                            
                             <span className="gam-line">&nbsp;</span>
                             <h3>Gambling Cashback section gives you the opportunity
                                     to earn cashback by referring your betting accounts

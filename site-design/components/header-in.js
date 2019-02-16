@@ -36,7 +36,21 @@ export default withRouter(class Header extends Component {
                                 <li><Link href="/"><a>Home</a></Link></li>
                                 <li><Link href="/contact"><a>Contact us</a></Link></li>
                             </ul>
+                            {/* <ul className="is-relative is-inline-block">
+                                <li className="is-relative is-inline-block" style={{width: '20px', marginRight: '20px'}}><span class="notfiy">
+                                <a href="/activity" title="notification">
+                                    <img src="/static/images/icons/note.svg" alt="i" />
+                                    <span id="count" class="note-count">0</span>
+                                </a>
+                            </span></li>
+                            <li className="is-relative is-inline-block" style={{width: '20px'}}><span class="logout" title="logout">
+                            <a href="/logout"><img src="/static/images/icons/logout.svg" alt="i" /></a>
+                            </span></li>
+                            </ul> */}
+                            
+                            
                             <ul className="nav-tp-rt">
+                            
                                 <li><Link href="/login"><a>Login</a></Link></li>
                                 <li><Link href="/signup"><a>join</a></Link></li>
                             </ul>

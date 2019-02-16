@@ -31,7 +31,7 @@ const HeartBingoCashback = (props) => (
                         <div className="cbk-bk-top">
                             <h1>Heart - Bingo Cashback And Voucher Deals</h1>
                             <ul>
-                                <li><a href="/cashback-bonuses/casino">Bingo</a><span><img src="static/images/icons/mini-arrow.svg" /></span></li>
+                                <li><Link href="/cashback-bonuses"><a>Bingo</a></Link><span><img src="static/images/icons/mini-arrow.svg" /></span></li>
                                 <li>Heart - Bingo Cashback And Voucher Deals</li>
                             </ul>
                         </div>
@@ -48,7 +48,10 @@ const HeartBingoCashback = (props) => (
                         </div>
                         <div className="cbk-bk-bot level">
                             <div className="claim-bk level-left">
-                                <a href="#!" className="btn get-green-btn fancybox fancybox.ajax" id="fancy_claim_popup">CLAIM CASHBACK</a>
+                            <Link href="#!">
+                            <a className="btn get-green-btn fancybox fancybox.ajax" id="fancy_claim_popup">CLAIM CASHBACK</a>
+                            </Link>
+                            
                         <div className="clearfix"></div>
                 
                                 </div> 
@@ -60,7 +63,10 @@ const HeartBingoCashback = (props) => (
                             <span>
                                 {/* <div className="rateit" data-rateit-value="" data-rateit-ispreset="true" data-rateit-readonly="true"><button id="rateit-reset-2" data-role="none" className="rateit-reset" aria-label="reset rating" aria-controls="rateit-range-2" style="display: none;"></button><div id="rateit-range-2" className="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-2" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-readonly="true" style="width: 80px; height: 16px;"><div className="rateit-selected rateit-preset" style="height: 16px; width: 0px;"></div><div className="rateit-hover" style="height:16px"></div></div></div> */}
                                 <img src="static/images/icons/star-1.png"  alt="star"/>
-                                <a href="javascript:void(0);" className="modal-button fancybox fancybox.ajax" data-target="modal" aria-haspopup="true">PlayOJO - Casino Reviews</a>
+                                <Link href="javascript:void(0);">
+                                <a className="modal-button fancybox fancybox.ajax" data-target="modal" aria-haspopup="true">PlayOJO - Casino Reviews</a>
+                                </Link>
+                                
                                
                                 <div className="modal" id="modal">
                                 <div className="modal-background"></div>
@@ -163,20 +169,26 @@ const HeartBingoCashback = (props) => (
                                             <h3>£25</h3>
                                             <p>Earn £25 cashback when you register via the link below and deposit £50 and wager at least £50
                                             </p>
-                                            <a href="/signin" className="btn get-green-btn">GET CASHBACK</a>
+                                            <Link href="/login">
+                                            <a className="btn get-green-btn">GET CASHBACK</a>
+                                            </Link>
+                                          
                                                                                                                                                                             </div>
                                                                                                                                                                             <div className="vouch-wrap">
                                         <h4>Voucher codes &amp; offers</h4>
                                         <div className="vouch-sec-in">
                                             <div className="vouch-image">
-                                            <a href="javascript:void(0);"><img src="static/images/others/cbk-clm-01.png" alt="Img" /></a>
+                                            <Link href="">
+                                            <a><img src="static/images/others/cbk-clm-01.png" alt="Img" /></a>
+                                            </Link>
+                                           
                                             </div>
                                             <div className="vouch-def">
                                             <h6>30 Free Spins on Double Bubble. Min £10 deposit and wager.</h6>
                                             <p>*New members only, opt in required. Min £10 deposit and wager. Spins on Double Bubble only. 30 day expiry from opt-in. Rules apply. 18+
                                             </p>
-                                        
-                                            <a href="/signin" className="btn green-btn">Visit site</a>
+                                            <Link href="/login"><a className="btn green-btn">Visit site</a></Link>
+                                            
                                             </div>
                                         </div>
                                     </div>
@@ -188,13 +200,13 @@ const HeartBingoCashback = (props) => (
                                                 <div className="panel panel-default term-default">
                                                     <div className="panel-heading term-head">
                                                         <h4 className="panel-title term-accord-title">
-                                                            <a className="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                                                <i className="arr-acc glyphicon glyphicon-plus"></i>
+                                                            <a className="accordtab current" data-toggle="AccordD1" data-parent="#accordion" href="#AccordD1">
+                                                                <i className="arr-acc-new glyphicon glyphicon-plus"></i>
                                                                 <span className="term-head-tit">Additional Merchant Terms &amp; Conditions</span>
                                                             </a>
                                                         </h4>
                                                     </div>
-                                                    <div id="collapseThree" className="panel-collapse collapse">
+                                                    <div id="AccordD1" className="dsnone panel-collapse collapse in">
                                                     {/* <div id="collapseThree" className="panel-collapse collapse" style="height: 0px;"> */}
                                                         <div className="panel-body term-body">
                                                             <ul>
@@ -218,13 +230,32 @@ const HeartBingoCashback = (props) => (
                  <div className="nav-box">
                     <h4>Navigation</h4>
                     <ul>
-                        <li className="" role="presentation"><a href="/cashback-bonuses/arbitrage-matched-betting">Arbitrage &amp; Matched Betting</a></li>
-                        <li className="active" role="presentation"><a href="/cashback-bonuses/bingo">Bingo</a></li>
-                        <li className="" role="presentation"><a href="/cashback-bonuses/bookmaker">Bookmaker</a></li>
-                        <li className="" role="presentation"><a href="/cashback-bonuses/casino">Casino</a></li>
-                        <li className="" role="presentation"><a href="/cashback-bonuses/lottery-games">Lottery &amp; Games</a></li>
-                        <li className="" role="presentation"><a href="/cashback-bonuses/poker">Poker</a></li>
-                        <li className="" role="presentation"><a href="/cashback-bonuses/trading-investing">Trading &amp; Investing</a></li>
+                        <li className="" role="presentation">
+                        <Link href=""><a>Arbitrage &amp; Matched Betting</a></Link>
+                        </li>
+                        <li className="active" role="presentation">
+                        <Link href=""><a>Bingo</a></Link>
+                        </li>
+                        <li className="" role="presentation">
+                        <Link href=""><a>Bookmaker</a></Link>
+                        </li>
+                        <li className="" role="presentation">
+                        <Link href=""><a>Casino</a></Link>
+                        </li>
+                        <li className="" role="presentation">
+                        <Link href="">
+                        <a>Lottery &amp; Games</a>
+                        </Link>
+                        </li>
+                        <li className="" role="presentation">
+                        <Link href="">
+                        <a>Poker</a>
+                        </Link></li>
+                        <li className="" role="presentation">
+                        <Link href="">
+                        <a>Trading &amp; Investing</a>
+                        </Link>
+                        </li>
                                     
                     </ul>
                 </div>
@@ -234,9 +265,12 @@ const HeartBingoCashback = (props) => (
                         
                         <div className="simi-image level">
                            <div className="level-left">
-                           <a href="/mr-play-casino-cashback">
+                           <Link href="">
+                           <a>
                                 <img src="static/images/others/dashcasino-similar-img.png" alt="Mr Play - Casino" />
                             </a>
+                           </Link>
+                           
                            </div>
                            <div className="level-right">
                             <span><img src="static/images/icons/acc-ar-close.png" alt="i"/></span>
@@ -245,8 +279,8 @@ const HeartBingoCashback = (props) => (
                         <div className="simi-arr"></div>
 
                         <div className="smilar-cb">
-
-                            <a href="/mr-play-casino-cashback"> £20 cashback<span><img src="static/images/icons/acc-ar-doub.png" alt="i" /></span></a>
+                        <Link href=""><a> £20 cashback<span><img src="static/images/icons/acc-ar-doub.png" alt="i" /></span></a></Link>
+                            
                         </div>
                     </div>
 
@@ -254,9 +288,12 @@ const HeartBingoCashback = (props) => (
                         
                         <div className="simi-image level">
                            <div className="level-left">
-                           <a href="/mr-play-casino-cashback">
+                           <Link href="">
+                           <a>
                                 <img src="static/images/others/dashcasino-similar-img-01.png" alt="Mr Play - Casino" />
                             </a>
+                           </Link>
+                           
                            </div>
                            <div className="level-right">
                             <span><img src="static/images/icons/acc-ar-close.png" alt="i"/></span>
@@ -265,8 +302,10 @@ const HeartBingoCashback = (props) => (
                         <div className="simi-arr"></div>
 
                         <div className="smilar-cb">
-
-                            <a href="/mr-play-casino-cashback"> £20 cashback<span><img src="static/images/icons/acc-ar-doub.png" alt="i" /></span></a>
+                        <Link href="">
+                        <a> £20 cashback<span><img src="static/images/icons/acc-ar-doub.png" alt="i" /></span></a>
+                        </Link>
+                           
                         </div>
                     </div>
 
@@ -274,9 +313,10 @@ const HeartBingoCashback = (props) => (
                         
                         <div className="simi-image level">
                            <div className="level-left">
-                           <a href="/mr-play-casino-cashback">
+                           <Link href=""><a>
                                 <img src="static/images/others/dashcasino-similar-img-02.png" alt="Mr Play - Casino" />
-                            </a>
+                            </a></Link>
+                           
                            </div>
                            <div className="level-right">
                             <span><img src="static/images/icons/acc-ar-close.png" alt="i"/></span>
@@ -285,8 +325,10 @@ const HeartBingoCashback = (props) => (
                         <div className="simi-arr"></div>
 
                         <div className="smilar-cb">
-
-                            <a href="/mr-play-casino-cashback"> £20 cashback<span><img src="static/images/icons/acc-ar-doub.png" alt="i" /></span></a>
+                        <Link href="">
+                        <a> £20 cashback<span><img src="static/images/icons/acc-ar-doub.png" alt="i" /></span></a>
+                        </Link>
+                           
                         </div>
                     </div>
 

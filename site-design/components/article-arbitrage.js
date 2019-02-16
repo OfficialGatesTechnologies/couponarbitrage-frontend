@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/styles.scss'
 import { withRouter } from 'next/router';
-import Link from 'next/link';
 
 export default withRouter(class ArticleArbitrage extends Component {
 
@@ -20,8 +19,7 @@ export default withRouter(class ArticleArbitrage extends Component {
                         <div className="learn-box-detail">
                             <div className="fwid details-heading level">
                                 <h2 className="level-left">How much can you earn from sports arbitrage?</h2>
-                                <span className="level-right back-img">
-                                <Link href=""><a><img src="static/images/icons/icon-back-arrow.png" alt="Icon" /> Back</a></Link></span></div>
+                                <span className="level-right back-img"><a><img src="static/images/icons/icon-back-arrow.png" alt="Icon" /> Back</a></span></div>
                             <div className="fwid details-texts">   <p><strong>How much can you earn from sports arbitrage?</strong></p>
 <p>The all-important question and the most commonly asked by our users - how much can I earn from sports arbitrage?</p>
 <p>Unfortunately we cannot give you a specific answer as there are simply too many variables; how much capital do you have to invest; how many hours per week can you commit to trading; what skill level and experience do you have in sports arbitrage; which arbitrage alert service are you using.</p>

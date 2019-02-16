@@ -47,7 +47,9 @@ const faq = (props) => (
                         <div className="fwid bot-box is-inline-block is-fullwidth">
 <div className="fwid fm-white-top pd-30">
 <div className="fwid tabdivsec-wrap">
-<div className="fwid tabdivsec-li"> <a className="accordtab current" data-toggle="maindiv-1" href="javascript:void(0);"><h2>How does the Skrill Bonus Scheme Work?</h2></a>
+<div className="fwid tabdivsec-li"> 
+
+<a className="accordtab current" data-toggle="maindiv-1" href="javascript:void(0);"><h2>How does the Skrill Bonus Scheme Work?</h2></a>
 <div className="dsnone maintabdiv" id="maindiv-1"  style={{display: 'block'}}>
 <p>Our Skrill bonus scheme allows you to earn cashback on all your transactions using your Skrill account. The rewards offered by us are in addition to those of the Skrill VIP loyalty scheme and includes all merchants. Our scheme is mainly targeted at high volume players but you can also earn cashback if you use your account less frequently - unfortunately low volume players will be unlikely to become a VIP so will not qualify for the Skrill loyalty Program offered by Skrill directly.</p>
 </div>

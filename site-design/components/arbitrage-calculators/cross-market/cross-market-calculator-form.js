@@ -57,7 +57,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -97,7 +97,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -122,7 +122,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit">&nbsp;</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit">&nbsp;</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -149,7 +149,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -172,7 +172,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -196,7 +196,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">&nbsp;</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">&nbsp;</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -224,7 +224,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -246,7 +246,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -268,7 +268,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">&nbsp;</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">&nbsp;</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -326,7 +326,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -366,7 +366,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -391,7 +391,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit">&nbsp;</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit">&nbsp;</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -418,7 +418,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -441,7 +441,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -465,7 +465,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">&nbsp;</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">&nbsp;</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -493,7 +493,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -515,7 +515,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -571,7 +571,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -611,7 +611,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Handicap draw</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Handicap draw</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -636,7 +636,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit">&nbsp;</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit">&nbsp;</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -660,7 +660,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -687,7 +687,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -710,7 +710,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -734,7 +734,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -790,7 +790,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -830,7 +830,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -855,7 +855,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit">&nbsp;</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit">&nbsp;</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -879,7 +879,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -906,7 +906,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -929,7 +929,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -953,7 +953,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -1009,7 +1009,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -1049,7 +1049,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -1074,7 +1074,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -1098,7 +1098,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit">&nbsp;</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit">&nbsp;</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -1125,7 +1125,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 1</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 1</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -1148,7 +1148,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>
@@ -1172,7 +1172,7 @@ export default withRouter(class CrossMarketCalculatorForm extends Component {
                           <table cellspacing="0" cellpadding="3" border="0" style={{width: '100%'}}>
                             <tbody>
                               <tr>
-                                <td align="center" colspan="2"><span className="red-tit text-center">Team 2</span></td>
+                                <td align="center" colSpan="2"><span className="red-tit text-center">Team 2</span></td>
                               </tr>
                               <tr>
                                 <td align="right" className="vtop td-50"><span>Odds:</span></td>

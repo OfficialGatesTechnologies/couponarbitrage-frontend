@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../../styles/styles.scss'
 import { withRouter } from 'next/router';
-import Link from 'next/link';
 import HomeJoinUs from '../home-land-sections/home-joinus';
 import HomeArbsection from '../home-land-sections/home-arb-section';
 import HomeSharbingSwsection from '../home-land-sections/home-sharbingsw-section';

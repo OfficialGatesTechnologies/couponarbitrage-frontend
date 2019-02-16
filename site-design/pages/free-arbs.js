@@ -40,7 +40,7 @@ const FreeArbs = (props) => (
         </div>
         <div className="fwid tables-lists-wrap mg-t-40 clearfix">
         <div className="tab-content iframe-theme">
-          <iframe src="//oddstorm.com/surebets/index.php?if=1&amp;if_bg=FFFFFF&amp;if_color=000000&amp;if_tab_bg=F2F2F2&amp;if_links_color=060352&amp;if_table_bg=393686&amp;if_table_color=FFFFFF&amp;if_header_bg=E5E5E5&amp;if_header_color=393686&amp;if_odd_bg=EBF6F5&amp;if_odd_color=000000&amp;if_even_bg=FFFFFF&amp;if_even_color=000000&amp;if_pid=1941" frameborder="0" height="800px" width="100%"></iframe>        </div>
+          <iframe src="//oddstorm.com/surebets/index.php?if=1&amp;if_bg=FFFFFF&amp;if_color=000000&amp;if_tab_bg=F2F2F2&amp;if_links_color=060352&amp;if_table_bg=393686&amp;if_table_color=FFFFFF&amp;if_header_bg=E5E5E5&amp;if_header_color=393686&amp;if_odd_bg=EBF6F5&amp;if_odd_color=000000&amp;if_even_bg=FFFFFF&amp;if_even_color=000000&amp;if_pid=1941" frameborder="0" height="800px" width="100%" className="cus-iframe"></iframe>        </div>
       </div>
         </div>
         

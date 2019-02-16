@@ -22,12 +22,15 @@ export default withRouter(class HomeSharbingSwsection extends Component {
                         <div className="columns is-desktop">
                             
                             <div className="column is-6 sharb-rt is-pulled-right">
+                           <Link>
+                           <a ><img src="/static/images/sharbing-mob.png" alt="sharbing-image" /></a>
+                           </Link>
                            
-                                <a ><img src="/static/images/sharbing-mob.png" alt="sharbing-image" /></a>
                            
                             </div>
                             <div className="column is-6 is-pulled-left sharb-rt">
-                            <a ><h2>SHARBING SOFTWARE APP </h2></a>
+                            <Link><a ><h2>SHARBING SOFTWARE APP </h2></a></Link>
+                            
                             <span className="shar-line">&nbsp;</span>
                             <h3>Our arbitrage software scans all the major bookies and exchanges and provides you with shop arbs, online arbs and odds comparison across a range of markets on multiple platforms.</h3>
                             <ul>
@@ -39,8 +42,10 @@ export default withRouter(class HomeSharbingSwsection extends Component {
                                 </ul>
                                 <div className="shar-app">
                                     <ul>
-                                        <li><a href="#"><img src="/static/images/others/app-01.png" alt="image"/></a></li>
-                                        <li><a href="//bit.ly/1XYkJEt"><img src="/static/images/others/app-02.png" alt="image"/></a></li>
+                                        <li>
+                                            <Link href=""><a><img src="/static/images/others/app-01.png" alt="image"/></a></Link></li>
+                                        <li>
+                                            <Link href="//bit.ly/1XYkJEt"><a><img src="/static/images/others/app-02.png" alt="image"/></a></Link></li>
                                     </ul>
                                 </div>
                             </div>

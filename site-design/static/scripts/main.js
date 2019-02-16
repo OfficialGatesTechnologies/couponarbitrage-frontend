@@ -176,7 +176,7 @@ jQuery(document).ready(function ($) {
         var x = tweets.length;
         var n = 0;
         var element = document.getElementById('tweet');
-        var html = '<div class="slides">';
+        var html = '<div className="slides">';
         while (n < x) {
             html += '<div>' + tweets[n] + '</div>';
             n++;
@@ -214,10 +214,10 @@ jQuery(document).ready(function ($) {
         var rm = "0 -";
         var msgs = resp.msg.replace(rm, '');
         if (resp.result === 'success') {
-            $('.subscription-success').html('<h4><i class="fa fa-check success-msg"></i> ' + msgs + '</h4>').fadeIn(1000);
+            $('.subscription-success').html('<h4><i className="fa fa-check success-msg"></i> ' + msgs + '</h4>').fadeIn(1000);
             $('.subscription-error').fadeOut(500);
         } else if (resp.result === 'error') {
-            $('.subscription-error').html('<h4><i class="fa fa-times error-msg"></i> ' + msgs + '</h4>').fadeIn(1000);
+            $('.subscription-error').html('<h4><i className="fa fa-times error-msg"></i> ' + msgs + '</h4>').fadeIn(1000);
 
         }
     }

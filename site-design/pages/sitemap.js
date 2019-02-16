@@ -12,7 +12,7 @@ const sitemap = (props) => (
     <div>   
         <Head>
             <meta charSet="utf-8" />
-            <title>{site_name} | FAQs</title>
+            <title>{site_name} | Sitemap</title>
              
         </Head>
 
@@ -51,26 +51,26 @@ const sitemap = (props) => (
                                         <div className="column">
                                             <ul className="no-style">
                                                 <li><Link href="/"><a>Home</a></Link></li>
-                                                <li> <a href="javascript:;" class="parentmenu-one" id="">Gambling Cashback Offers</a>
+                                                <li><Link href="#!"><a className="parentmenu-one" id="">Gambling Cashback Offers</a></Link> 
                                                 <ul className="no-style">
                                                     <li><Link href="/cashback-bonuses"><a>Cashback On Your Losses</a></Link></li>
                                                     <li><Link href="/cashback-bonuses"><a>Fixed Cashback Deals</a></Link></li>
                                                 </ul>
                                                 </li>
-                                                <li> <a href="javascript:;" class="parentmenu-one" id="3">Turnover Cashback</a>
+                                                <li><Link href="#!"><a className="parentmenu-one" id="3">Turnover Cashback</a></Link> 
                                                 <ul className="no-style">
-                                                    <li><Link href="/EcopayzCashbackScheme_page"><a>Ecopayz Cashback Scheme</a></Link></li>
-                                                    <li><Link href="/EcopayzCashbackScheme_page"><a>Skrill Cashback Scheme</a></Link></li>
-                                                    <li><Link href="/EcopayzCashbackScheme_page"><a>SBOBET Cashback Program</a></Link></li>
-                                                    <li><Link href="/EcopayzCashbackScheme_page"><a>Neteller Cashback Scheme</a></Link></li>
-                                                    <li><Link href="/EcopayzCashbackScheme_page"><a>Asianconnect Cashback</a></Link></li>
+                                                    <li><Link href="/ecopayz-cashback-scheme-page"><a>Ecopayz Cashback Scheme</a></Link></li>
+                                                    <li><Link href="/ecopayz-cashback-scheme-page"><a>Skrill Cashback Scheme</a></Link></li>
+                                                    <li><Link href="/ecopayz-cashback-scheme-page"><a>SBOBET Cashback Program</a></Link></li>
+                                                    <li><Link href="/ecopayz-cashback-scheme-page"><a>Neteller Cashback Scheme</a></Link></li>
+                                                    <li><Link href="/ecopayz-cashback-scheme-page"><a>Asianconnect Cashback</a></Link></li>
                                                 </ul>
                                                 </li>
                                                 <li><Link href="/free-arbs"><a>Free Arbs</a></Link></li>
                                                 <li><Link href="/learn-sports-arbitrage"><a>Learn Sports Arbitrage</a></Link></li>
-                                                <li> <a href="javascript:;" className="parentmenu-one" id="3">Tools</a>
+                                                <li><Link href="#!"><a className="parentmenu-one" id="3">Tools</a></Link> 
                                                 <ul className="no-style">
-                                                    <li><Link href="/ArbitrageCalculators"><a>Arbitrage Calculators</a></Link></li>
+                                                    <li><Link href="/arbitrage-calculators"><a>Arbitrage Calculators</a></Link></li>
                                                     
                                                 </ul>
                                                 </li>

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import {site_name} from '../utils/Common';
 import HeaderIn from '../components/header-in';
 import Footer from '../components/footer';
@@ -7,8 +6,9 @@ import ArbCruncherCalculatorTop from '../components/arbitrage-calculators/arb-cr
 import ArbCruncherCalculatorForm from '../components/arbitrage-calculators/arb-cruncher/arb-cruncher-calculator-form';
 import ArbitrageCalculatorsMenu from '../components/arbitrage-calculators/arbitrage-calculators-menu';
 
+import Link from 'next/link';
 
-const InnerCrossMarketCalculator = (props) => (
+const ArbCruncherCalculator = (props) => (
     <div>   
         <Head>
             <meta charSet="utf-8" />
@@ -43,5 +43,5 @@ const InnerCrossMarketCalculator = (props) => (
     </div>
   )
 
-export default InnerCrossMarketCalculator;
+export default ArbCruncherCalculator;
 

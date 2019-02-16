@@ -1,5 +1,5 @@
- 
- 
+
+
 import Head from 'next/head';
 
 import {site_name} from '../utils/Common';
@@ -8,13 +8,12 @@ import HeaderIn from '../components/header-in';
 import Footer from '../components/footer';
 import Link from 'next/link';
 const Affiliates = (props) => (
-    <div>   
+    <div>
         <Head>
             <meta charSet="utf-8" />
             <title>{site_name} | Affiliates</title>
-             
-        </Head>
 
+        </Head>
         <HeaderIn />
         <div className="aff-bg">
         <div className="container">
@@ -23,7 +22,26 @@ const Affiliates = (props) => (
                 <div className="aff-ttl">Coupon Arbitrage Affiliates</div>
                 <div className="aff-sec-01">
                     <div className="aff-banner">
-                    <Link href="/login"><a><img src="static/images/backgrounds/affiliate-banner.jpg"/></a></Link>
+                    <div className="columns is-vcentered is-gapless">
+                        <div className="column is-8">
+                        <div className="level-0">
+                        <div className="aff-banner-detail text-center">
+                            <h4>5% ON REFERRALS CASHBACK | 20% ON SHARBING APP SUBSCRIPTIONS</h4>
+                            <h1>EARN UP TO 20% COMMISSION</h1>
+                            <h4>ON EVERY REFERRED CUSTOMER FOR LIFE</h4>
+                            <Link href="/affiliate-dashboard"><a className="jo-btn">DASHBOARD</a></Link>
+                        </div>
+                        </div>
+                        </div>
+                        <div className="column is-4 ">
+                        <div className="image">
+                        <img src="/static/images/others/aff-banner.png" alt="aff" />
+                        </div>
+
+
+                        </div>
+                    </div>
+                    {/* <Link href="/login"><a><img src="static/images/backgrounds/affiliate-banner.jpg"/></a></Link> */}
                     </div>
                     <div className="aff-para">
                     <p>Join the Coupon Arbitrage affiliate programe and earn commission for referring new subscribers to our sharbing app along with commission across all our cashback deals.</p>
@@ -90,4 +108,3 @@ const Affiliates = (props) => (
   )
 
 export default Affiliates;
-

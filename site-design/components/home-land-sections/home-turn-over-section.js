@@ -20,7 +20,10 @@ export default withRouter(class HomeTurnOversection extends Component {
                     <div className="turn-wrap">
                         <div className="turn-lt">
                             <div className="turn-lt-desk">
-                                <a ><img src="/static/images/turn-lap-01.png" alt="gambling-image" /></a>
+                            <Link>
+                            <a ><img src="/static/images/turn-lap-01.png" alt="gambling-image" /></a>
+                            </Link>
+                            
                             </div>
                             <div className="turn-lt-tap">
                                 <Link href="/cashback-bonuses">

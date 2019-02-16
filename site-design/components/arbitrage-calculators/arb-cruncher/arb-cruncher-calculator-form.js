@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../../styles/styles.scss'
+import '../../../styles/styles.scss';
 import { withRouter } from 'next/router';
 
 export default withRouter(class ArbCruncherCalculatorForm extends Component {
@@ -24,7 +24,7 @@ export default withRouter(class ArbCruncherCalculatorForm extends Component {
                     </div>
                     <div className="calc_form arb-cruncher-body">
                     <div className="iframe-wrap text-center">
-          <iframe id="iframe-id" src="//www.arbcruncher.com/webmaster_calc.asp?type=1" frameborder="0" height="600px" width="495px" scrolling="no" name="ArbCruncher"></iframe> 
+          <iframe id="iframe-id" src="//www.arbcruncher.com/webmaster_calc.asp?type=1" className="arb-crun-plugin" frameBorder="0" height="600px" width="495px" scrolling="no" name="ArbCruncher"></iframe> 
                  </div>
      
                     

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../styles/styles.scss';
 import { withRouter } from 'next/router';
+import Link from 'next/link';
 
 export default withRouter(class HomeJoinUs extends Component {
 
@@ -33,7 +34,10 @@ export default withRouter(class HomeJoinUs extends Component {
                                 </ul>
                             </div>
                             <div className="column is-6 is-pulled-right join-lt">
+                            <Link href="#">
                             <a href="#" className="video" data-toggle="modal" data-target="#" data-video="/couponarbitrage/site/assets/videos/test-02.mp4"><img src="/static/images/join-video.jpg" alt="video" /></a>
+                            </Link>
+                            
                             </div>
                         </div>
                     </div>

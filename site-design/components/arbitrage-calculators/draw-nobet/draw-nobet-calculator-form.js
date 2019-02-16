@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../../styles/styles.scss'
 import { withRouter } from 'next/router';
-import Link from 'next/link';
+
 
 export default withRouter(class DrawNoBetCalculatorForm extends Component {
 
@@ -89,7 +89,7 @@ export default withRouter(class DrawNoBetCalculatorForm extends Component {
                     </tr>
                     <tr >
                         <td></td>
-                        <td colspan="2"><label className="control-label-01 back-all">Back selections on same betting exchange</label>
+                        <td colSpan="2"><label className="control-label-01 back-all">Back selections on same betting exchange</label>
                         {/* <input type="checkbox" className="dis-inblock dis-vt" name="s_exchange_radio" id="s_exchange_radio" /> */}
                         <div className="checkbox join-check-wrap">
                         <label>
@@ -111,20 +111,20 @@ export default withRouter(class DrawNoBetCalculatorForm extends Component {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td colspan="2" align="right" valign="middle" className="has-text-right"><label className="control-label-01 back-all " style={{fontWeight:  'Bold'}}>Book %</label></td>
+                        <td colSpan="2" align="right" valign="middle" className="has-text-right"><label className="control-label-01 back-all " style={{fontWeight:  'Bold'}}>Book %</label></td>
                         <td><input type="text" className="input default-txbx" value="0.00" id="laybet_amount"/></td>
                     </tr>
                     <tr>
                     <td></td>
                         <td></td>
                         <td></td>
-                        <td colspan="3" align="right" valign="middle" className="has-text-right">
+                        <td colSpan="3" align="right" valign="middle" className="has-text-right">
                         <label className="control-label-01 back-all mg-tp-8" style={{fontWeight:  'Bold'}}>Total Stake £</label>  </td>
                         <td><input type="text" className="input default-txbx" value="0.00" id="total_stake" /></td>
                     </tr>
                    
                     <tr>
-                        <td colspan="8" align="center" className="text-center">
+                        <td colSpan="8" align="center" className="text-center">
                         <input type="reset" className="btn purple-btn normal-btn rst" value="Reset" />
                         <input type="button" className="btn green-btn normal-btn" value="Calculate" onClick="calculateBackRay()" />
                         </td>

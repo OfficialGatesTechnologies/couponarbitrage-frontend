@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../../styles/styles.scss'
 import { withRouter } from 'next/router';
-import Link from 'next/link';
+
 
 export default withRouter(class AsianHandicapsCalculatorForm extends Component {
 
@@ -120,7 +120,7 @@ export default withRouter(class AsianHandicapsCalculatorForm extends Component {
                 <td><input type="text" className="input default-txbx" name="e_yield" id="e_yield_1" value="0.00" readonly=""/></td>
               </tr>
                     <tr>
-                        <td colspan="8" align="center" className="text-center">
+                        <td colSpan="8" align="center" className="text-center">
                         <input type="reset" className="btn purple-btn normal-btn rst" value="Reset" />
                         <input type="button" className="btn green-btn normal-btn" value="Calculate" onClick="calculateBackRay()" />
                         </td>
