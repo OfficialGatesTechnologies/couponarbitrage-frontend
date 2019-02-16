@@ -55,12 +55,15 @@ export default withRouter(class Header extends Component {
                                             </span>
                                             Profile </a>
                                     </Link>
+                                    <Link href="/site_settings" prefetch>
                                     <a className="navbar-item">
                                         <span className="icon bd-link-icon has-text-grey-dark">
                                             <i className="fas fa-cog"></i>
                                         </span>
                                         Settings
                             </a>
+                            </Link>
+
                                     <hr className="navbar-divider" />
                                     <a className="navbar-item is-light" onClick={this.logout}>
                                         <span className="icon bd-link-icon has-text-grey-dark">

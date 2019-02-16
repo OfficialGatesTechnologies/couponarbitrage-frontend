@@ -46,6 +46,8 @@ export default withRouter(class cashback_claims extends Component {
         this.getDropDownData();
     }
     componentWillReceiveProps = (nextProps) => {
+       
+
         this.setState({ status: nextProps.router.query.status });
         setTimeout(() => { this.getList(1); }, 100);
         //console.log('nextProps.match.params.scheme',nextProps.router.query.status);
@@ -68,7 +70,7 @@ export default withRouter(class cashback_claims extends Component {
         const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey,filterByStore } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/cashback-claims/list?cb_type=2&pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/cashback-claims/list?cb_type=2&status='+status+'&pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (filterByStore) { listUrl += '&filterByStore=' + filterByStore; }

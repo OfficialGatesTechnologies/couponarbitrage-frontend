@@ -65,10 +65,10 @@ export default withRouter(class revenue_cashback_claims extends Component {
     }
 
     getList = (page) => {
-        const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey,filterByStore } = this.state;
+        const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey,filterByStore,status } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/cashback-claims/list?cb_type=3&pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/cashback-claims/list?cb_type=3&status='+status+'&pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (filterByStore) { listUrl += '&filterByStore=' + filterByStore; }
@@ -255,6 +255,49 @@ export default withRouter(class revenue_cashback_claims extends Component {
             visibleTag: false
         });
     }
+
+    exportStores = (e) => {
+        e.preventDefault();
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
+        let listUrl = apiUrl + 'admin/cashback-offer/export-stores';
+        axios.get(listUrl)
+            .then(res => {
+                var exportRes = res.data.results;
+                var exportData = [];
+                exportRes.map(function (dataRow) {
+                    var exportRow = [];
+                    exportRow['_id'] = dataRow._id;
+                    exportRow['aff_id'] = dataRow.aid._id;
+                    exportRow['Aff_Name'] = dataRow.aid.name;
+                    exportRow['cat_id'] = dataRow.cat_id._id;
+                    exportRow['cat_title'] = dataRow.cat_id.cat_title;
+                    exportRow['title'] = dataRow.title;
+                    exportRow['details'] = dataRow.details;
+                    exportRow['details_default'] = dataRow.details_default;
+                    exportRow['banner'] = dataRow.banner;
+                    exportRow['internal_banner'] = dataRow.internal_banner;
+                    exportRow['link'] = dataRow.link;
+                    exportRow['value'] = dataRow.value;
+                    exportRow['comm'] = dataRow.comm;
+                    exportRow['vaild_from'] = dataRow.vaild_from;
+                    exportRow['valid_to'] = dataRow.valid_to;
+                    exportRow['tweet'] = dataRow.tweet;
+                    exportRow['send_mail'] = dataRow.send_mail;
+                    exportRow['merchant_tc'] = dataRow.merchant_tc;
+                    exportRow['merchant_tc_default'] = dataRow.merchant_tc_default;
+                    exportRow['youtube_video'] = dataRow.youtube_video;
+                    exportRow['meta_title'] = dataRow.meta_title;
+                    exportRow['meta_keywords'] = dataRow.meta_keywords;
+                    exportRow['meta_description'] = dataRow.meta_description;
+                    exportData.push(exportRow);
+                });
+                const csvExporter = new ExportToCsv(options);
+                csvExporter.generateCsv(exportData);
+            }).catch(() => {
+                this.setState({ loading: false });
+            })
+
+    }
     
 
 
@@ -356,6 +399,11 @@ export default withRouter(class revenue_cashback_claims extends Component {
                             <div className="level">
                                 <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">{this.state.status == 'more_info' ? 'More information requested' : this.state.status} Claims   List </h2>
                                 <div>
+                                <a className="button is-link" onClick={this.exportStores}>
+                                        <span className="icon is-small">
+                                            <i className="fas fa-share"></i>
+                                        </span> <span>Export</span>
+                                    </a>
                                 </div>
                             </div>
                             <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-size-6">
@@ -391,7 +439,7 @@ export default withRouter(class revenue_cashback_claims extends Component {
                         </div>
                     </div>
                 </div>
-                <TagModel tagOptions={this.state.tagOptions} handleUpdateTags={this.handleUpdateTags} tagSelectedOpt={this.state.tagSelectedOpt} handleSelectChange={this.handleSelectChange} visibleTag={this.state.visibleTag} closeTagModal={this.closeTagModal} errors={this.state.error} />
+                <TagModel  tagOptions={this.state.tagOptions} handleUpdateTags={this.handleUpdateTags} tagSelectedOpt={this.state.tagSelectedOpt} handleSelectChange={this.handleSelectChange} visibleTag={this.state.visibleTag} closeTagModal={this.closeTagModal} errors={this.state.error} />
 
             </div>
         )
@@ -472,6 +520,7 @@ const TagModel = (props) => {
                         options={props.tagOptions}
                         isMulti={true}
                         value={props.tagSelectedOpt}
+                       
                     />
                     <p className="help is-danger">{_.get(props.errors, 'tagSelectedOpt')}</p>
                 </div>

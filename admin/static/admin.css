@@ -371,3 +371,21 @@ html,body {
 .control.ctrl-lab .checkbox {
   margin: 0 15px 0px 0;
 }
+.title-statics {
+
+  font-size: 18px;
+  font-weight: bold;
+ 
+  margin: 0;
+      margin-top: 0px;
+
+}
+.cashback-boxs ul {
+
+  list-style: outside none none;
+  margin: 0;
+  margin-bottom: 0px;
+  padding: 0;
+  margin-bottom: 0px;
+
+}

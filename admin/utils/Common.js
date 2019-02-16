@@ -36,8 +36,8 @@ export const ADMINMODULES = [
         'submodules': [
             { 'name': 'Cashback Categories', 'url': '/cashback_categories', 'as': '/cashback_categories', 'id': 'cashback_categories' },
             { 'name': 'Cashback Stores', 'url': '/cashback_stores', 'as': '/cashback_stores', 'id': 'cashback_stores' },
-            { 'name': 'Cashback Offers', 'url': '/cashback_offers','as':'/cashback_offers', 'id': 'cashback_offers' },
-            { 'name': 'Cashback Vouchers Codes', 'url': '/cashback_vouchers','as':'/cashback_vouchers', 'id': 'cashback_vouchers' },
+            { 'name': 'Cashback Offers', 'url': '/cashback_offers', 'as': '/cashback_offers', 'id': 'cashback_offers' },
+            { 'name': 'Cashback Vouchers Codes', 'url': '/cashback_vouchers', 'as': '/cashback_vouchers', 'id': 'cashback_vouchers' },
             { 'name': 'Cashback Sites', 'url': '/cashback_sites', 'as': 'cashback_sites', 'id': 'cashback_sites' }
         ]
     },
@@ -48,15 +48,15 @@ export const ADMINMODULES = [
         'id': 4,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Unconfirmed Claims', 'url': '/cashback_claims?status=unconfirmed','as': '/cashback_claims/unconfirmed', 'id': 'cashback_claims/unconfirmed' },
-            { 'name': 'Unapproved Claims', 'url': '/cashback_claims?status=unapproved','as': '/cashback_claims/unapproved', 'id': 'cashback_claims/unapproved' },
-            { 'name': 'Finished Claims', 'url': '/cashback_claims?status=finished','as': '/cashback_claims/finished', 'id': 'cashback_claims/finished' },
-            { 'name': 'Payable Claims', 'url': '/cashback_claims?status=payable','as': '/cashback_claims/payable', 'id': 'cashback_claims/payable' },
-            { 'name': 'Paid Claims', 'url': '/cashback_claims?status=paid','as': '/cashback_claims/paid','id': 'cashback_claims/paid' },
-            { 'name': 'More information requested', 'url': '/cashback_claims?status=more_info','as': '/cashback_claims/more_info', 'id': 'cashback_claims/more_info' },        
-            { 'name': 'Cancelled Claims', 'url': '/cashback_claims?status=cancelled','as': '/cashback_claims/cancelled','id': 'cashback_claims/cancelled' },
-          //  { 'name': 'Total Liability', 'url': '/menus', 'id': 'admin-accounts7' },
-           
+            { 'name': 'Unconfirmed Claims', 'url': '/cashback_claims?status=unconfirmed', 'as': '/cashback_claims/unconfirmed', 'id': 'cashback_claims/unconfirmed' },
+            { 'name': 'Unapproved Claims', 'url': '/cashback_claims?status=unapproved', 'as': '/cashback_claims/unapproved', 'id': 'cashback_claims/unapproved' },
+            { 'name': 'Finished Claims', 'url': '/cashback_claims?status=finished', 'as': '/cashback_claims/finished', 'id': 'cashback_claims/finished' },
+            { 'name': 'Payable Claims', 'url': '/cashback_claims?status=payable', 'as': '/cashback_claims/payable', 'id': 'cashback_claims/payable' },
+            { 'name': 'Paid Claims', 'url': '/cashback_claims?status=paid', 'as': '/cashback_claims/paid', 'id': 'cashback_claims/paid' },
+            { 'name': 'More information requested', 'url': '/cashback_claims?status=more_info', 'as': '/cashback_claims/more_info', 'id': 'cashback_claims/more_info' },
+            { 'name': 'Cancelled Claims', 'url': '/cashback_claims?status=cancelled', 'as': '/cashback_claims/cancelled', 'id': 'cashback_claims/cancelled' },
+            //  { 'name': 'Total Liability', 'url': '/menus', 'id': 'admin-accounts7' },
+
 
         ]
     },
@@ -67,13 +67,14 @@ export const ADMINMODULES = [
         'id': 5,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Unconfirmed Claims', 'url': '/revenue_cashback_claims?status=unconfirmed','as': '/revenue_cashback_claims/unconfirmed', 'id': 'cashback_claims/unconfirmed' },
-            { 'name': 'Unapproved Claims', 'url': '/revenue_cashback_claims?status=unapproved','as': '/revenue_cashback_claims/unapproved', 'id': 'cashback_claims/unapproved' },
-            { 'name': 'Finished Claims', 'url': '/revenue_cashback_claims?status=finished','as': '/revenue_cashback_claims/finished', 'id': 'cashback_claims/finished' },
-            { 'name': 'Payable Claims', 'url': '/revenue_cashback_claims?status=payable','as': '/revenue_cashback_claims/payable', 'id': 'cashback_claims/payable' },
-            { 'name': 'Paid Claims', 'url': '/revenue_cashback_claims?status=paid','as': '/revenue_cashback_claims/paid','id': 'cashback_claims/paid' },
-            { 'name': 'More information requested', 'url': '/revenue_cashback_claims?status=more_info','as': '/revenue_cashback_claims/more_info', 'id': 'cashback_claims/more_info' },        
-            { 'name': 'Cancelled Claims', 'url': '/revenue_cashback_claims?status=cancelled','as': '/revenue_cashback_claims/cancelled','id': 'cashback_claims/cancelled' },
+            { 'name': 'Unconfirmed Claims', 'url': '/revenue_cashback_claims?status=unconfirmed', 'as': '/revenue_cashback_claims/unconfirmed', 'id': 'cashback_claims/unconfirmed' },
+            { 'name': 'Unapproved Claims', 'url': '/revenue_cashback_claims?status=unapproved', 'as': '/revenue_cashback_claims/unapproved', 'id': 'cashback_claims/unapproved' },
+            { 'name': 'Finished Claims', 'url': '/revenue_cashback_claims?status=finished', 'as': '/revenue_cashback_claims/finished', 'id': 'cashback_claims/finished' },
+            { 'name': 'Payable Claims', 'url': '/revenue_cashback_claims?status=payable', 'as': '/revenue_cashback_claims/payable', 'id': 'cashback_claims/payable' },
+            { 'name': 'Paid Claims', 'url': '/revenue_cashback_claims?status=paid', 'as': '/revenue_cashback_claims/paid', 'id': 'cashback_claims/paid' },
+            { 'name': 'More information requested', 'url': '/revenue_cashback_claims?status=more_info', 'as': '/revenue_cashback_claims/more_info', 'id': 'cashback_claims/more_info' },
+            { 'name': 'Cancelled Claims', 'url': '/revenue_cashback_claims?status=cancelled', 'as': '/revenue_cashback_claims/cancelled', 'id': 'cashback_claims/cancelled' },
+            { 'name': 'Cashback Credits', 'url': '/cashback_credits', 'as': '/cashback_credits', 'id': 'cashback_credits' },
 
 
         ]
@@ -85,9 +86,11 @@ export const ADMINMODULES = [
         'id': 6,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Unconfirmed Claims', 'url': '/menu-manager', 'id': 'admin-accounts7' },
-            { 'name': 'Unapproved Claims', 'url': '/menus', 'id': 'admin-accounts7' },
-
+            { 'name': 'Skrill Cashback', 'url': '/skrill_cashback', 'as': '/skrill_cashback', 'id': 'skrill_cashback' },
+            { 'name': 'SBObet Cashback', 'url': '/sbobet_cashback', 'as': '/sbobet_cashback', 'id': 'sbobet_cashback' },
+            { 'name': 'Neteller Cashback', 'url': '/neteller_cashback', 'as': '/neteller_cashback', 'id': 'neteller_cashback' },
+            { 'name': 'Asian Connect Cashback', 'url': '/asian_cashback', 'as': '/asian_cashback', 'id': 'asian_cashback' },
+            { 'name': 'Ecopayz Cashback', 'url': '/ecopay_cashback', 'as': '/ecopay_cashback', 'id': 'ecopay_cashback' }
 
         ]
     },
@@ -166,7 +169,7 @@ export const ADMINMODULES = [
             // { 'name': 'Page List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
             { 'name': 'Affiliate Networks', 'url': '/affiliate_networks', 'as': '/affiliate_networks', 'id': 'admin-accounts7' },
             // { 'name': 'Turnover Static Text', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
-             { 'name': 'Tags', 'url': '/tags', 'as': '/tags','id': 'admin-accounts7' },
+            { 'name': 'Tags', 'url': '/tags', 'as': '/tags', 'id': 'admin-accounts7' },
 
         ]
     },
