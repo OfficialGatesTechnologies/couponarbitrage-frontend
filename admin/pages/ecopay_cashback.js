@@ -22,7 +22,7 @@ const options = {
     useKeysAsHeaders: true,
 
 };
-export default withRouter(class Neteller_cashback extends Component {
+export default withRouter(class Ecopay_cashback extends Component {
 
     constructor(props) {
         super(props);
@@ -39,9 +39,9 @@ export default withRouter(class Neteller_cashback extends Component {
             sortOrder: 'desc',
             sortKey: 'registerDate',
             user_id: '',
-            netellerId: '',
-            pendingAmount:0,
-            paidAmount:0,
+            ecopayzId: '',
+            totalCom:0,
+            siteCom:0,
             totalusers:0,
 
             selectedOption: { value: '', label: '' },
@@ -62,7 +62,7 @@ export default withRouter(class Neteller_cashback extends Component {
         const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/turnover-cashback/neteller-cashbacks?pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/turnover-cashback/ecopay-cashbacks?pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (sortOrder) { listUrl += '&sortOrder=' + sortOrder + '&sortKey=' + sortKey; }
@@ -71,8 +71,8 @@ export default withRouter(class Neteller_cashback extends Component {
                 this.setState({
                     arrList: res.data.results,
                     totalRecords: res.data.totalCount,
-                    pendingAmount:res.data.pendingAmount.length>0?res.data.pendingAmount[0].sum.toFixed(2):0,
-                    paidAmount:res.data.paidAmount.length>0?res.data.paidAmount[0].sum.toFixed(2):0,
+                    totalCom:res.data.totalSum.length>0?res.data.totalSum[0].sum.toFixed(2):0,
+                    siteCom:res.data.totalComm.length>0?res.data.totalComm[0].sum.toFixed(2):0,
                     loading: false
                 });
             }).catch(() => {
@@ -111,6 +111,7 @@ export default withRouter(class Neteller_cashback extends Component {
     resetSearch = (e) => {
         e.preventDefault();
         document.getElementById('searchForm').reset();
+
         this.setState({ searchKey: '', searchBy: '', searchStatus: '' });
         setTimeout(() => { this.getList(1); }, 100);
     }
@@ -176,7 +177,7 @@ export default withRouter(class Neteller_cashback extends Component {
                 const tragetFile = document.getElementById('uploadFile').files[0];
                 data.append('file', tragetFile);
                 axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-                axios.post(apiUrl + 'admin/turnover-cashback/upload-neteller-data', data).then((result) => {
+                axios.post(apiUrl + 'admin/turnover-cashback/upload-ecopay-data', data).then((result) => {
                     let sucMsg = result.data.message;
                     this.setState({ uploadFile: '' });
                     document.getElementById('uploadForm').reset();
@@ -198,10 +199,10 @@ export default withRouter(class Neteller_cashback extends Component {
             visibleModal: false
         });
     }
-    openModel = (netellerId) => {
+    openModel = (ecopayzId) => {
         this.setState({
             visibleModal: true,
-            netellerId: netellerId
+            ecopayzId: ecopayzId
         });
     }
     searchUsers = (query, callback) => {
@@ -230,13 +231,13 @@ export default withRouter(class Neteller_cashback extends Component {
     }
 
     handleUpdateUser = () => {
-        const { user_id, netellerId } = this.state;
+        const { user_id, ecopayzId } = this.state;
         let fieldNeedToValidate = ['user_id'];
         this.formValidation(fieldNeedToValidate, (isValid) => {
             if (isValid) {
-                axios.post(apiUrl + 'admin/turnover-cashback/update-neteller-user', { user_id: user_id, netellerId: netellerId }).then((result) => {
+                axios.post(apiUrl + 'admin/turnover-cashback/update-ecopay-user', { user_id: user_id, ecopayzId: ecopayzId }).then((result) => {
                     let sucMsg = result.data.msg;
-                    this.setState({ user_id: '', netellerId: '', selectedOption: { value: '', label: '' }, visibleModal: false });
+                    this.setState({ user_id: '', ecopayzId: '', selectedOption: { value: '', label: '' }, visibleModal: false });
                     if (result.data.success) {
                         toastr.success(sucMsg, '');
                         setTimeout(() => { this.getList(1); }, 300);
@@ -253,18 +254,19 @@ export default withRouter(class Neteller_cashback extends Component {
     exportCashbacks = (e) => {
         e.preventDefault();
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/turnover-cashback/export-neteller-cashbacks';
+        let listUrl = apiUrl + 'admin/turnover-cashback/export-ecopay-cashbacks';
         axios.get(listUrl)
             .then(res => {
                 var exportRes = res.data.results;
                 var exportData = [];
                 exportRes.map(function (dataRow) {
                     var exportRow = [];
-                    exportRow['user_id'] = dataRow.netellerId;
+                    exportRow['user_id'] = dataRow.ecopayzId;
                     exportRow['username'] = dataRow.user_id ? dataRow.user_id.username : '[';
                     exportRow['Email'] = dataRow.user_id ? dataRow.user_id.email : '';
-                    exportRow['pendingAmount'] = dataRow.pendingAmount;
-                    exportRow['paidAmount'] = dataRow.paidAmount;
+                    exportRow['currentBalance'] = dataRow.total_amount;
+                  
+                   
                     exportData.push(exportRow);
                 });
                 const csvExporter = new ExportToCsv(options);
@@ -282,7 +284,7 @@ export default withRouter(class Neteller_cashback extends Component {
             <div>
                 <Head>
                     <meta charSet="utf-8" />
-                    <title>{site_name}  -  Neteller Cashback  s  </title>
+                    <title>{site_name}  -  Ecopayz Cashbacks  </title>
                 </Head>
                 <div className="page-wrapper" id="page-wrapper">
                     <div className="columns">
@@ -296,7 +298,7 @@ export default withRouter(class Neteller_cashback extends Component {
                                             </Link>
                                         </li>
                                         <li className="is-active"><a href="#">Turnover Cashback</a></li>
-                                        <li className="is-active"><a href="#">Neteller Cashback   Manager</a></li>
+                                        <li className="is-active"><a href="#">Ecopayz Cashback  Manager</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -308,10 +310,9 @@ export default withRouter(class Neteller_cashback extends Component {
                             <div className="box bread-box is-shadowless has-background-white">
                                 <nav className="breadcrumb" aria-label="breadcrumbs">
                                     <ul>
-                                        <li className="is-active"> <a><b>Total Current Balance : </b>&nbsp;&nbsp;£{this.state.pendingAmount} </a></li>
-                                        <li className="is-active"> <a><b>Total Paid Amount: </b>&nbsp;&nbsp;£{this.state.paidAmount}</a> </li>
-                                        <li className="is-active"> <a><b>Total Users: </b>&nbsp;&nbsp;{this.state.totalRecords}</a> </li>
-                                      
+                                        <li className="is-active"> <a><b>Total Commission: </b> €{this.state.totalCom} </a></li>
+                                        <li className="is-active"> <a><b>Total Users: </b> {this.state.totalRecords}</a> </li>
+                                        <li className="is-active"> <a><b>Site Commission: </b> €{this.state.siteCom}</a> </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -358,7 +359,7 @@ export default withRouter(class Neteller_cashback extends Component {
                                                     <div className="select is-fullwidth">
                                                         <select name="searchBy" onChange={this.handleInputChange}>
                                                             <option value="">Search By</option>
-                                                            <option value="netellerId">User Id</option>
+                                                            <option value="ecopayzId">User Id</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -386,7 +387,7 @@ export default withRouter(class Neteller_cashback extends Component {
 
                         <div className="table-responsive dash-table-res">
                             <div className="level">
-                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Neteller Cashback      List </h2>         
+                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Ecopayz Cashback  List </h2>         
                                 <div>
                                     <a className="button is-link" onClick={this.exportCashbacks}>
 
@@ -401,12 +402,10 @@ export default withRouter(class Neteller_cashback extends Component {
                                 <thead>
                                     <tr className="bg-light">
                                         <th style={{ width: '25px' }}>#</th >
-                                        <th onClick={this.handleSort.bind(this, 'netellerId', this.state.sortOrder)} >User Id   <i className={`fa ${(this.state.sortKey == "netellerId") ? this.state.sortClass : "fa-sort"}`}></i></th>
+                                        <th onClick={this.handleSort.bind(this, 'ecopayzId', this.state.sortOrder)} >User Id   <i className={`fa ${(this.state.sortKey == "ecopayzId") ? this.state.sortClass : "fa-sort"}`}></i></th>
                                         <th>User Name</th>
                                         <th>E-mail </th>
-
                                         <th>Current Balance</th>
-                                        <th>Total Paid</th>
                                     </tr>
                                 </thead>
                                 <TableListContent openModel={this.openModel} updateSite={this.updateSite} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} />
@@ -427,7 +426,7 @@ export default withRouter(class Neteller_cashback extends Component {
                         </div>
                     </div>
                 </div>
-                <TagModel selectedOption={this.state.selectedOption} netellerId={this.state.netellerId} handleUpdateUser={this.handleUpdateUser} searchUsers={this.searchUsers} handleSelectChange={this.handleSelectChange} visibleModal={this.state.visibleModal} closeTagModal={this.closeTagModal} errors={this.state.error} />
+                <TagModel selectedOption={this.state.selectedOption} ecopayzId={this.state.ecopayzId} handleUpdateUser={this.handleUpdateUser} searchUsers={this.searchUsers} handleSelectChange={this.handleSelectChange} visibleModal={this.state.visibleModal} closeTagModal={this.closeTagModal} errors={this.state.error} />
             </div>
         )
     }
@@ -446,25 +445,25 @@ const TableListContent = (props) => {
                     </td></tr>
                     : (props.arrlist.length > 0) ?
                         props.arrlist.map(function (dataRow, i) {
-                          
+                            var moneyBookerAwardto = dataRow.user_id ? dataRow.user_id.moneyBookerAwardto : null;
+                            var moneyBookerBonus = (moneyBookerAwardto !== null && moneyBookerAwardto == 0 && dataRow.user_id) ? dataRow.user_id.moneyBookerBonus : 0;
                             return <tr>
                                 <td>{sNo + i}</td>
-                                <td>{dataRow.netellerId}</td>
+                                <td>{dataRow.ecopayzId}</td>
                                 <td>{
                                     dataRow.user_id ?
-                                        <Link href={`/neteller_cashback_details?id=${dataRow.netellerId}`} as={`/neteller_cashback_details/${dataRow.netellerId}`}>
+                                        <Link href={`/ecopay_cashback_details?id=${dataRow.ecopayzId}`} as={`/ecopay_cashback_details/${dataRow.ecopayzId}`}>
                                             <a data-tip="View" className="button is-success is-small tooltip" data-tooltip="View"> {dataRow.user_id.username}</a>
                                         </Link> :
-                                        <button onClick={props.openModel.bind(this, dataRow.netellerId)} className="button is-danger is-small">Assign User</button>
+                                        <button onClick={props.openModel.bind(this, dataRow.ecopayzId)} className="button is-danger is-small">Assign User</button>
                                 }
                                 </td>
                                 <td>{dataRow.user_id ?
                                     dataRow.user_id.email
                                     : 'N/A'}</td>
-                                <td>{dataRow.pendingAmount}</td>
-                                <td>{dataRow.paidAmount}</td>
+                                <td>{dataRow.total_amount + moneyBookerBonus}</td>
                             </tr>
-                        }) : <tr><td colSpan="8" style={{ 'textAlign': 'center' }}>No records found.</td></tr>
+                        }) : <tr><td colSpan="8" style={{ 'textAlign': 'center' }} >No records found.</td></tr>
 
 
             }
@@ -478,7 +477,7 @@ const TagModel = (props) => {
     return (
         <Modal width="500" visible={props.visibleModal} effect="fadeInUp">
             <header className="modal-card-head">
-                <p className="modal-card-title">Assign User {props.netellerId}</p>
+                <p className="modal-card-title">Assign User {props.ecopayzId}</p>
             </header>
             <div className="column is-12">
                 <div className="control">

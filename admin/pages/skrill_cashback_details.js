@@ -185,7 +185,13 @@ export default withRouter(class Skrill_cashback extends Component {
                                                 <a href="#">Dashboard</a>
                                             </Link>
                                         </li>
+                                        
                                         <li className="is-active"><a href="#">Turnover Cashback</a></li>
+                                        <li>
+                                            <Link href="/skrill_cashback" prefetch>
+                                                <a href="#"> Skrill Cashback </a>
+                                            </Link>
+                                        </li>
                                         <li className="is-active"><a href="#">Skrill Cashback Manager</a></li>
                                     </ul>
                                 </nav>

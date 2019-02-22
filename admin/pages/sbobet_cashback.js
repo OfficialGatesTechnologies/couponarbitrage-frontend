@@ -40,9 +40,9 @@ export default withRouter(class Sbobet_cashback extends Component {
             sortKey: 'registerDate',
             user_id: '',
             sbobetId: '',
-            pendingAmount:0,
-            paidAmount:0,
-            totalusers:0,
+            pendingAmount: 0,
+            paidAmount: 0,
+            totalusers: 0,
 
             selectedOption: { value: '', label: '' },
             errors: {
@@ -71,15 +71,15 @@ export default withRouter(class Sbobet_cashback extends Component {
                 this.setState({
                     arrList: res.data.results,
                     totalRecords: res.data.totalCount,
-                    pendingAmount:res.data.pendingAmount.length>0?res.data.pendingAmount[0].sum.toFixed(2):0,
-                    paidAmount:res.data.paidAmount.length>0?res.data.paidAmount[0].sum.toFixed(2):0,
+                    pendingAmount: res.data.pendingAmount.length > 0 ? res.data.pendingAmount[0].sum.toFixed(2) : 0,
+                    paidAmount: res.data.paidAmount.length > 0 ? res.data.paidAmount[0].sum.toFixed(2) : 0,
                     loading: false
                 });
             }).catch(() => {
                 this.setState({ loading: false });
             })
     }
- 
+
     handleInputChange = (e) => {
         const target = e.target;
         const value = target.value;
@@ -254,7 +254,7 @@ export default withRouter(class Sbobet_cashback extends Component {
     exportCashbacks = (e) => {
         e.preventDefault();
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/turnover-cashback/export-skrill-cashbacks';
+        let listUrl = apiUrl + 'admin/turnover-cashback/export-sbobet-cashbacks';
         axios.get(listUrl)
             .then(res => {
                 var exportRes = res.data.results;
@@ -264,9 +264,9 @@ export default withRouter(class Sbobet_cashback extends Component {
                     exportRow['user_id'] = dataRow.sbobetId;
                     exportRow['username'] = dataRow.user_id ? dataRow.user_id.username : '[';
                     exportRow['Email'] = dataRow.user_id ? dataRow.user_id.email : '';
-                    exportRow['currentBalance'] = dataRow.total_amount;
-                    exportRow['moneyBookerBonus'] = dataRow.user_id ? dataRow.user_id.moneyBookerBonus : 0;
-                   
+                    exportRow['pendingAmount'] = dataRow.pendingAmount;
+                    exportRow['paidAmount'] = dataRow.paidAmount;
+
                     exportData.push(exportRow);
                 });
                 const csvExporter = new ExportToCsv(options);
@@ -313,7 +313,7 @@ export default withRouter(class Sbobet_cashback extends Component {
                                         <li className="is-active"> <a><b>Total Current Balance : </b>&nbsp;&nbsp;£{this.state.pendingAmount} </a></li>
                                         <li className="is-active"> <a><b>Total Paid Amount: </b>&nbsp;&nbsp;£{this.state.paidAmount}</a> </li>
                                         <li className="is-active"> <a><b>Total Users: </b>&nbsp;&nbsp;{this.state.totalRecords}</a> </li>
-                                      
+
                                     </ul>
                                 </nav>
                             </div>
@@ -388,7 +388,7 @@ export default withRouter(class Sbobet_cashback extends Component {
 
                         <div className="table-responsive dash-table-res">
                             <div className="level">
-                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">SBObet Cashback     List </h2>         
+                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">SBObet Cashback     List </h2>
                                 <div>
                                     <a className="button is-link" onClick={this.exportCashbacks}>
 
@@ -448,7 +448,7 @@ const TableListContent = (props) => {
                     </td></tr>
                     : (props.arrlist.length > 0) ?
                         props.arrlist.map(function (dataRow, i) {
-                          
+
                             return <tr>
                                 <td>{sNo + i}</td>
                                 <td>{dataRow.sbobetId}</td>
@@ -463,8 +463,8 @@ const TableListContent = (props) => {
                                 <td>{dataRow.user_id ?
                                     dataRow.user_id.email
                                     : 'N/A'}</td>
-                                <td>{dataRow.pendingAmount}</td>
-                                <td>{dataRow.paidAmount}</td>
+                                <td>£{dataRow.pendingAmount}</td>
+                                <td>£{dataRow.paidAmount}</td>
                             </tr>
                         }) : <tr><td colSpan="8" style={{ 'textAlign': 'center' }} >No records found.</td></tr>
 

@@ -34,7 +34,7 @@ export default withRouter(class Neteller_cashback_details extends Component {
             userDetails: [],
             awardAmount: 0,
             awardTo: 0,
-            sbobet_user_id: this.props.router.query.id,
+            neteller_user_id: this.props.router.query.id,
 
             errors: {
                 name: null,
@@ -48,10 +48,10 @@ export default withRouter(class Neteller_cashback_details extends Component {
     }
 
     getList = (page) => {
-        const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey, sbobet_user_id } = this.state;
+        const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey, neteller_user_id } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/turnover-cashback/neteller-cashbacks-details?sbobet_user_id=' + sbobet_user_id + '&pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/turnover-cashback/neteller-cashbacks-details?neteller_user_id=' + neteller_user_id + '&pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (sortOrder) { listUrl += '&sortOrder=' + sortOrder + '&sortKey=' + sortKey; }
@@ -129,7 +129,54 @@ export default withRouter(class Neteller_cashback_details extends Component {
 
 
     }
-   
+    updateCashbackStatusAsPaid = () => {
+        toastr.clear();
+        const { activePage, neteller_user_id } = this.state;
+        var updateStatus = true;
+        if (!window.confirm('Are you sure want to update?')) {
+            updateStatus = false;
+        }
+        if (updateStatus) {
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
+            axios.post(apiUrl + 'admin/turnover-cashback/update-neteller-paid', {
+                neteller_user_id: neteller_user_id,
+            }).then((result) => {
+                let sucMsg = result.data.msg;
+                toastr.success(sucMsg, '');
+                this.getList(activePage);
+            }).catch(error => {
+                let errorMsg = error.response.data.msg;
+                toastr.error(errorMsg, 'Error!');
+            });
+        }
+
+
+    }
+
+    updateCashbackStatusAsPending = (id) => {
+        toastr.clear();
+        const { activePage } = this.state;
+        var updateStatus = true;
+        if (!window.confirm('Are you sure want to update?')) {
+            updateStatus = false;
+        }
+        if (updateStatus) {
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
+            axios.post(apiUrl + 'admin/turnover-cashback/update-neteller-pending', {
+                _id: id,
+            }).then((result) => {
+                let sucMsg = result.data.msg;
+                toastr.success(sucMsg, '');
+                this.getList(activePage);
+            }).catch(error => {
+                let errorMsg = error.response.data.msg;
+                toastr.error(errorMsg, 'Error!');
+            });
+        }
+
+
+    }
+
 
 
 
@@ -154,6 +201,11 @@ export default withRouter(class Neteller_cashback_details extends Component {
                                             </Link>
                                         </li>
                                         <li className="is-active"><a href="#">Turnover Cashback</a></li>
+                                        <li>
+                                            <Link href="/neteller_cashback" prefetch>
+                                                <a href="#"> Neteller Cashback </a>
+                                            </Link>
+                                        </li>
                                         <li className="is-active"><a href="#">View User </a></li>
                                     </ul>
                                 </nav>
@@ -166,7 +218,7 @@ export default withRouter(class Neteller_cashback_details extends Component {
                             <div className="box bread-box is-shadowless has-background-white">
                                 <nav className="breadcrumb" aria-label="breadcrumbs">
                                     <ul>
-                                        <li className="is-active"> <a><b>User Id: : </b>&nbsp;&nbsp;{this.state.sbobet_user_id} </a></li>
+                                        <li className="is-active"> <a><b>User Id: : </b>&nbsp;&nbsp;{this.state.neteller_user_id} </a></li>
                                         <li className="is-active"> <a><b>Email: </b>&nbsp;&nbsp;{this.state.userDetails.user_id ? this.state.userDetails.user_id.email : ''}</a> </li>
                                         <li className="is-active"> <a><b>User Name: </b>&nbsp;&nbsp;{this.state.userDetails.user_id ? this.state.userDetails.user_id.username : ''}</a> </li>
                                         <li className="is-active"> <a><b>Name: </b>&nbsp;&nbsp;{this.state.userDetails.user_id ? this.state.userDetails.user_id.name : ''}</a> </li>
@@ -263,19 +315,31 @@ export default withRouter(class Neteller_cashback_details extends Component {
                             </div>
                         </section>
                         <div className="table-responsive dash-table-res">
+                        <div className="level">
+                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">&nbsp; </h2>
+                                <div>
+                                    {
+                                        this.state.pendingAmount > 0 ?
+                                            <a className="button is-link" onClick={this.updateCashbackStatusAsPaid}>
 
+                                                <span>Update As Paid</span>
+                                            </a> : ''
+                                    }
+
+
+                                </div>
+                            </div>
                             <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-size-6">
                                 <thead>
                                     <tr className="bg-light">
                                         <th style={{ width: '25px' }}>#</th >
-                                        <th onClick={this.handleSort.bind(this, 'skrill_id', this.state.sortOrder)} >User Id   <i className={`fa ${(this.state.sortKey == "skrill_id") ? this.state.sortClass : "fa-sort"}`}></i></th>
                                         <th>Amount</th>
-                                        <th>Credit Date </th>
+                                        <th>Paid On </th>
                                         <th>Payment Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <TableListContent openModel={this.openModel} updateSite={this.updateSite} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} updateCashbackStatus={this.updateCashbackStatus} />
+                                <TableListContent updateCashbackStatusAsPending={this.updateCashbackStatusAsPending} openModel={this.openModel} updateSite={this.updateSite} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} updateCashbackStatus={this.updateCashbackStatus} />
                             </table>
                             <nav className="pagination is-rounded" role="navigation" aria-label="pagination">
                                 <Pagination
@@ -310,41 +374,31 @@ const TableListContent = (props) => {
                     </td></tr>
                     : (props.arrlist.length > 0) ?
                         props.arrlist.map(function (dataRow, i) {
-                            var enabledBtn = (dataRow.paymentStatus == 1) ? true : false;
-                            var disbaledBtn = (dataRow.paymentStatus == 0) ? true : false;
+                          
                             return <tr>
-                                <td>{sNo + i}</td>
-                                <td>{dataRow.skrillId}</td>
-                                <td> £{dataRow.amount}</td>
-                                <td>{dataRow.creditDate.slice(0, 10)}</td>
+                            <td>{sNo + i}</td>
+                            <td> £{dataRow.amount}</td>
+                            <td>{dataRow.paidOn.slice(0, 10)}</td>
 
-                                <td>
-                                    {
-                                        dataRow.paymentStatus !== 0 ?
-                                            <label className="tag is-success tooltip is-tooltip-bottom " data-tooltip="Approved ">
-                                                Paid</label> : <label className="tag is-danger tooltip is-tooltip-bottom " data-tooltip="Approved ">
-                                                Pending</label>
-                                    }
-                                </td>
-                                <td>
-                                    <div className="buttons">
-                                        <button data-tip="Mark As Paid" disabled={enabledBtn} onClick={props.updateCashbackStatus.bind(this, 'paid', dataRow._id)} className="button is-success is-small tooltip" data-tooltip="Enable">
-                                            <span className="icon has-text-white">
-                                                <i className="fas fa-check"></i>
-                                            </span>
-                                        </button>
-                                        <button data-tip="Mark As Pending" disabled={disbaledBtn} onClick={props.updateCashbackStatus.bind(this, 'pending', dataRow._id)} className="button is-primary is-small tooltip" data-tooltip="Disable">
-                                            <span className="icon has-text-white">
-                                                <i className="fas fa-ban"></i>
-                                            </span>
-                                        </button>
+                            <td>
+                                <label className="tag is-success tooltip is-tooltip-bottom " data-tooltip="Approved ">
+                                    Paid</label>
+                            </td>
+                            <td>
+                                <div className="buttons">
+
+                                    <button data-tip="Mark As Pending" onClick={props.updateCashbackStatusAsPending.bind(this, dataRow._id)} className="button is-primary is-small tooltip" data-tooltip="Disable">
+                                        <span className="icon has-text-white">
+                                            <i className="fas fa-ban"></i>
+                                        </span>
+                                    </button>
 
 
-                                        <ReactTooltip />
-                                    </div>
+                                    <ReactTooltip />
+                                </div>
 
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                         }) : <tr><td colSpan="8" style={{ 'textAlign': 'center' }} >No records found.</td></tr>
 
 

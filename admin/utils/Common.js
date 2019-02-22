@@ -89,7 +89,7 @@ export const ADMINMODULES = [
             { 'name': 'Skrill Cashback', 'url': '/skrill_cashback', 'as': '/skrill_cashback', 'id': 'skrill_cashback' },
             { 'name': 'SBObet Cashback', 'url': '/sbobet_cashback', 'as': '/sbobet_cashback', 'id': 'sbobet_cashback' },
             { 'name': 'Neteller Cashback', 'url': '/neteller_cashback', 'as': '/neteller_cashback', 'id': 'neteller_cashback' },
-            { 'name': 'Asian Connect Cashback', 'url': '/asian_cashback', 'as': '/asian_cashback', 'id': 'asian_cashback' },
+            { 'name': 'Asian Connect Cashback', 'url': '/asianconnect_cashback', 'as': '/asianconnect_cashback', 'id': 'asian_cashback' },
             { 'name': 'Ecopayz Cashback', 'url': '/ecopay_cashback', 'as': '/ecopay_cashback', 'id': 'ecopay_cashback' }
 
         ]

@@ -9,7 +9,7 @@ import { BounceLoader } from 'react-spinners';
 import Pagination from "react-js-pagination";
 import ReactTooltip from 'react-tooltip';
 import _ from 'lodash';
-export default withRouter(class Sbobet_cashback_details extends Component {
+export default withRouter(class Asianconnect_cashback_details extends Component {
 
     constructor(props) {
         super(props);
@@ -29,12 +29,12 @@ export default withRouter(class Sbobet_cashback_details extends Component {
             skrill_id: '',
             pendingAmount: 0,
             paidAmount: 0,
-
+           
             totalusers: 0,
             userDetails: [],
             awardAmount: 0,
             awardTo: 0,
-            sbobet_user_id: this.props.router.query.id,
+            asianconnect_user_id: this.props.router.query.id,
 
             errors: {
                 name: null,
@@ -48,10 +48,10 @@ export default withRouter(class Sbobet_cashback_details extends Component {
     }
 
     getList = (page) => {
-        const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey, sbobet_user_id } = this.state;
+        const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey, asianconnect_user_id } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/turnover-cashback/sbobet-cashbacks-details?sbobet_user_id=' + sbobet_user_id + '&pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/turnover-cashback/asianconnect-cashbacks-details?asianconnect_user_id=' + asianconnect_user_id + '&pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (sortOrder) { listUrl += '&sortOrder=' + sortOrder + '&sortKey=' + sortKey; }
@@ -104,17 +104,42 @@ export default withRouter(class Sbobet_cashback_details extends Component {
         this.setState({ searchKey: '', searchBy: '', searchStatus: '' });
         setTimeout(() => { this.getList(1); }, 100);
     }
-    updateCashbackStatusAsPaid = () => {
+
+    updateCashbackStatus = (action, id) => {
         toastr.clear();
-        const { activePage, sbobet_user_id } = this.state;
+        const { activePage } = this.state;
         var updateStatus = true;
         if (!window.confirm('Are you sure want to update?')) {
             updateStatus = false;
         }
         if (updateStatus) {
             axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-            axios.post(apiUrl + 'admin/turnover-cashback/update-sbobet-paid', {
-                sbobet_user_id: sbobet_user_id,
+            axios.post(apiUrl + 'admin/turnover-cashback/update-skrill-cb-status', {
+                action: action,
+                _id: id,
+            }).then((result) => {
+                let sucMsg = result.data.msg;
+                toastr.success(sucMsg, '');
+                this.getList(activePage);
+            }).catch(error => {
+                let errorMsg = error.response.data.msg;
+                toastr.error(errorMsg, 'Error!');
+            });
+        }
+
+
+    }
+    updateCashbackStatusAsPaid = () => {
+        toastr.clear();
+        const { activePage, asianconnect_user_id } = this.state;
+        var updateStatus = true;
+        if (!window.confirm('Are you sure want to update?')) {
+            updateStatus = false;
+        }
+        if (updateStatus) {
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
+            axios.post(apiUrl + 'admin/turnover-cashback/update-asianconnect-paid', {
+                asianconnect_user_id: asianconnect_user_id,
             }).then((result) => {
                 let sucMsg = result.data.msg;
                 toastr.success(sucMsg, '');
@@ -137,7 +162,7 @@ export default withRouter(class Sbobet_cashback_details extends Component {
         }
         if (updateStatus) {
             axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-            axios.post(apiUrl + 'admin/turnover-cashback/update-sbobet-pending', {
+            axios.post(apiUrl + 'admin/turnover-cashback/update-asianconnect-pending', {
                 _id: id,
             }).then((result) => {
                 let sucMsg = result.data.msg;
@@ -151,6 +176,8 @@ export default withRouter(class Sbobet_cashback_details extends Component {
 
 
     }
+
+
 
 
     render() {
@@ -175,8 +202,8 @@ export default withRouter(class Sbobet_cashback_details extends Component {
                                         </li>
                                         <li className="is-active"><a href="#">Turnover Cashback</a></li>
                                         <li>
-                                            <Link href="/sbobet_cashback" prefetch>
-                                                <a href="#"> SBObet Cashback </a>
+                                            <Link href="/asianconnect_cashback" prefetch>
+                                                <a href="#"> Asian Connect Cashback  </a>
                                             </Link>
                                         </li>
                                         <li className="is-active"><a href="#">View User </a></li>
@@ -191,10 +218,10 @@ export default withRouter(class Sbobet_cashback_details extends Component {
                             <div className="box bread-box is-shadowless has-background-white">
                                 <nav className="breadcrumb" aria-label="breadcrumbs">
                                     <ul>
-                                        <li className="is-active"> <a><b>User Id: : </b>&nbsp;&nbsp;{this.state.sbobet_user_id} </a></li>
-                                        <li className="is-active"> <a><b>Email: </b>&nbsp;&nbsp;{this.state.userDetails && this.state.userDetails.user_id ? this.state.userDetails.user_id.email : ''}</a> </li>
-                                        <li className="is-active"> <a><b>User Name: </b>&nbsp;&nbsp;{this.state.userDetails && this.state.userDetails.user_id ? this.state.userDetails.user_id.username : ''}</a> </li>
-                                        <li className="is-active"> <a><b>Name: </b>&nbsp;&nbsp;{this.state.userDetails && this.state.userDetails.user_id ? this.state.userDetails.user_id.name : ''}</a> </li>
+                                        <li className="is-active"> <a><b>User Id: : </b>&nbsp;&nbsp;{this.state.asianconnect_user_id} </a></li>
+                                        <li className="is-active"> <a><b>Email: </b>&nbsp;&nbsp;{this.state.userDetails.user_id ? this.state.userDetails.user_id.email : ''}</a> </li>
+                                        <li className="is-active"> <a><b>User Name: </b>&nbsp;&nbsp;{this.state.userDetails.user_id ? this.state.userDetails.user_id.username : ''}</a> </li>
+                                        <li className="is-active"> <a><b>Name: </b>&nbsp;&nbsp;{this.state.userDetails.user_id ? this.state.userDetails.user_id.name : ''}</a> </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -218,13 +245,13 @@ export default withRouter(class Sbobet_cashback_details extends Component {
                                                     <div className="select is-fullwidth">
                                                         <select name="searchBy" onChange={this.handleInputChange}>
                                                             <option value="">Search By</option>
-
+                                                           
                                                             <option value="amount">Amount</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                             
                                         </div>
                                         <p className="buttons">
                                             <a className="button is-theme is-rounded" onClick={this.handleSearch}>
@@ -245,7 +272,7 @@ export default withRouter(class Sbobet_cashback_details extends Component {
                             </div>
                         </section>
 
-
+                         
                         <section className="hero is-light mg-b-20">
                             <div className="hero-body pd-tb-10">
                                 <div className="container1">
@@ -255,9 +282,9 @@ export default withRouter(class Sbobet_cashback_details extends Component {
                                                 <div className="cashback-boxs">
                                                     <h1 className="title-statics">Pending</h1>
                                                     <ul>
-
+                                                        
                                                         <li><strong>Total Amount:</strong>&nbsp;&nbsp; £{this.state.pendingAmount} </li>
-
+                                                     
 
                                                     </ul>
                                                 </div>
@@ -266,9 +293,9 @@ export default withRouter(class Sbobet_cashback_details extends Component {
                                                 <div className="cashback-boxs">
                                                     <h1 className="title-statics">Paid</h1>
                                                     <ul>
-
+                                                         
                                                         <li><strong>Total Amount:</strong>&nbsp;&nbsp; £{this.state.paidAmount} </li>
-
+                                                        
                                                     </ul>
                                                 </div>
                                             </div>
@@ -276,9 +303,9 @@ export default withRouter(class Sbobet_cashback_details extends Component {
                                                 <div className="cashback-boxs">
                                                     <h1 className="title-statics">Total</h1>
                                                     <ul>
-
-                                                        <li><strong>Total Amount:</strong>&nbsp;&nbsp; £{parseFloat(this.state.pendingAmount) + parseFloat(this.state.paidAmount)}</li>
-
+                                                       
+                                                        <li><strong>Total Amount:</strong>&nbsp;&nbsp; £{parseFloat(this.state.pendingAmount)+parseFloat(this.state.paidAmount)}</li>
+                                                       
                                                     </ul>
                                                 </div>
                                             </div>
@@ -288,7 +315,7 @@ export default withRouter(class Sbobet_cashback_details extends Component {
                             </div>
                         </section>
                         <div className="table-responsive dash-table-res">
-                            <div className="level">
+                        <div className="level">
                                 <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">&nbsp; </h2>
                                 <div>
                                     {
@@ -312,7 +339,7 @@ export default withRouter(class Sbobet_cashback_details extends Component {
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <TableListContent openModel={this.openModel} updateSite={this.updateSite} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} updateCashbackStatusAsPending={this.updateCashbackStatusAsPending} />
+                                <TableListContent updateCashbackStatusAsPending={this.updateCashbackStatusAsPending} openModel={this.openModel} updateSite={this.updateSite} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} updateCashbackStatus={this.updateCashbackStatus} />
                             </table>
                             <nav className="pagination is-rounded" role="navigation" aria-label="pagination">
                                 <Pagination
@@ -347,31 +374,31 @@ const TableListContent = (props) => {
                     </td></tr>
                     : (props.arrlist.length > 0) ?
                         props.arrlist.map(function (dataRow, i) {
-
+                          
                             return <tr>
-                                <td>{sNo + i}</td>
-                                <td> £{dataRow.amount}</td>
-                                <td>{dataRow.paidOn.slice(0, 10)}</td>
+                            <td>{sNo + i}</td>
+                            <td> £{dataRow.amount}</td>
+                            <td>{dataRow.paidOn.slice(0, 10)}</td>
 
-                                <td>
-                                    <label className="tag is-success tooltip is-tooltip-bottom " data-tooltip="Approved ">
-                                        Paid</label>
-                                </td>
-                                <td>
-                                    <div className="buttons">
+                            <td>
+                                <label className="tag is-success tooltip is-tooltip-bottom " data-tooltip="Approved ">
+                                    Paid</label>
+                            </td>
+                            <td>
+                                <div className="buttons">
 
-                                        <button data-tip="Mark As Pending" onClick={props.updateCashbackStatusAsPending.bind(this, dataRow._id)} className="button is-primary is-small tooltip" data-tooltip="Disable">
-                                            <span className="icon has-text-white">
-                                                <i className="fas fa-ban"></i>
-                                            </span>
-                                        </button>
+                                    <button data-tip="Mark As Pending" onClick={props.updateCashbackStatusAsPending.bind(this, dataRow._id)} className="button is-primary is-small tooltip" data-tooltip="Disable">
+                                        <span className="icon has-text-white">
+                                            <i className="fas fa-ban"></i>
+                                        </span>
+                                    </button>
 
 
-                                        <ReactTooltip />
-                                    </div>
+                                    <ReactTooltip />
+                                </div>
 
-                                </td>
-                            </tr>
+                            </td>
+                        </tr>
                         }) : <tr><td colSpan="8" style={{ 'textAlign': 'center' }} >No records found.</td></tr>
 
 
