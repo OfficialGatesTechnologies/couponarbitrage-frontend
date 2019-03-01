@@ -47,7 +47,6 @@ export default withRouter(class Cashback_stores extends Component {
             tagOptions: [{ value: '', label: '' }],
             errors: {
                 uploadFile: null,
-
             },
 
         }

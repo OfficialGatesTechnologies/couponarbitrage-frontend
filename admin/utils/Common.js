@@ -101,8 +101,10 @@ export const ADMINMODULES = [
         'id': 7,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Unconfirmed Claims', 'url': '/menu-manager', 'id': 'admin-accounts7' },
-            { 'name': 'Unapproved Claims', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Cashback & Bonuses Payouts', 'url': '/cashback_bonus_payouts', 'as': '/cashback_bonus_payouts', 'id': 'cashback_bonus_payouts' },
+            { 'name': 'Revenue Share Cashback Payouts', 'url': '/revenue_cashback_payouts', 'as': '/revenue_cashback_payouts', 'id': 'revenue_cashback_payouts' },
+            { 'name': 'Turnover Cashback Payouts', 'url': '/turnover_cashback_payouts', 'as': '/turnover_cashback_payouts', 'id': 'turnover_cashback_payouts' },
+            { 'name': 'Affiliate Payouts', 'url': '/affiliate_payouts', 'as': '/affiliate_payouts', 'id': 'affiliate_payouts' },
 
 
         ]
@@ -129,8 +131,9 @@ export const ADMINMODULES = [
         'id': 9,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Unconfirmed Claims', 'url': '/menu-manager', 'id': 'admin-accounts7' },
-            { 'name': 'Unapproved Claims', 'url': '/article', 'id': 'admin-accounts7' },
+            { 'name': 'Add New Article', 'url': '/manage_articles','as': '/manage_articles', 'id': 'manage_articles' },
+            { 'name': 'Articles List', 'url': '/articles', 'as': '/articles','id': 'articles' },
+            { 'name': 'Comments List', 'url': '/articles_commands', 'as': '/articles_commands','id': 'articles_commands' },
 
 
         ]
@@ -182,21 +185,16 @@ export const ADMINMODULES = [
 export const genRandomPassword = (length) => {
     var makepass = "";
     var salt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
     for (var i = 0; i < length; i++)
         makepass += salt.charAt(Math.floor(Math.random() * salt.length));
-
     return makepass;
 }
 
 export const getCryptedPassword = (password, salt) => {
-
     return (salt) ? md5(password + salt) : md5(password);
-
 }
 
 export const checkDate = (toDate) => {
-
     var date = new Date();
     var mydate = new Date(toDate);
     return date < mydate ? true : false;
@@ -470,8 +468,6 @@ export const hearAboutUs = () => {
         { "name": "Newspaper/Magazine Article", "code": "41454" },
         { "name": "Flyer", "code": "32643" },
         { "name": "Other", "code": "32649" },
-
-
     ];
 
     return hearAboutUs;
