@@ -117,8 +117,17 @@ export const ADMINMODULES = [
         'id': 8,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Unconfirmed Claims', 'url': '/menu-manager', 'id': 'admin-accounts7' },
-            { 'name': 'Unapproved Claims', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Bookmakers List', 'url': '/bookmakers','as':'bookmakers', 'id': 'bookmakers' },
+            { 'name': 'Bookmaker Tags', 'url': '/bookmaker_tags', 'as':'bookmaker_tags', 'id': 'bookmaker_tags' },
+            { 'name': 'Sharbs List', 'url': '/sharbs','as':'sharbs', 'id': 'sharbs' },
+            { 'name': 'Sharbs Odds Bulk Upload', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Sharbs Odds Market Bulk Upload', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Sharbs Uploads', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Subscription Plans', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Subscription Payment List', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Subscription List', 'url': '/menus', 'id': 'admin-accounts7' },
+            { 'name': 'Chat History', 'url': '/menus', 'id': 'admin-accounts7' },
+         
 
 
         ]
