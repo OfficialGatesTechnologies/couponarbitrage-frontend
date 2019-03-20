@@ -117,19 +117,16 @@ export const ADMINMODULES = [
         'id': 8,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Bookmakers List', 'url': '/bookmakers','as':'bookmakers', 'id': 'bookmakers' },
-            { 'name': 'Bookmaker Tags', 'url': '/bookmaker_tags', 'as':'bookmaker_tags', 'id': 'bookmaker_tags' },
-            { 'name': 'Sharbs List', 'url': '/sharbs','as':'sharbs', 'id': 'sharbs' },
-            { 'name': 'Sharbs Odds Bulk Upload', 'url': '/menus', 'id': 'admin-accounts7' },
-            { 'name': 'Sharbs Odds Market Bulk Upload', 'url': '/menus', 'id': 'admin-accounts7' },
-            { 'name': 'Sharbs Uploads', 'url': '/menus', 'id': 'admin-accounts7' },
-            { 'name': 'Subscription Plans', 'url': '/menus', 'id': 'admin-accounts7' },
-            { 'name': 'Subscription Payment List', 'url': '/menus', 'id': 'admin-accounts7' },
-            { 'name': 'Subscription List', 'url': '/menus', 'id': 'admin-accounts7' },
-            { 'name': 'Chat History', 'url': '/menus', 'id': 'admin-accounts7' },
-         
-
-
+            { 'name': 'Bookmakers List', 'url': '/bookmakers', 'as': '/bookmakers', 'id': 'bookmakers' },
+            { 'name': 'Bookmaker Tags', 'url': '/bookmaker_tags', 'as': '/bookmaker_tags', 'id': 'bookmaker_tags' },
+            { 'name': 'Sharbs List', 'url': '/sharbs', 'as': '/sharbs', 'id': 'sharbs' },
+            { 'name': 'Sharbs Odds Bulk Upload', 'url': '/sharbs_bulk_upload', 'as': '/sharbs_bulk_upload', 'id': 'admin-accounts7' },
+            { 'name': 'Sharbs Odds Market Bulk Upload', 'url': '/sharbs_market_bulk_upload', 'as': '/sharbs_market_bulk_upload', 'id': 'admin-accounts7' },
+            { 'name': 'Sharbs Uploads', 'url': '/sharbs_upload', 'as': '/sharbs_upload', 'id': 'sharbs_upload' },
+            { 'name': 'Subscription Plans', 'url': '/plans', 'as': '/plans', 'id': 'plans' },
+            { 'name': 'Subscription Payment List', 'url': '/payments', 'as': '/payments', 'id': 'payments' },
+            { 'name': 'Subscription List', 'url': '/user_plans', 'as': '/user_plans', 'id': 'user_plans' },
+            { 'name': 'Chat History', 'url': '/chat_history', 'as': '/chat_history', 'id': 'chat_history' },
         ]
     },
 
@@ -140,9 +137,9 @@ export const ADMINMODULES = [
         'id': 9,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Add New Article', 'url': '/manage_articles','as': '/manage_articles', 'id': 'manage_articles' },
-            { 'name': 'Articles List', 'url': '/articles', 'as': '/articles','id': 'articles' },
-            { 'name': 'Comments List', 'url': '/articles_commands', 'as': '/articles_commands','id': 'articles_commands' },
+            { 'name': 'Add New Article', 'url': '/manage_articles', 'as': '/manage_articles', 'id': 'manage_articles' },
+            { 'name': 'Articles List', 'url': '/articles', 'as': '/articles', 'id': 'articles' },
+            { 'name': 'Comments List', 'url': '/articles_commands', 'as': '/articles_commands', 'id': 'articles_commands' },
 
 
         ]
@@ -171,17 +168,17 @@ export const ADMINMODULES = [
         'id': 11,
         'isChecked': false,
         'submodules': [
-            { 'name': 'Mail Templates', 'url': '/email_templates', 'as': '/email_templates', 'id': 'admin-accounts7' },
-            // { 'name': 'Store Reviews', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
-            // { 'name': 'Banners List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            { 'name': 'Mail Templates', 'url': '/email_templates', 'as': '/email_templates', 'id': 'email_templates' },
+            { 'name': 'Store Reviews', 'url': '/store_reviews', 'as': '/store_reviews', 'id': 'store_reviews' },
+            { 'name': 'Banners List', 'url': '/banner', 'as': '/banner', 'id': 'banners' },
             // { 'name': 'Affiliate Banners List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
-            // { 'name': 'FAQ List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
-            // { 'name': 'Subscribers List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
+            { 'name': 'FAQ List', 'url': '/faq', 'as': '/faq', 'id': 'faq' },
+            { 'name': 'Subscribers List', 'url': '/subscribers', 'as': '/subscribers', 'id': 'subscribers' },
             // { 'name': 'Newsletters List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
-            // { 'name': 'Page List', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
-            { 'name': 'Affiliate Networks', 'url': '/affiliate_networks', 'as': '/affiliate_networks', 'id': 'admin-accounts7' },
-            // { 'name': 'Turnover Static Text', 'url': '/masterdata/email-templates', 'id': 'admin-accounts7' },
-            { 'name': 'Tags', 'url': '/tags', 'as': '/tags', 'id': 'admin-accounts7' },
+            { 'name': 'Page List', 'url': '/pages', 'as': '/pages', 'id': 'pages' },
+            { 'name': 'Affiliate Networks', 'url': '/affiliate_networks', 'as': '/affiliate_networks', 'id': 'affiliate_networks' },
+            { 'name': 'Turnover Static Text', 'url': '/static_text', 'as': '/static_text', 'id': 'static_text' },
+            { 'name': 'Tags', 'url': '/tags', 'as': '/tags', 'id': 'tags' },
 
         ]
     },

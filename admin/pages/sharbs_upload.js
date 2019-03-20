@@ -8,7 +8,7 @@ import toastr from 'toastr'
 import { BounceLoader } from 'react-spinners';
 import Pagination from "react-js-pagination";
 import ReactTooltip from 'react-tooltip';
-export default withRouter(class Sharbs extends Component {
+export default withRouter(class Sharbs_upload extends Component {
 
     constructor(props) {
         super(props);
@@ -36,7 +36,7 @@ export default withRouter(class Sharbs extends Component {
         const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/bookmaker/get-sharbs-list?pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/bookmaker/get-sharbs-documents?pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (sortOrder) { listUrl += '&sortOrder=' + sortOrder + '&sortKey=' + sortKey; }
@@ -57,12 +57,12 @@ export default withRouter(class Sharbs extends Component {
         toastr.clear();
         const { activePage } = this.state;
         var updateStatus = true;
-        if (action == 'delete' && !window.confirm('Are you sure want to delete?')) {
+        if (action == 'delete' && !window.confirm('Are you sure want to unload?')) {
             updateStatus = false;
         }
         if (updateStatus) {
             axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-            axios.post(apiUrl + 'admin/bookmaker/delete-sharbs', {
+            axios.post(apiUrl + 'admin/bookmaker/unload-sharbs', {
                 action: action,
                 _id: id,
             }).then((result) => {
@@ -77,40 +77,14 @@ export default withRouter(class Sharbs extends Component {
 
 
     }
-    handleInputChange = (e) => {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-        this.setState({
-            [name]: value
-        })
-    }
-    handleSearch = (event) => {
-        event.preventDefault();
-        this.getList(1);
-    }
+
 
     handlePageChange = (pageNumber) => {
         this.setState({ activePage: pageNumber });
         this.getList(pageNumber);
     }
 
-    handleSort = (sortKey, sortOrder) => {
-        sortOrder = (sortOrder == 'desc') ? 'asc' : 'desc';
-        let sortClass = (sortOrder == 'desc') ? 'fa-sort-alpha-down' : 'fa-sort-alpha-up';
-        setTimeout(() => {
-            this.setState({ sortClass: sortClass, sortOrder: sortOrder, sortKey: sortKey });
-            this.getList(1);
-        }, 100);
 
-    }
-
-    resetSearch = (e) => {
-        e.preventDefault();
-        document.getElementById('searchForm').reset();
-        this.setState({ searchKey: '', searchBy: '', searchStatus: '' });
-        setTimeout(() => { this.getList(1); }, 100);
-    }
 
 
     render() {
@@ -118,7 +92,7 @@ export default withRouter(class Sharbs extends Component {
             <div>
                 <Head>
                     <meta charSet="utf-8" />
-                    <title>{site_name} - Sharbs List </title>
+                    <title>{site_name} - Sharbs Uploads  </title>
                 </Head>
                 <div className="page-wrapper" id="page-wrapper">
                     <div className="columns">
@@ -132,11 +106,9 @@ export default withRouter(class Sharbs extends Component {
                                             </Link>
                                         </li>
                                         <li className="is-active"><a href="#">Betting Settings </a></li>
-                                        <li className="is-active"><a href="#">Sharbs List</a></li>
+                                        <li className="is-active"><a href="#">Sharbs Uploads  List</a></li>
                                     </ul>
-                                    <Link href="/manage_sharbs" as="manage_sharbs">
-                                        <a className="ad-new" >Add New Sharb</a>
-                                    </Link>
+
                                 </nav>
 
                             </div>
@@ -145,57 +117,10 @@ export default withRouter(class Sharbs extends Component {
                     </div>
 
                     <div className="box is-shadowless has-background-white" >
-                        <section className="hero is-light mg-b-20">
-                            <div className="hero-body pd-tb-10">
-                                <div className="container1">
-                                    <form id="searchForm">
-                                        <div className="columns mg-b-0">
-                                            <div className="column">
-                                                <div className="control">
-                                                    <label className="label">Search Key</label>
-                                                    <input className="input" type="text" name="searchKey" placeholder="Search Key" onChange={this.handleInputChange}></input>
-                                                </div>
 
-                                            </div>
-                                            <div className="column">
-                                                <div className="control">
-                                                    <label className="label">Search By</label>
-                                                    <div className="select is-fullwidth">
-                                                        <select name="searchBy" onChange={this.handleInputChange}>
-                                                            <option value="">Search By</option>
-
-                                                            <option value="bm_name">Name</option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-                                        </div>
-                                        <p className="buttons">
-                                            <a className="button is-theme is-rounded" onClick={this.handleSearch}>
-                                                <span className="icon is-small">
-                                                    <i className="fas fa-search"></i>
-                                                </span>
-                                                <span>Search</span>
-                                            </a>
-                                            <a className="button is-danger is-outlined is-rounded" onClick={this.resetSearch}>
-                                                <span>Reset</span>
-                                                <span className="icon is-small">
-                                                    <i className="fas fa-times"></i>
-                                                </span>
-                                            </a>
-                                        </p> </form>
-                                </div>
-
-
-                            </div>
-                        </section>
                         <div className="table-responsive dash-table-res">
                             <div className="level">
-                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Bookmaker   List </h2>
+                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Sharbs Unload</h2>
                                 <div>
 
 
@@ -207,12 +132,9 @@ export default withRouter(class Sharbs extends Component {
                                 <thead>
                                     <tr className="bg-light">
                                         <th>#</th >
-                                        <th>League</th>
-                                        <th>Match </th>
-                                        <th> Bookmaker </th>
-                                        <th> Home Odds </th>
-                                        <th> Draw Odds </th>
-                                        <th> Away Odds </th>
+                                        <th>Date Created</th>
+                                        <th>Details </th>
+
                                         <th style={{ width: '200px' }}>Action</th>
                                     </tr>
                                 </thead>
@@ -257,26 +179,31 @@ const TableListContent = (props) => {
 
                             return <tr key={sNo + i}>
                                 <td>{sNo + i}</td>
-                                <td>{dataRow.competition.c_name}</td>
-                                <td>{dataRow.matches?dataRow.matches.match_hometeam:''} VS {dataRow.matches?dataRow.matches.match_awayteam:''}</td>
-                                <td>{dataRow.bookmaker?dataRow.bookmaker.bm_name:''}</td>
-                                <td>{dataRow.odds_ho}</td>
-                                <td>{dataRow.odds_xo}</td>
-                                <td>{dataRow.odds_ao}</td>
+                                <td>{dataRow.sharbsDocAdded.slice(0, 10)}</td>
+                                <td><b>Reference :</b>User upload of "{dataRow.bookmaker ? dataRow.bookmaker.bm_name : ''}" on {dataRow.sharbsDocType ? dataRow.sharbsDocType : ''}
+                                    <br />
+                                    <b>Status :</b>
+                                    <br /> Pending {dataRow.pendingCount.length} records
 
-
-
-
+                                   <br /> Processed {dataRow.completedCount.length} records </td>
                                 <td>
                                     <div className="buttons">
+                                        {
+                                            dataRow.pendingCount.length > 0 ?
+                                                dataRow.sharbsDocType === 'marketodds' ? <Link href={`/sharbs_market_bulk_upload?id=${dataRow._id}`} as={`/sharbs_market_bulk_upload/${dataRow._id}`}>
+                                                    <a data-tip="Edit" className="button is-info is-small tooltip" data-tooltip="Edit">  <span className="icon has-text-white">
+                                                        <i className="fas fa-pencil-alt"></i>
+                                                    </span></a>
+                                                </Link> : <Link href={`/sharbs_bulk_upload?id=${dataRow._id}`} as={`/sharbs_bulk_upload/${dataRow._id}`}>
+                                                        <a data-tip="Edit" className="button is-info is-small tooltip" data-tooltip="Edit">  <span className="icon has-text-white">
+                                                            <i className="fas fa-pencil-alt"></i>
+                                                        </span></a>
+                                                    </Link>
+                                                : ''
+                                        }
 
-                                        <Link href={`/manage_sharbs?id=${dataRow._id}`} as={`/update_sharbs/${dataRow._id}`}>
-                                            <a data-tip="Edit" className="button is-info is-small tooltip" data-tooltip="Edit">  <span className="icon has-text-white">
-                                                <i className="fas fa-pencil-alt"></i>
-                                            </span></a>
-                                        </Link>
 
-                                        <button data-tip="Delete" onClick={props.updateBookmakers.bind(this, 'delete', dataRow._id)} className="button is-danger is-small tooltip" data-tooltip="Delete">
+                                        <button data-tip="Unload" onClick={props.updateBookmakers.bind(this, 'delete', dataRow._id)} className="button is-danger is-small tooltip" data-tooltip="Delete">
                                             <span className="icon has-text-white">
                                                 <i className="fas fa-trash-alt"></i>
                                             </span>

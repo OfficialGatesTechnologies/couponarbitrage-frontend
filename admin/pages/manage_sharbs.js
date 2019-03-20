@@ -7,7 +7,6 @@ import Router from 'next/router'
 import axios from 'axios';
 import Link from 'next/link';
 import toastr from 'toastr';
-import Image from 'react-image-resizer';
 
 export default withRouter(class manage_sharbs extends Component {
 
@@ -22,7 +21,7 @@ export default withRouter(class manage_sharbs extends Component {
             arrbookmaker: [],
             arrsels: [],
             uogoal: false,
-            articleData: {
+            sharbsData: {
                 _id: '',
                 odds_cid: '',
                 odds_matchid: '',
@@ -70,7 +69,7 @@ export default withRouter(class manage_sharbs extends Component {
             })
 
         if (editId) {
-            this.getArticleRow(editId);
+            this.getSharbsRow(editId);
         }
         this.getAllBookmaker();
     }
@@ -92,27 +91,34 @@ export default withRouter(class manage_sharbs extends Component {
             })
     }
 
-    getArticleRow = (editId) => {
+    getSharbsRow = (editId) => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        axios.get(apiUrl + 'admin/bookmaker/bookmaker-row?_id=' + editId)
+        axios.get(apiUrl + 'admin/bookmaker/sharbs-row?_id=' + editId)
             .then(res => {
-                var articleData = res.data.results;
-                this.setState({ articleData: articleData, editForm: true })
+                var sharbsData = res.data.results;
+                sharbsData['odds_ho_old'] = sharbsData.odds_ho;
+                sharbsData['odds_xo_old'] = sharbsData.odds_xo;
+                sharbsData['odds_ao_old'] = sharbsData.odds_ao;
+                if (sharbsData.odds_cid) this.getMatches(sharbsData.odds_cid);
+                if (sharbsData.odds_matchid) this.getMarkets(sharbsData.odds_cid, sharbsData.odds_matchid, 0);
+                if (sharbsData.odds_market) this.getBookmakers(sharbsData.odds_cid, sharbsData.odds_matchid, sharbsData.odds_market);
+                if (sharbsData.odds_bm_market) this.getSel(sharbsData.odds_cid, sharbsData.odds_matchid, sharbsData.odds_market, sharbsData.odds_bm_market);
+                this.setState({ sharbsData: sharbsData, editForm: true });
             }).catch((error) => {
                 if (error) {
                     toastr.error('Invalid URI', 'Error!');
-                    Router.push(`/bookmakers`);
+                    Router.push(`/sharbs`);
                 }
             })
     }
     formValidation = (fieldsToValidate = [], callback = () => { }) => {
-        const { articleData } = this.state;
+        const { sharbsData } = this.state;
         const allFields = {
 
             odds_cid: {
                 message: "Please select league.",
                 doValidate: () => {
-                    const value = _.trim(_.get(articleData, 'odds_cid', ""));
+                    const value = _.trim(_.get(sharbsData, 'odds_cid', ""));
                     if (value.length > 0) {
                         return true;
                     }
@@ -122,7 +128,7 @@ export default withRouter(class manage_sharbs extends Component {
             odds_matchid: {
                 message: "Please select match.",
                 doValidate: () => {
-                    const value = _.trim(_.get(articleData, 'odds_matchid', ""));
+                    const value = _.trim(_.get(sharbsData, 'odds_matchid', ""));
                     if (value.length > 0) {
                         return true;
                     }
@@ -132,7 +138,7 @@ export default withRouter(class manage_sharbs extends Component {
             odds_bmid: {
                 message: "Please select bookmaker.",
                 doValidate: () => {
-                    const value = _.trim(_.get(articleData, 'odds_bmid', ""));
+                    const value = _.trim(_.get(sharbsData, 'odds_bmid', ""));
                     if (value.length > 0 && value != 0) {
                         return true;
                     }
@@ -142,7 +148,7 @@ export default withRouter(class manage_sharbs extends Component {
             odds_ho: {
                 message: "Please enter home win odds.",
                 doValidate: () => {
-                    const value = _.trim(_.get(articleData, 'odds_ho', ""));
+                    const value = _.trim(_.get(sharbsData, 'odds_ho', ""));
                     if (value.length > 0) {
                         return true;
                     }
@@ -190,9 +196,9 @@ export default withRouter(class manage_sharbs extends Component {
     }
     createSharbs = () => {
         const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-        const { articleData } = this.state;
+        const { sharbsData } = this.state;
         const data = new FormData();
-        _.forOwn(articleData, (value, key) => {
+        _.forOwn(sharbsData, (value, key) => {
             data.set(key, value);
         });
  
@@ -208,9 +214,9 @@ export default withRouter(class manage_sharbs extends Component {
     }
     updateSharbs = () => {
         const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-        const { articleData } = this.state;
+        const { sharbsData } = this.state;
         const data = new FormData();
-        _.forOwn(articleData, (value, key) => {
+        _.forOwn(sharbsData, (value, key) => {
             data.set(key, value);
         });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
@@ -235,25 +241,25 @@ export default withRouter(class manage_sharbs extends Component {
 
     }
     handleInputChange = (e) => {
-        const { articleData } = this.state;
+        const { sharbsData } = this.state;
         const target = e.target;
         const value = target.value;
         const name = target.name;
-        articleData[name] = value;
+        sharbsData[name] = value;
         this.setState({
-            articleData: articleData
+            sharbsData: sharbsData
         })
         if (name == 'odds_cid') this.getMatches(value);
-        if (name == 'odds_matchid') this.getMarkets(articleData.odds_cid, value, 0);
-        if (name == 'odds_market') this.getBookmakers(articleData.odds_cid, articleData.odds_matchid, value);
-        if (name == 'odds_bm_market') this.getSel(articleData.odds_cid, articleData.odds_matchid, articleData.odds_market, value);
+        if (name == 'odds_matchid') this.getMarkets(sharbsData.odds_cid, value, 0);
+        if (name == 'odds_market') this.getBookmakers(sharbsData.odds_cid, sharbsData.odds_matchid, value);
+        if (name == 'odds_bm_market') this.getSel(sharbsData.odds_cid, sharbsData.odds_matchid, sharbsData.odds_market, value);
     }
     handleEditorChange = (name, e) => {
-        const { articleData } = this.state;
+        const { sharbsData } = this.state;
         const value = e.editor.getData();
-        articleData[name] = value;
+        sharbsData[name] = value;
         this.setState({
-            articleData: articleData
+            sharbsData: sharbsData
         })
     }
     getMatches = (comp_id) => {
@@ -344,16 +350,14 @@ export default withRouter(class manage_sharbs extends Component {
     }
 
     getSel = (odds_cid, odds_matchid, odds_market, odds_bm_market) => {
-        const { articleData } = this.state;
+        const { sharbsData } = this.state;
         let sels;
         this.setState({
             arrsels: [],
-
         });
         let resSelsList = [];
-        let selsIds = [];
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/bookmaker/get-sels-list?odds_cid=' + odds_cid + '&odds_matchid=' + odds_matchid + '&odds_market=' + odds_market + '&odds_bm_market=' + odds_bm_market + '&odds_pn=' + articleData.odds_pn;
+        let listUrl = apiUrl + 'admin/bookmaker/get-sels-list?odds_cid=' + odds_cid + '&odds_matchid=' + odds_matchid + '&odds_market=' + odds_market + '&odds_bm_market=' + odds_bm_market + '&odds_pn=' + sharbsData.odds_pn;
         axios.get(listUrl)
             .then(res => {
                 sels = res.data.results;
@@ -388,7 +392,7 @@ export default withRouter(class manage_sharbs extends Component {
 
 
     render() {
-        const { articleData, error } = this.state;
+        const { sharbsData, error } = this.state;
 
         return (
             <div>
@@ -429,7 +433,7 @@ export default withRouter(class manage_sharbs extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">League   </label>
                                     <div className="select is-fullwidth">
-                                        <select value={`${(articleData.odds_cid) ? articleData.odds_cid : 0}`} name="odds_cid" onChange={this.handleInputChange}>
+                                        <select value={`${(sharbsData.odds_cid) ? sharbsData.odds_cid : 0}`} name="odds_cid" onChange={this.handleInputChange}>
                                             <option value="0">Select League</option>
                                             {
                                                 this.state.arrList.length > 0 ?
@@ -450,7 +454,7 @@ export default withRouter(class manage_sharbs extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">Match    </label>
                                     <div className="select is-fullwidth">
-                                        <select value={`${(articleData.odds_matchid) ? articleData.odds_matchid : 0}`} name="odds_matchid" onChange={this.handleInputChange}>
+                                        <select value={`${(sharbsData.odds_matchid) ? sharbsData.odds_matchid : 0}`} name="odds_matchid" onChange={this.handleInputChange}>
                                             <option value="0">Select Match </option>
                                             {
                                                 this.state.arrMatches.length > 0 ?
@@ -471,7 +475,7 @@ export default withRouter(class manage_sharbs extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">Market   </label>
                                     <div className="select is-fullwidth">
-                                        <select value={`${(articleData.odds_market) ? articleData.odds_market : 0}`} name="odds_market" onChange={this.handleInputChange}>
+                                        <select value={`${(sharbsData.odds_market) ? sharbsData.odds_market : 0}`} name="odds_market" onChange={this.handleInputChange}>
                                             <option value="0">Select Market </option>
                                             {
                                                 this.state.arrMarkets.length > 0 ?
@@ -497,7 +501,7 @@ export default withRouter(class manage_sharbs extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">PN    </label>
                                     <div className="select is-fullwidth">
-                                        <select value={`${(articleData.odds_pn) ? articleData.odds_pn : 0}`} name="odds_pn" onChange={this.handleInputChange}>
+                                        <select value={`${(sharbsData.odds_pn) ? sharbsData.odds_pn : 0}`} name="odds_pn" onChange={this.handleInputChange}>
                                             <option value="0" >0</option>
                                             <option value="1" >1</option>
                                             <option value="2" >2</option>
@@ -515,7 +519,7 @@ export default withRouter(class manage_sharbs extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">Market Bookmakers    </label>
                                     <div className="select is-fullwidth">
-                                        <select value={`${(articleData.odds_bm_market) ? articleData.odds_bm_market : 0}`} name="odds_bm_market" onChange={this.handleInputChange}>
+                                        <select value={`${(sharbsData.odds_bm_market) ? sharbsData.odds_bm_market : 0}`} name="odds_bm_market" onChange={this.handleInputChange}>
                                             <option value="0">Select Bookmakers </option>
                                             {
                                                 this.state.arrbookmaker.length > 0 ?
@@ -534,7 +538,7 @@ export default withRouter(class manage_sharbs extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">SEL     </label>
                                     <div className="select is-fullwidth">
-                                        <select value={`${(articleData.odds_sel) ? articleData.odds_sel : 0}`} name="odds_sel" onChange={this.handleInputChange}>
+                                        <select value={`${(sharbsData.odds_sel) ? sharbsData.odds_sel : 0}`} name="odds_sel" onChange={this.handleInputChange}>
                                             <option value="0">Select  </option>
                                             {
                                                 this.state.arrsels.length > 0 ?
@@ -559,8 +563,8 @@ export default withRouter(class manage_sharbs extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">Bookmaker    </label>
                                     <div className="select is-fullwidth">
-                                        <select value={`${(articleData.odds_bmid) ? articleData.odds_bmid : 0}`} name="odds_bmid" onChange={this.handleInputChange}>
-                                            <option value="0">Select League</option>
+                                        <select value={`${(sharbsData.odds_bmid) ? sharbsData.odds_bmid : 0}`} name="odds_bmid" onChange={this.handleInputChange}>
+                                            <option value="0">Select Bookmaker</option>
 
                                             {
                                                 this.state.arrBookmakerTags.length > 0 ?
@@ -582,7 +586,7 @@ export default withRouter(class manage_sharbs extends Component {
                             <div className="column is-6">
                                 <div className="control">
                                     <label className="label has-text-grey">Home Win Odds  </label>
-                                    <input className={"input " + (_.get(error, 'odds_ho') ? ' is-danger' : '')} type="text" name="odds_ho" placeholder="Home Win Odds" value={articleData.odds_ho} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
+                                    <input className={"input " + (_.get(error, 'odds_ho') ? ' is-danger' : '')} type="text" name="odds_ho" placeholder="Home Win Odds" value={sharbsData.odds_ho} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
                                     <p className="help is-danger">{_.get(error, 'odds_ho')}</p>
                                 </div>
                             </div>
@@ -593,14 +597,14 @@ export default withRouter(class manage_sharbs extends Component {
                             <div className="column is-6">
                                 <div className="control">
                                     <label className="label has-text-grey">Draw Odds   </label>
-                                    <input className={"input " + (_.get(error, 'odds_xo') ? ' is-danger' : '')} type="text" name="odds_xo" placeholder="Draw Odds" value={articleData.odds_xo} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
+                                    <input className={"input " + (_.get(error, 'odds_xo') ? ' is-danger' : '')} type="text" name="odds_xo" placeholder="Draw Odds" value={sharbsData.odds_xo} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
                                     <p className="help is-danger">{_.get(error, 'odds_xo')}</p>
                                 </div>
                             </div>
                             <div className="column is-6">
                                 <div className="control">
                                     <label className="label has-text-grey">Away Odds   </label>
-                                    <input className={"input " + (_.get(error, 'odds_ao') ? ' is-danger' : '')} type="text" name="odds_ao" placeholder="Away Odds" value={articleData.odds_ao} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
+                                    <input className={"input " + (_.get(error, 'odds_ao') ? ' is-danger' : '')} type="text" name="odds_ao" placeholder="Away Odds" value={sharbsData.odds_ao} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
                                     <p className="help is-danger">{_.get(error, 'odds_ao')}</p>
                                 </div>
                             </div>
@@ -610,7 +614,7 @@ export default withRouter(class manage_sharbs extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">Tag    </label>
                                     <div className="select is-fullwidth">
-                                        <select value={`${(articleData.odds_tag) ? articleData.odds_tag : 0}`} name="odds_tag" onChange={this.handleInputChange}>
+                                        <select value={`${(sharbsData.odds_tag) ? sharbsData.odds_tag : 0}`} name="odds_tag" onChange={this.handleInputChange}>
                                             <option value="0">Select League</option>
 
                                             {
@@ -634,7 +638,7 @@ export default withRouter(class manage_sharbs extends Component {
                                 <div className="control">
                                     <label className="label has-text-grey">Color  </label>
                                     <div className="select is-fullwidth">
-                                        <select value={`${(articleData.odds_tag_color) ? articleData.odds_tag_color : 0}`} name="odds_tag_color" onChange={this.handleInputChange}>
+                                        <select value={`${(sharbsData.odds_tag_color) ? sharbsData.odds_tag_color : 0}`} name="odds_tag_color" onChange={this.handleInputChange}>
                                             <option value="0">Select</option>
                                             <option value="#7CFC00">Green</option>
                                             <option value="#FFC200">Amber</option>

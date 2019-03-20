@@ -4,11 +4,10 @@ import { site_name, apiUrl } from '../utils/Common';
 import { withRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
-import toastr from 'toastr'
 import { BounceLoader } from 'react-spinners';
 import Pagination from "react-js-pagination";
-import ReactTooltip from 'react-tooltip';
-export default withRouter(class Sharbs extends Component {
+import ReactTooltip from 'react-tooltip'
+export default withRouter(class Email_templates extends Component {
 
     constructor(props) {
         super(props);
@@ -23,7 +22,7 @@ export default withRouter(class Sharbs extends Component {
             searchStatus: '',
             sortClass: 'fa-sort',
             sortOrder: 'desc',
-            sortKey: 'registerDate',
+            sortKey: 'user_intrested_added',
         }
 
     }
@@ -36,13 +35,12 @@ export default withRouter(class Sharbs extends Component {
         const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/bookmaker/get-sharbs-list?pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/masterdata/pages-list?pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (sortOrder) { listUrl += '&sortOrder=' + sortOrder + '&sortKey=' + sortKey; }
         axios.get(listUrl)
             .then(res => {
-                console.log(res.data.results);
                 this.setState({
                     arrList: res.data.results,
                     totalRecords: res.data.totalCount,
@@ -53,30 +51,7 @@ export default withRouter(class Sharbs extends Component {
 
             })
     }
-    updateBookmakers = (action, id) => {
-        toastr.clear();
-        const { activePage } = this.state;
-        var updateStatus = true;
-        if (action == 'delete' && !window.confirm('Are you sure want to delete?')) {
-            updateStatus = false;
-        }
-        if (updateStatus) {
-            axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-            axios.post(apiUrl + 'admin/bookmaker/delete-sharbs', {
-                action: action,
-                _id: id,
-            }).then((result) => {
-                let sucMsg = result.data.msg;
-                toastr.success(sucMsg, '');
-                this.getList(activePage);
-            }).catch(error => {
-                let errorMsg = error.response.data.msg;
-                toastr.error(errorMsg, 'Error!');
-            });
-        }
-
-
-    }
+    
     handleInputChange = (e) => {
         const target = e.target;
         const value = target.value;
@@ -112,13 +87,12 @@ export default withRouter(class Sharbs extends Component {
         setTimeout(() => { this.getList(1); }, 100);
     }
 
-
     render() {
         return (
             <div>
                 <Head>
                     <meta charSet="utf-8" />
-                    <title>{site_name} - Sharbs List </title>
+                    <title>{site_name} - User Accounts </title>
                 </Head>
                 <div className="page-wrapper" id="page-wrapper">
                     <div className="columns">
@@ -131,12 +105,10 @@ export default withRouter(class Sharbs extends Component {
                                                 <a href="#">Dashboard</a>
                                             </Link>
                                         </li>
-                                        <li className="is-active"><a href="#">Betting Settings </a></li>
-                                        <li className="is-active"><a href="#">Sharbs List</a></li>
+                                        <li className="is-active"><a href="#">Master Data</a></li>
+                                        <li className="is-active"><a href="#">Pages  List</a></li>
                                     </ul>
-                                    <Link href="/manage_sharbs" as="manage_sharbs">
-                                        <a className="ad-new" >Add New Sharb</a>
-                                    </Link>
+
                                 </nav>
 
                             </div>
@@ -153,26 +125,20 @@ export default withRouter(class Sharbs extends Component {
                                             <div className="column">
                                                 <div className="control">
                                                     <label className="label">Search Key</label>
-                                                    <input className="input" type="text" name="searchKey" placeholder="Search Key" onChange={this.handleInputChange}></input>
+                                                    <input className="input" registrationAccountEmail="text" name="searchKey" placeholder="Search Key" onChange={this.handleInputChange}></input>
                                                 </div>
-
                                             </div>
                                             <div className="column">
                                                 <div className="control">
                                                     <label className="label">Search By</label>
                                                     <div className="select is-fullwidth">
                                                         <select name="searchBy" onChange={this.handleInputChange}>
-                                                            <option value="">Search By</option>
-
-                                                            <option value="bm_name">Name</option>
-
+                                                            <option value="" selected="selected">Select</option>
+                                                            <option value="pageTitle">Title</option>      
                                                         </select>
                                                     </div>
                                                 </div>
-
                                             </div>
-
-
                                         </div>
                                         <p className="buttons">
                                             <a className="button is-theme is-rounded" onClick={this.handleSearch}>
@@ -195,9 +161,8 @@ export default withRouter(class Sharbs extends Component {
                         </section>
                         <div className="table-responsive dash-table-res">
                             <div className="level">
-                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Bookmaker   List </h2>
+                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Pages    List </h2>
                                 <div>
-
 
                                 </div>
 
@@ -207,16 +172,15 @@ export default withRouter(class Sharbs extends Component {
                                 <thead>
                                     <tr className="bg-light">
                                         <th>#</th >
-                                        <th>League</th>
-                                        <th>Match </th>
-                                        <th> Bookmaker </th>
-                                        <th> Home Odds </th>
-                                        <th> Draw Odds </th>
-                                        <th> Away Odds </th>
-                                        <th style={{ width: '200px' }}>Action</th>
+                                        <th onClick={this.handleSort.bind(this, 'pageTitle', this.state.sortOrder)} >Title <i className={`fa ${(this.state.sortKey == "pageTitle") ? this.state.sortClass : "fa-sort"}`}></i></th>
+                                     
+
+                                        <th onClick={this.handleSort.bind(this, 'pageType', this.state.sortOrder)} >Type <i className={`fa ${(this.state.sortKey == "pageType") ? this.state.sortClass : "fa-sort"}`}></i></th>
+
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
-                                <TableListContent updateBookmakers={this.updateBookmakers} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} />
+                                <TableListContent updateAccount={this.updateAccount} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} />
 
                             </table>
                             <nav className="pagination is-rounded" role="navigation" aria-label="pagination">
@@ -248,45 +212,29 @@ const TableListContent = (props) => {
 
             {
                 (props.loading) ?
-                    <tr key="loading"><td colSpan="8" ><BounceLoader css="margin: 0 auto;" sizeUnit={"px"} size={30} color={'#123abc'} loading={true} />
+                    <tr><td colSpan="8" ><BounceLoader css="margin: 0 auto;" sizeUnit={"px"} size={30} color={'#123abc'} loading={true} />
                     </td></tr>
                     : (props.arrlist.length > 0) ?
                         props.arrlist.map(function (dataRow, i) {
 
-
-
-                            return <tr key={sNo + i}>
+                            return <tr>
                                 <td>{sNo + i}</td>
-                                <td>{dataRow.competition.c_name}</td>
-                                <td>{dataRow.matches?dataRow.matches.match_hometeam:''} VS {dataRow.matches?dataRow.matches.match_awayteam:''}</td>
-                                <td>{dataRow.bookmaker?dataRow.bookmaker.bm_name:''}</td>
-                                <td>{dataRow.odds_ho}</td>
-                                <td>{dataRow.odds_xo}</td>
-                                <td>{dataRow.odds_ao}</td>
-
-
-
-
+                                <td>{dataRow.pageTitle}
+                                </td>
+                                <td>{dataRow.pageType == 0?'Web Site':'Mobile App'}
+                                </td>
+                               
+                                
                                 <td>
-                                    <div className="buttons">
-
-                                        <Link href={`/manage_sharbs?id=${dataRow._id}`} as={`/update_sharbs/${dataRow._id}`}>
+                                <Link  href={`/page_manager?id=${dataRow._id}`} as={`/page_manager/${dataRow._id}`}>
                                             <a data-tip="Edit" className="button is-info is-small tooltip" data-tooltip="Edit">  <span className="icon has-text-white">
                                                 <i className="fas fa-pencil-alt"></i>
                                             </span></a>
-                                        </Link>
-
-                                        <button data-tip="Delete" onClick={props.updateBookmakers.bind(this, 'delete', dataRow._id)} className="button is-danger is-small tooltip" data-tooltip="Delete">
-                                            <span className="icon has-text-white">
-                                                <i className="fas fa-trash-alt"></i>
-                                            </span>
-                                        </button>
-                                        <ReactTooltip />
-                                    </div>
+                                        </Link><ReactTooltip />
 
                                 </td>
                             </tr>
-                        }) : <tr key="norecords"><td colSpan="8" style={{ 'textAlign': 'center' }} >No records found.</td></tr>
+                        }) : <tr><td colSpan="8" style={{ 'textAlign': 'center' }} >No records found.</td></tr>
 
 
             }

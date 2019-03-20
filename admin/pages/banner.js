@@ -8,7 +8,8 @@ import toastr from 'toastr'
 import { BounceLoader } from 'react-spinners';
 import Pagination from "react-js-pagination";
 import ReactTooltip from 'react-tooltip';
-export default withRouter(class Sharbs extends Component {
+import Image from 'react-image-resizer';
+export default withRouter(class Banner extends Component {
 
     constructor(props) {
         super(props);
@@ -36,13 +37,12 @@ export default withRouter(class Sharbs extends Component {
         const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/bookmaker/get-sharbs-list?pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/masterdata/banner-list?pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (sortOrder) { listUrl += '&sortOrder=' + sortOrder + '&sortKey=' + sortKey; }
         axios.get(listUrl)
             .then(res => {
-                console.log(res.data.results);
                 this.setState({
                     arrList: res.data.results,
                     totalRecords: res.data.totalCount,
@@ -53,7 +53,7 @@ export default withRouter(class Sharbs extends Component {
 
             })
     }
-    updateBookmakers = (action, id) => {
+    updateAccount = (action, id) => {
         toastr.clear();
         const { activePage } = this.state;
         var updateStatus = true;
@@ -62,7 +62,7 @@ export default withRouter(class Sharbs extends Component {
         }
         if (updateStatus) {
             axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-            axios.post(apiUrl + 'admin/bookmaker/delete-sharbs', {
+            axios.post(apiUrl + 'admin/masterdata/update-banners-status', {
                 action: action,
                 _id: id,
             }).then((result) => {
@@ -118,7 +118,7 @@ export default withRouter(class Sharbs extends Component {
             <div>
                 <Head>
                     <meta charSet="utf-8" />
-                    <title>{site_name} - Sharbs List </title>
+                    <title>{site_name} - Banners  List </title>
                 </Head>
                 <div className="page-wrapper" id="page-wrapper">
                     <div className="columns">
@@ -131,11 +131,11 @@ export default withRouter(class Sharbs extends Component {
                                                 <a href="#">Dashboard</a>
                                             </Link>
                                         </li>
-                                        <li className="is-active"><a href="#">Betting Settings </a></li>
-                                        <li className="is-active"><a href="#">Sharbs List</a></li>
+                                        <li className="is-active"><a href="#">Banners </a></li>
+                                        <li className="is-active"><a href="#">Banners  List</a></li>
                                     </ul>
-                                    <Link href="/manage_sharbs" as="manage_sharbs">
-                                        <a className="ad-new" >Add New Sharb</a>
+                                    <Link href="/manage_banner" as="manage_banner">
+                                        <a className="ad-new" >Add New Banner</a>
                                     </Link>
                                 </nav>
 
@@ -164,14 +164,26 @@ export default withRouter(class Sharbs extends Component {
                                                         <select name="searchBy" onChange={this.handleInputChange}>
                                                             <option value="">Search By</option>
 
-                                                            <option value="bm_name">Name</option>
+                                                            <option value="bannerTitle">Title</option>
 
                                                         </select>
                                                     </div>
                                                 </div>
 
                                             </div>
+                                            <div className="column">
+                                                <div className="control">
+                                                    <label className="label">Status</label>
+                                                    <div className="select is-fullwidth">
+                                                        <select name="searchStatus" onChange={this.handleInputChange}>
+                                                            <option value="all">All</option>
+                                                            <option value="Disabled">Disabled</option>
+                                                            <option value="Enabled">Enabled</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
+                                            </div>
 
                                         </div>
                                         <p className="buttons">
@@ -195,7 +207,7 @@ export default withRouter(class Sharbs extends Component {
                         </section>
                         <div className="table-responsive dash-table-res">
                             <div className="level">
-                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Bookmaker   List </h2>
+                                <h2 className="title is-size-5 has-text-grey-dark is-uppercase is-marginless">Banners   List </h2>
                                 <div>
 
 
@@ -207,16 +219,14 @@ export default withRouter(class Sharbs extends Component {
                                 <thead>
                                     <tr className="bg-light">
                                         <th>#</th >
-                                        <th>League</th>
-                                        <th>Match </th>
-                                        <th> Bookmaker </th>
-                                        <th> Home Odds </th>
-                                        <th> Draw Odds </th>
-                                        <th> Away Odds </th>
+                                        <th onClick={this.handleSort.bind(this, 'bannerTitle', this.state.sortOrder)} >Title <i className={`fa ${(this.state.sortKey == "bannerTitle") ? this.state.sortClass : "fa-sort"}`}></i></th>
+                                        <th >Image</th>
+                                        <th onClick={this.handleSort.bind(this, 'bannerAdded', this.state.sortOrder)} >Created On <i className={`fa ${(this.state.sortKey == "bannerAdded") ? this.state.sortClass : "fa-sort"}`}></i></th>
+                                        <th >Status</th>
                                         <th style={{ width: '200px' }}>Action</th>
                                     </tr>
                                 </thead>
-                                <TableListContent updateBookmakers={this.updateBookmakers} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} />
+                                <TableListContent updateAccount={this.updateAccount} pageLimit={this.state.pageLimit} activePage={this.state.activePage} arrlist={this.state.arrList} loading={this.state.loading} />
 
                             </table>
                             <nav className="pagination is-rounded" role="navigation" aria-label="pagination">
@@ -253,34 +263,69 @@ const TableListContent = (props) => {
                     : (props.arrlist.length > 0) ?
                         props.arrlist.map(function (dataRow, i) {
 
-
+                            var enabledBtn = (dataRow.bannerDisabled == 0) ? true : false;
+                            var disbaledBtn = (dataRow.bannerDisabled == 1) ? true : false;
 
                             return <tr key={sNo + i}>
                                 <td>{sNo + i}</td>
-                                <td>{dataRow.competition.c_name}</td>
-                                <td>{dataRow.matches?dataRow.matches.match_hometeam:''} VS {dataRow.matches?dataRow.matches.match_awayteam:''}</td>
-                                <td>{dataRow.bookmaker?dataRow.bookmaker.bm_name:''}</td>
-                                <td>{dataRow.odds_ho}</td>
-                                <td>{dataRow.odds_xo}</td>
-                                <td>{dataRow.odds_ao}</td>
+                                <td>{dataRow.bannerTitle}
 
+
+
+                                </td>
+                                <td>{
+                                        dataRow.bannerImageFile ?
+                                            <Image
+                                                src={`${apiUrl}resources/banner/${dataRow.bannerImageFile}`}
+                                                width={100}
+                                                height={50}
+
+                                            /> : ''
+                                    }
+
+
+
+                                </td>
+                                <td>{dataRow.bannerAdded.slice(0, 10)}</td>
 
 
 
                                 <td>
-                                    <div className="buttons">
+                                    {
+                                        dataRow.bannerDisabled === 0 ?
+                                            <label className="tag is-success tooltip is-tooltip-bottom " data-tooltip="Approved ">
+                                                Enabled</label> : <label className="tag is-danger tooltip is-tooltip-bottom " data-tooltip="Approved ">
+                                                Disabled</label>
 
-                                        <Link href={`/manage_sharbs?id=${dataRow._id}`} as={`/update_sharbs/${dataRow._id}`}>
+                                    }
+                                </td>
+                                <td>
+                                    <div className="buttons">
+                                        <button data-tip="Disable" disabled={disbaledBtn} onClick={props.updateAccount.bind(this, 'disbled', dataRow._id)} className="button is-primary is-small tooltip" data-tooltip="Disable">
+                                            <span className="icon has-text-white">
+                                                <i className="fas fa-ban"></i>
+                                            </span>
+                                        </button>
+                                        <button data-tip="Enable" disabled={enabledBtn} onClick={props.updateAccount.bind(this, 'enabled', dataRow._id)} className="button is-success is-small tooltip" data-tooltip="Enable">
+                                            <span className="icon has-text-white">
+                                                <i className="fas fa-check"></i>
+                                            </span>
+                                        </button>
+                                        <Link href={`/manage_banner?id=${dataRow._id}`} as={`/manage_banner/${dataRow._id}`}>
                                             <a data-tip="Edit" className="button is-info is-small tooltip" data-tooltip="Edit">  <span className="icon has-text-white">
                                                 <i className="fas fa-pencil-alt"></i>
                                             </span></a>
                                         </Link>
 
-                                        <button data-tip="Delete" onClick={props.updateBookmakers.bind(this, 'delete', dataRow._id)} className="button is-danger is-small tooltip" data-tooltip="Delete">
+                                        <button data-tip="Delete" onClick={props.updateAccount.bind(this, 'delete', dataRow._id)} className="button is-danger is-small tooltip" data-tooltip="Delete">
                                             <span className="icon has-text-white">
                                                 <i className="fas fa-trash-alt"></i>
                                             </span>
                                         </button>
+
+
+
+
                                         <ReactTooltip />
                                     </div>
 
