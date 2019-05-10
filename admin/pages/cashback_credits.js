@@ -265,9 +265,9 @@ const TableListContent = (props) => {
                             return <tr>
                                 <td>{sNo + i}</td>
                                 <td>
-                                    {dataRow.revenueCreditUserId.name}
-                                    {dataRow.revenueCreditUserId.last_name}
-                                    ( {dataRow.revenueCreditUserId.username})
+                                    {dataRow.revenueCreditUserId?dataRow.revenueCreditUserId.name:''}
+                                    {dataRow.revenueCreditUserId?dataRow.revenueCreditUserId.last_name:''}
+                                    ( {dataRow.revenueCreditUserId?dataRow.revenueCreditUserId.username:''})
                                  </td>
                                 <td>{dataRow.revenueCreditType}</td>
                                 <td>&pound;{dataRow.revenueCreditAmount}</td>

@@ -1,0 +1,214 @@
+/* Ion.RangeSlider, Simple Skin
+// css version 2.0.3
+// © Denis Ineshin, 2014    https://github.com/IonDen
+// © guybowden, 2014        https://github.com/guybowden
+// ===================================================================================================================*/
+
+/* =====================================================================================================================
+// Skin details */
+
+.irs {
+    height: 55px;
+}
+.irs-with-grid {
+    height: 75px;
+}
+.irs-line {
+    height: 10px; top: 33px;
+    background: #EEE;
+    background: linear-gradient(to bottom, #DDD -50%, #FFF 150%); /* W3C */
+    border: 1px solid #CCC;
+    border-radius: 16px;
+    -moz-border-radius: 16px;
+}
+    .irs-line-left {
+        height: 8px;
+    }
+    .irs-line-mid {
+        height: 8px;
+    }
+    .irs-line-right {
+        height: 8px;
+    }
+
+.irs-bar {
+    height: 10px; top: 33px;
+    border-top: 1px solid #811e68;
+    border-bottom: 1px solid #811e68;
+    background: #811e68;
+    
+}
+    .irs-bar-edge {
+        height: 10px; top: 33px;
+        width: 14px;
+        border: 1px solid #811e68;
+        border-right: 0;
+        background: #811e68;
+   
+        border-radius: 16px 0 0 16px;
+        -moz-border-radius: 16px 0 0 16px;
+    }
+
+.irs-shadow {
+    height: 2px; top: 38px;
+    background: #000;
+    opacity: 0.3;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+.lt-ie9 .irs-shadow {
+    filter: alpha(opacity=30);
+}
+
+.irs-slider {
+    top: 25px;
+    width: 27px; height: 27px;
+    border: 1px solid #AAA;
+    background: #DDD;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(220,220,220,1) 20%,rgba(255,255,255,1) 100%); /* W3C */
+    border-radius: 27px;
+    -moz-border-radius: 27px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+.irs-slider.state_hover, .irs-slider:hover {
+    background: #FFF;
+}
+
+.irs-min, .irs-max {
+    color: #333;
+    font-size: 12px; line-height: 1.333;
+    text-shadow: none;
+    top: 0;
+    padding: 1px 5px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.lt-ie9 .irs-min, .lt-ie9 .irs-max {
+    background: #ccc;
+}
+
+.irs-from, .irs-to, .irs-single {
+    color: #fff;
+    font-size: 14px; line-height: 1.333;
+    text-shadow: none;
+    padding: 1px 5px;
+    background: #811e68;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+.lt-ie9 .irs-from, .lt-ie9 .irs-to, .lt-ie9 .irs-single {
+    background: #999;
+}
+
+.irs-grid {
+    height: 27px;
+}
+.irs-grid-pol {
+    opacity: 0.5;
+    background: #811e68;
+	
+}
+.irs-grid-pol.small {
+    background: #999;
+}
+
+.irs-grid-text {
+    bottom: 5px;
+    color: #99a4ac;
+}
+
+.irs-disabled {
+}
+
+
+.sbobet-color .irs-bar, 
+.sbobet-color .irs-bar-edge, 
+.sbobet-color .irs-single, 
+.sbobet-color .icon-charts .bg ,  
+.sbobet-color  .rect-content
+{
+	background-color:#85a3e0 !important;
+	border-color:#85a3e0 !important;
+}
+
+.ecopayz-color .irs-bar, 
+.ecopayz-color .irs-bar-edge, 
+.ecopayz-color .irs-single, 
+.ecopayz-color .icon-charts .bg ,  
+.ecopayz-color  .rect-content
+{
+	background-color:#76b127 !important;
+	border-color:#76b127 !important;
+}
+
+
+.sbobet-color .c-primary-1
+{
+	background-color:#85a3e0 !important;
+}
+.sbobet-color .mem-head-text h4, .sbobet-color .prime-1
+{
+	color:#85a3e0 !important;
+}
+
+.neteller-color .irs-bar, 
+.neteller-color .irs-bar-edge, 
+.neteller-color .irs-single, 
+.neteller-color .icon-charts .bg ,  
+.neteller-color  .rect-content
+{
+	background-color:#83ba3b !important;
+	border-color:#83ba3b !important;
+}
+.neteller-color .c-primary-1
+{
+	background-color:#83ba3b !important;
+}
+.neteller-color .mem-head-text h4, .neteller-color .prime-1
+{
+	color:#83ba3b !important;
+}
+
+
+.asianconnect-color .irs-bar, 
+.asianconnect-color .irs-bar-edge, 
+.asianconnect-color .irs-single,   
+.asianconnect-color  .rect-content
+{
+	background-color:#c10000 !important;
+	border-color:#c10000 !important;
+}
+.asianconnect-color .c-primary-1, .asianconnect-color .icon-charts .bg 
+{
+	background-color:#ff6600 !important;
+}
+.asianconnect-color .mem-head-text h4, .asianconnect-color .prime-1
+{
+	color:#ff6600 !important;
+}
+
+.asianconnect-color .black-circle .icon-charts .bg 
+{
+	 background-color:#002060 !important;
+}
+.ecopayz-color .green-circle .icon-charts .bg 
+{
+	 background-color:#76B127 !important;
+}
+.asianconnect-color .prime-2
+{
+	color:#002060 !important;
+}
+
+.neteller-color .black-circle .icon-charts .bg, .sbobet-color .black-circle .icon-charts .bg{
+  background-color: #5c6478 !important;
+}
+
+.asianconnect-color .t40
+{
+	bottom:-40px !important;
+}

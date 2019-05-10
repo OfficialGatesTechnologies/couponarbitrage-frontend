@@ -269,8 +269,8 @@ const TableListContent = (props) => {
                             return <tr key={sNo + i}>
                                 <td>{sNo + i}</td>
                                 <td>{dataRow.title}</td>
-                                <td>{dataRow.store_id.aid.name} - {dataRow.store_id.title}</td>
-                                <td>{dataRow.user_id.username}</td>
+                                <td>{dataRow.store_id?dataRow.store_id.aid.name:''} - {dataRow.store_id?dataRow.store_id.title:''}</td>
+                                <td>{dataRow.user_id?dataRow.user_id.username:''}</td>
                                 <td>{dataRow.rating} </td>
                                 <td>
                                     {

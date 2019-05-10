@@ -16,6 +16,7 @@ export default withRouter(class manage_cashback_stores extends Component {
         super(props);
         this.state = {
             arrList: [],
+            menuList: [],
             catData: [],
             siteData: [],
             affData: [],
@@ -95,8 +96,23 @@ export default withRouter(class manage_cashback_stores extends Component {
             this.getCatRow(editId);
         }
         this.getDropDownData();
+        this.getCashbackMenus();
     }
 
+    getCashbackMenus = () => {
+
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
+        let listUrl = apiUrl + 'admin/cashback-offer/parent-menu?type=cashback';
+        axios.get(listUrl)
+            .then(res => {
+                this.setState({
+                    menuList: res.data.results,
+                });
+            }).catch(() => {
+                this.setState({ loading: false });
+
+            })
+    }
 
 
     getCatRow = (editId) => {
@@ -105,7 +121,7 @@ export default withRouter(class manage_cashback_stores extends Component {
         axios.get(apiUrl + 'admin/cashback-offer/store-row?_id=' + editId)
             .then(res => {
                 var storeData = res.data.results;
-
+                if (storeData.parent_id) this.getCategories(storeData.parent_id);
                 this.setState({ storeData: storeData, editForm: true })
             }).catch((error) => {
                 if (error) {
@@ -120,11 +136,26 @@ export default withRouter(class manage_cashback_stores extends Component {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
         axios.get(apiUrl + 'admin/cashback-offer/get-drop-down-data')
             .then(res => {
-                var catData = res.data.catRes;
+              
                 var siteData = res.data.results;
                 var affData = res.data.affRes;
                 var bannerData = res.data.bannerFileList;
-                this.setState({ catData: catData, siteData: siteData, affData: affData, bannerData: bannerData })
+                this.setState({ siteData: siteData, affData: affData, bannerData: bannerData })
+            }).catch((error) => {
+                if (error) {
+                    toastr.error('Invalid URI', 'Error!');
+                    Router.push(`/cashback_stores`);
+                }
+            })
+    }
+    getCategories = (parentId) => {
+
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
+        axios.get(apiUrl + 'admin/cashback-offer/get-drop-down-data?parentId='+parentId)
+            .then(res => {
+                var catData = res.data.catRes;
+               
+                this.setState({ catData: catData })
             }).catch((error) => {
                 if (error) {
                     toastr.error('Invalid URI', 'Error!');
@@ -145,6 +176,16 @@ export default withRouter(class manage_cashback_stores extends Component {
                     return false;
                 }
             },
+            parent_id: {
+                message: "Please select parent.",
+                doValidate: () => {
+                    const value = _.trim(_.get(storeData, 'parent_id', ""));
+                    if (value.length > 0) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
             cat_id: {
                 message: "Please select category.",
                 doValidate: () => {
@@ -155,6 +196,7 @@ export default withRouter(class manage_cashback_stores extends Component {
                     return false;
                 }
             },
+
             network_id: {
                 message: "Please select a network.",
                 doValidate: () => {
@@ -273,7 +315,7 @@ export default withRouter(class manage_cashback_stores extends Component {
         e.preventDefault();
         const { storeData } = this.state;
         let fieldNeedToValidate = [];
-        fieldNeedToValidate = ['aid', 'cat_id', 'network_id', 'title', 'uploadType', 'link', 'value'];
+        fieldNeedToValidate = ['aid', 'cat_id', 'network_id', 'title', 'uploadType', 'link', 'value','parent_id'];
         this.state.showUploadtype ? fieldNeedToValidate.push(this.state.showUploadtype) : '';
         !storeData.details_default?fieldNeedToValidate.push('details'):fieldNeedToValidate.pop('details');
         console.log(fieldNeedToValidate);
@@ -355,6 +397,7 @@ export default withRouter(class manage_cashback_stores extends Component {
         this.setState({
             storeData: storeData
         })
+        if (name == 'parent_id') this.getCategories(value);
          
     }
     handleDateChange = (fieldName, e) => {
@@ -436,6 +479,26 @@ export default withRouter(class manage_cashback_stores extends Component {
 
                             <div className="column is-3">
                                 <div className="control">
+                                    <label className="label has-text-grey">Parent   </label>
+                                    <div className="select is-fullwidth">
+                                        <select className={"input " + (_.get(error, 'parent_id') ? ' is-danger' : '')} value={`${(storeData.parent_id) ? storeData.parent_id : null}`} name="parent_id" onChange={this.handleInputChange}>
+                                            <option key="0" value="0">Select category</option>
+                                            {
+                                                this.state.menuList.length > 0 ?
+                                                    this.state.menuList.map(function (dataRow, i) {
+                                                        return (
+                                                            <option key={i + 1} value={dataRow._id}>{dataRow.name}</option>
+                                                        )
+                                                    }) : ''
+                                            }
+                                        </select>
+                                        <p className="help is-danger">{_.get(error, 'parent_id')}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="column is-3">
+                                <div className="control">
                                     <label className="label has-text-grey">Category   </label>
                                     <div className="select is-fullwidth">
                                         <select className={"input " + (_.get(error, 'cat_id') ? ' is-danger' : '')} value={`${(storeData.cat_id) ? storeData.cat_id : null}`} name="cat_id" onChange={this.handleInputChange}>
@@ -446,8 +509,7 @@ export default withRouter(class manage_cashback_stores extends Component {
                                                     this.state.catData.map(function (dataRow, i) {
 
                                                         return (
-                                                            <option key={i + 1} value={dataRow._id}>{dataRow.cat_title} - {dataRow.cat_parent.name}</option>
-
+                                                            <option key={i + 1} value={dataRow._id}>{dataRow.cat_title}</option>
                                                         )
 
                                                     }) : ''
@@ -480,7 +542,12 @@ export default withRouter(class manage_cashback_stores extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="column is-3">
+                           
+                        </div>
+
+                        
+                        <div className="columns">
+                        <div className="column is-6">
                                 <div className="control">
                                     <label className="label has-text-grey">Title</label>
                                     <input className={"input " + (_.get(error, 'title') ? ' is-danger' : '')} type="text" name="title" placeholder="Title" value={storeData.title} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />

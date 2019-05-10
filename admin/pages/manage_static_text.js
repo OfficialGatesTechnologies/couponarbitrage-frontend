@@ -258,6 +258,8 @@ export default withRouter(class manage_plans extends Component {
                                             <option value="Skrill">Skrill</option>
                                             <option value="Neteller">Neteller</option>
                                             <option value="Ecopayz">Ecopayz</option>
+                                            <option value="AsianConnect88">Asianconnect</option>
+                                            <option value="SBObet">SBObet</option>
                                         </select>
 
                                         <p className="help is-danger">{_.get(error, 'static_text_for')}</p>

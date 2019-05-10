@@ -27,6 +27,8 @@ export default withRouter(class manage_menu extends Component {
                 introtext: "",
                 description: "",
                 defaultMenuItem: "",
+                showInLandingPageMenu: "",
+                showInMenu: "",
                 metatitle: "",
                 metakey: "",
                 metadesc: "",
@@ -210,7 +212,7 @@ export default withRouter(class manage_menu extends Component {
 
         const tragetFile = document.getElementById('imageFile').files[0];
         data.append('file', tragetFile);
- 
+
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
         axios.post(apiUrl + 'admin/menu/update-menu', data, config).then((result) => {
             let sucMsg = result.data.msg;
@@ -363,6 +365,33 @@ export default withRouter(class manage_menu extends Component {
                                     <label className="label has-text-grey">Order </label>
                                     <input className={"input " + (_.get(error, 'ordering') ? ' is-danger' : '')} name="ordering" type="text" placeholder="Order" value={menuData.ordering} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
                                     <p className="help is-danger">{_.get(error, 'ordering')}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="columns">
+                            <div className="column is-6">
+                                <div className="control">
+                                    <label className="label has-text-grey">Show In Landing Page Menu? (only applicable for parent menu)</label>
+                                    <div className="select is-fullwidth">
+                                        <select value={`${(this.state.editForm && menuData.showInLandingPageMenu) ? menuData.showInLandingPageMenu : 0}`} name="showInLandingPageMenu" onChange={this.handleInputChange}>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+
+                                        </select>
+                                        <p className="help is-danger">{_.get(error, 'showInLandingPageMenu')}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="column is-6">
+                                <div className="control">
+                                    <label className="label has-text-grey">Show In  Menu? (only applicable for parent menu)</label>
+                                    <div className="select is-fullwidth">
+                                        <select value={`${(this.state.editForm && menuData.showInMenu) ? menuData.showInMenu : 0}`} name="showInMenu" onChange={this.handleInputChange}>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                        <p className="help is-danger">{_.get(error, 'showInMenu')}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

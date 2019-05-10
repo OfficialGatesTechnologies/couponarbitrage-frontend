@@ -314,7 +314,7 @@ const TableListContent = (props) => {
                             var disbaledBtn = (dataRow.voucher_disabled == 1) ? true : false;
                             return <tr key={sNo + i}>
                                 <td>{sNo + i}</td>
-                                <td>{dataRow.store_id.aid.name} - {dataRow.store_id.title}</td>
+                                <td>{dataRow.store_id?dataRow.store_id.aid.name:''} - {dataRow.store_id?dataRow.store_id.title:''}</td>
                                 <td>{dataRow.voucher_title}</td>
                                 <td>{dataRow.voucher_mode} </td>
                                 <td>{dataRow.voucher_type} </td>

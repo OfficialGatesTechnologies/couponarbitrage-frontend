@@ -68,7 +68,7 @@ export default withRouter(class revenue_cashback_claims extends Component {
         const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey,filterByStore,status } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/cashback-claims/list?cb_type=3&status='+status+'&pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/cashback-claims/list?cb_type=2&status='+status+'&pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (filterByStore) { listUrl += '&filterByStore=' + filterByStore; }
@@ -471,9 +471,10 @@ const TableListContent = (props) => {
                                 <td>{dataRow.username ? dataRow.username : ''}</td>
                                 <td>{dataRow.aff_id ? dataRow.aff_id.title : ''} -
                                 {dataRow.store_id ? dataRow.store_id.title : ''}</td>
-                                <td>--</td>
+                                <td> 
+                                {dataRow.store_id && dataRow.store_id.network_id ? dataRow.store_id.network_id.title : ''}</td>
                                 <td>{dataRow.date_applied ? dataRow.date_applied.slice(0, 10) : ''}</td>
-                                <td>{dataRow.amount ? dataRow.amount : ''}</td>
+                                <td>{dataRow.amount ? dataRow.amount : ''}%</td>
                                 <td>
                                     {dataRow.store_id ? `FROM: ${dataRow.store_id.vaild_from.slice(0, 10)}` : ''}
                                     {dataRow.store_id && dataRow.store_id.valid_to ? ` Upto: ${dataRow.store_id.valid_to.slice(0, 10)} ` : ''}</td>

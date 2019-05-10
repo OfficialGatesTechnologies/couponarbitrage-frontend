@@ -62,7 +62,7 @@ export default withRouter(class revenue_cashback_payouts extends Component {
         const { pageLimit, searchKey, searchBy, searchStatus, sortOrder, sortKey,filterByType, filterByStatus } = this.state;
         this.setState({ loading: true });
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtAdminToken');
-        let listUrl = apiUrl + 'admin/cashback-payouts/list?cb_type=2&pageLimit=' + pageLimit + '&page=' + page;
+        let listUrl = apiUrl + 'admin/cashback-payouts/list?cb_type=3&pageLimit=' + pageLimit + '&page=' + page;
         if (searchKey) { listUrl += '&searchKey=' + searchKey + '&searchBy=' + searchBy; }
         if (searchStatus) { listUrl += '&searchStatus=' + searchStatus; }
         if (filterByType) { listUrl += '&filterByType=' + filterByType; }
