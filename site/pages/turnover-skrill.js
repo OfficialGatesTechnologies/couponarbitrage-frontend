@@ -3,6 +3,7 @@ import Head from 'next/head';
 import axios from 'axios';
 import { site_name, apiUrl } from '../utils/Common';
 import { withRouter } from 'next/router';
+import Router from 'next/router'
 import Link from 'next/link';
 import HeaderIn from '../components/header-in';
 import Footer from '../components/footer';
@@ -23,6 +24,7 @@ export default withRouter(class TurnoverSkrill extends Component {
             pendingAmount:[],
             paidAmount:[],
             loading: false,
+           
         }
     }
     componentDidMount = () => {
@@ -66,7 +68,7 @@ export default withRouter(class TurnoverSkrill extends Component {
             <div>
                 <Head>
                     <meta charSet="utf-8" />
-                    <title>{site_name} | My Account-Earnings</title>
+                    <title> Skrill Cashback Transactions | {site_name} </title>
 
                 </Head>
 
@@ -98,21 +100,24 @@ export default withRouter(class TurnoverSkrill extends Component {
                                         <h3 className="title-purble">Cashback by Merchant</h3>
                                         <p className="fon-18">Please find below the status of your transactions by merchant</p>
                                     </div>
-                                    <div className="column is-5">
-                                        <div className="green-box-detail">
+                                   
                                         {
                                              this.state.arrList.length > 0
                                              ?<>
-                                             <span>Award Amount</span>:&nbsp;£{this.state.userData.moneyBookerBonus?this.state.userData.moneyBookerBonus:0}<br />
-                                             <span>Current Balance</span>:&nbsp;£{this.state.pendingAmount[0]?this.state.pendingAmount[0].sum+this.state.userData.moneyBookerBonus:0}<br />
-                                             <span>Total Cash Back Received</span>:&nbsp;£{this.state.paidAmount[0]?this.state.paidAmount[0].sum:0}<br /> 
-                                             <span>Skrill User ID</span>:&nbsp;{this.state.userData.moneyBookerId?this.state.userData.moneyBookerId:0}<br /> 
-                                             <span>E-mail Address</span>:&nbsp; <Link href="#"><a>{this.state.userData.email}</a></Link></>
+                                             <div className="column is-5">
+                                                <div className="green-box-detail">
+                                                    <span>Award Amount</span>:&nbsp;£{this.state.userData.moneyBookerBonus?this.state.userData.moneyBookerBonus:0}<br />
+                                                    <span>Current Balance</span>:&nbsp;£{this.state.pendingAmount[0]?this.state.pendingAmount[0].sum+this.state.userData.moneyBookerBonus:0}<br />
+                                                    <span>Total Cash Back Received</span>:&nbsp;£{this.state.paidAmount[0]?this.state.paidAmount[0].sum:0}<br /> 
+                                                    <span>Skrill User ID</span>:&nbsp;{this.state.userData.moneyBookerId?this.state.userData.moneyBookerId:0}<br /> 
+                                                    <span>E-mail Address</span>:&nbsp; <Link href="#"><a>{this.state.userData.email}</a></Link>
+                                                </div>
+                                             </div>
+                                             </>
                                              :''
                                         }
                                            
-                                        </div>
-                                    </div>
+                                     
                                 </div>
                                 <div className="is-relative">
                                     <div className="fwid texts-box">

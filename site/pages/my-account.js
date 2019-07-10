@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
 import { withRouter } from 'next/router';
+import Router from 'next/router'
 import axios from 'axios';
 import { site_name, apiUrl } from '../utils/Common';
 import HeaderIn from '../components/header-in';
@@ -130,7 +131,7 @@ export default withRouter(class MyAccount extends Component {
 
                                                             <td><span className="bfont green-font">€{userStats.totalSkrillPending && userStats.totalSkrillPending[0] ? userStats.totalSkrillPending[0].sum : 0}</span></td>
                                                             <td><span className="bfont">€{userStats.totalSkrillPaid && userStats.totalSkrillPaid[0] ? userStats.totalSkrillPaid[0].sum : 0}</span></td>
-                                                            <td><Link href="/earnings"><a className="slink"> <span>View all earnings</span> </a></Link></td>
+                                                            <td><Link href={`/turnover-skrill`} as={`/turnover/skrill`}><a className="slink"> <span>View all earnings</span> </a></Link></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -152,7 +153,7 @@ export default withRouter(class MyAccount extends Component {
                                                         <tr>
                                                             <td><span className="bfont green-font">€{userStats.totalEcopayPending && userStats.totalEcopayPending[0] ? userStats.totalEcopayPending[0].sum : 0}</span></td>
                                                             <td><span className="bfont">€{userStats.totalEcopayPaid && userStats.totalEcopayPaid[0] ? userStats.totalEcopayPaid[0].sum : 0}</span></td>
-                                                            <td><Link href="/earnings"><a className="slink"> <span>View all earnings</span> </a></Link></td>
+                                                            <td><Link href={`/turnover-ecopayz`} as={`/turnover/ecopayz`}><a className="slink"> <span>View all earnings</span> </a></Link></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -174,7 +175,7 @@ export default withRouter(class MyAccount extends Component {
                                                         <tr>
                                                             <td><span className="bfont green-font">£{userStats.sbobetRes && userStats.sbobetRes.pendingAmount ? userStats.sbobetRes.pendingAmount : 0}</span></td>
                                                             <td><span className="bfont">£{userStats.sbobetRes && userStats.sbobetRes.paidAmount ? userStats.sbobetRes.paidAmount : 0}</span></td>
-                                                            <td><Link href="/earnings"><a className="slink"> <span>View all earnings</span> </a></Link></td>
+                                                            <td><Link href={`/turnover-sbobet`} as={`/turnover/sbobet`}><a className="slink"> <span>View all earnings</span> </a></Link></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -197,7 +198,7 @@ export default withRouter(class MyAccount extends Component {
                                                         <tr>
                                                             <td><span className="bfont green-font">€{userStats.netellerRes && userStats.netellerRes.pendingAmount ? userStats.netellerRes.pendingAmount : 0}</span></td>
                                                             <td><span className="bfont">€{userStats.netellerRes && userStats.netellerRes.paidAmount ? userStats.netellerRes.paidAmount : 0}</span></td>
-                                                            <td><Link href="/earnings"><a className="slink"> <span>View all earnings</span> </a></Link></td>
+                                                            <td><Link href={`/turnover-neteller`} as={`/turnover/neteller`}><a className="slink"> <span>View all earnings</span> </a></Link></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -220,7 +221,7 @@ export default withRouter(class MyAccount extends Component {
                                                         <tr>
                                                             <td><span className="bfont green-font">€{userStats.assianConnectRes && userStats.assianConnectRes.pendingAmount ? userStats.assianConnectRes.pendingAmount : 0}</span></td>
                                                             <td><span className="bfont">€{userStats.assianConnectRes && userStats.assianConnectRes.paidAmount ? userStats.assianConnectRes.paidAmount : 0}</span></td>
-                                                            <td><Link href="/earnings"><a className="slink"> <span>View all earnings</span> </a></Link></td>
+                                                            <td><Link href={`/turnover-asian-connect`} as={`/turnover/asianconnect`}><a className="slink"> <span>View all earnings</span> </a></Link></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

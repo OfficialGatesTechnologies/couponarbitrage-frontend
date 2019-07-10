@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
 import { withRouter } from 'next/router';
+import Router from 'next/router';
 import axios from 'axios';
 import { site_name, apiUrl } from '../utils/Common';
 import HeaderIn from '../components/header-in';

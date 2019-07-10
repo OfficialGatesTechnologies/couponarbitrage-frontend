@@ -22,7 +22,6 @@ app.prepare()
             }
             next();
         });
-       
         server.get('*', (req, res) => {
             return handle(req, res)
         })
@@ -30,8 +29,7 @@ app.prepare()
             if (err) throw err;
             console.log(`Listening on port ${port}...`);
         });
-    })
-    .catch(err => {
+    }).catch(err => {
         console.error(err.stack)
         process.exit(1)
     })

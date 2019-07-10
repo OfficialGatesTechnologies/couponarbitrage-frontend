@@ -6106,3 +6106,12 @@ div.cv-font-12{
   background: #71acc4;
     color: #fff;
 }
+.cus-flex{
+ display: flex;
+ justify-content: space-between;
+}
+.cus-input{
+  height: 40px;
+  width: 100%;
+  margin-right: 10px;
+}
