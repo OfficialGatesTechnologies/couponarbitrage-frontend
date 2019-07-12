@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
 import axios from 'axios';
-import { site_name, apiUrl } from '../utils/Common';
+import { site_name, apiUrl, getCountries } from '../utils/Common';
 import { withRouter } from 'next/router';
 import Router from 'next/router';
 import HeaderIn from '../components/header-in';
@@ -10,25 +10,33 @@ import MyAccountMidMenu from '../components/my-account/my-account-mid-menu';
 import MyAccountTop from '../components/my-account/my-account-top';
 import Link from 'next/link';
 import jsCookie from 'js-cookie';
+import _ from 'lodash';
+import { toast } from 'react-toastify';
+toast.configure();
 export default withRouter(class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
             userData: {
-                accountSkrillEmail: '',
-                accountNetellerEmail: '',
-                accountPaypalEmail: '',
-                bankAccountName: '',
-                bankAccountNumber: '',
-                bankAccountSortCode: '',
+                _id: '',
+                name: '',
+                last_name: '',
+                username: "",
+                email: "",
+                password: "",
+                cpassword: "",
+                accountPhone: "",
+                accountCountry: "",
+             
             },
             errors: {
-                accountSkrillEmail: null,
-                accountNetellerEmail: null,
-                accountPaypalEmail: null,
-                bankAccountName: null,
-                bankAccountNumber: null,
-                bankAccountSortCode: null,
+                name: null,
+                last_name: null,
+                username: null,
+                email: null,
+                password: null,
+                cpassword: null,
+                
             },
             disableBtn: false
         }
@@ -50,7 +58,7 @@ export default withRouter(class Profile extends Component {
 
 
     render() {
-        const { } = this.state;
+        const { error, userData } = this.state;
         return (
             <div>
                 <Head>
@@ -88,10 +96,9 @@ export default withRouter(class Profile extends Component {
                                 <div className="fwid text-left pd-20 sec-wraps is-inline-block is-fullwidth">
                                     <div className="panel pan-border-color-cus">
                                         <p className="panel-heading pan-border-color-cus bg-head">
-                                            Update your profile
-        </p>
+                                            Update your profile </p>
                                         <div className="panel-block pan-border-color-cus">
-                                            <form className="is-fullwidth max-panel-bdy">
+                                            <span className="is-fullwidth max-panel-bdy">
 
                                                 <div className="field is-horizontal">
                                                     <div className="field-label is-normal">
@@ -100,8 +107,8 @@ export default withRouter(class Profile extends Component {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <div className="control">
-                                                                <input className="input" name="FirstName" id="FirstName" type="text" />
-
+                                                                <input className={"input " + (_.get(error, 'name') ? ' is-danger' : '')} name="name" type="text" placeholder="Name" value={userData.name} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
+                                                                <p className="help is-danger">{_.get(error, 'name')}</p>
                                                             </div>
                                                         </div>
 
@@ -114,7 +121,8 @@ export default withRouter(class Profile extends Component {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <div className="control">
-                                                                <input className="input" name="LastName" id="LastName" type="text" />
+                                                                <input className={"input " + (_.get(error, 'last_name') ? ' is-danger' : '')} type="text" name="last_name" placeholder="last name" value={userData.last_name} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
+                                                                <p className="help is-danger">{_.get(error, 'last_name')}</p>
 
                                                             </div>
                                                         </div>
@@ -128,7 +136,8 @@ export default withRouter(class Profile extends Component {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <div className="control">
-                                                                <input className="input" name="Username" id="Username" type="text" />
+                                                                <input className={"input " + (_.get(error, 'username') ? ' is-danger' : '')} type="text" name="username" placeholder="Username" value={userData.username} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
+                                                                <p className="help is-danger">{_.get(error, 'username')}</p>
 
                                                             </div>
                                                         </div>
@@ -142,7 +151,8 @@ export default withRouter(class Profile extends Component {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <div className="control">
-                                                                <input className="input" name="Email" id="Email" type="Email" />
+                                                                <input className={"input " + (_.get(error, 'email') ? ' is-danger' : '')} name="email" type="text" placeholder="E-Mail" value={userData.email} onChange={this.handleInputChange} onKeyUp={this.onTextFieldBlur} onBlur={this.onTextFieldBlur} />
+                                                                <p className="help is-danger">{_.get(error, 'email')}</p>
 
                                                             </div>
                                                         </div>
@@ -177,21 +187,7 @@ export default withRouter(class Profile extends Component {
 
                                                     </div>
                                                 </div>
-                                                <div className="field is-horizontal">
-                                                    <div className="field-label is-normal">
-                                                        <label className="label has-text-weight-light has-text-grey-light">Gender</label>
-                                                    </div>
-                                                    <div className="field-body">
-                                                        <div className="field">
-                                                            <input className="is-checkradio" id="exampleRadioInline1" type="radio" name="exampleRadioInline" checked="checked" />
-                                                            <label for="exampleRadioInline1">Male</label>
-                                                            <input className="is-checkradio" id="exampleRadioInline2" type="radio" name="exampleRadioInline" />
-                                                            <label for="exampleRadioInline2">Female</label>
-                                                        </div>
 
-
-                                                    </div>
-                                                </div>
                                                 <div className="field is-horizontal">
                                                     <div className="field-label is-normal">
                                                         <label className="label has-text-weight-light has-text-grey-light">Date of Birth</label>
@@ -214,17 +210,22 @@ export default withRouter(class Profile extends Component {
                                                         <div className="field">
                                                             <div className="control">
                                                                 <div className="select">
-                                                                    <select className="is-hovered w-250">
-                                                                        <option>Select Country</option>
-                                                                        <option>Afghanistan</option>
+
+                                                                    <select className="is-hovered w-250" value={`${(userData.accountCountry) ? userData.accountCountry : null}`} name="accountCountry" onChange={this.handleInputChange}>
+                                                                        <option value="">Select Country</option>
+
+                                                                        {getCountries().map(country => (
+
+
+
+                                                                            <option value={country.code}>{country.name}</option>
+                                                                        ))}
 
                                                                     </select>
+                                                                    <p className="help is-danger">{_.get(error, 'accountCountry')}</p>
                                                                 </div>
                                                             </div>
-                                                            {/* <div className="control">
-                    <input className="input" name="DateOfBirth" id="DateOfBirth" type="text"  />
-                   
-                </div> */}
+
                                                         </div>
 
                                                     </div>
@@ -264,7 +265,7 @@ export default withRouter(class Profile extends Component {
                                                 </div>
 
 
-                                            </form>
+                                            </span>
                                         </div>
                                     </div>
 

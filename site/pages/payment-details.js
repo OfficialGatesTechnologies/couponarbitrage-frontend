@@ -9,7 +9,10 @@ import Footer from '../components/footer';
 import MyAccountMidMenu from '../components/my-account/my-account-mid-menu';
 import MyAccountTop from '../components/my-account/my-account-top';
 import Link from 'next/link';
+import _ from 'lodash';
 import jsCookie from 'js-cookie';
+import { toast } from 'react-toastify';
+toast.configure();
 export default withRouter(class PaymentDetails extends Component {
     constructor(props) {
         super(props);
@@ -47,10 +50,145 @@ export default withRouter(class PaymentDetails extends Component {
             })
 
     }
+    handleInputChange = (e) => {
+        const { userData } = this.state;
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+        userData[name] = value;
+        this.setState({
+            userData: userData
+        })
+    }
+    onTextFieldBlur = (e) => {
+        e.preventDefault();
+        let errors = this.state.errors;
+        const fieldName = e.target.name;
+        let fieldNeedToValidate = [fieldName];
+        errors[fieldName] = null;
+        this.formValidation(fieldNeedToValidate);
 
+    }
+    formValidation = (fieldsToValidate = [], callback = () => { }) => {
+        const { userData } = this.state;
+        const allFields = {
+            accountSkrillEmail: {
+                message: "Please enter valid email.",
+                doValidate: () => {
+                    const value = _.trim(_.get(userData, 'accountSkrillEmail', ""));
+                    const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
+                    if (emailValid) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            accountNetellerEmail: {
+                message: "Please enter valid email.",
+                doValidate: () => {
+                    const value = _.get(userData, 'accountNetellerEmail', '');
+                    const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
+                    if (emailValid) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            accountPaypalEmail: {
+                message: "Please enter valid email.",
+                doValidate: () => {
+                    const value = _.get(userData, 'accountPaypalEmail', '');
+                    const emailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
+                    if (emailValid) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            bankAccountName: {
+                message: "Please enter the password.",
+                doValidate: () => {
+                    const value = _.get(userData, 'bankAccountName', '');
+                    if (value && value.length > 0) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            bankAccountNumber: {
+                message: "Please enter the password.",
+                doValidate: () => {
+                    const value = _.get(userData, 'bankAccountNumber', '');
+                    if (value && value.length > 0) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            bankAccountSortCode: {
+                message: "Please enter the password.",
+                doValidate: () => {
+                    const value = _.get(userData, 'bankAccountSortCode', '');
+                    if (value && value.length > 0) {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        };
+        let errors = this.state.errors;
+        _.each(fieldsToValidate, (field) => {
+            const fieldValidate = _.get(allFields, field);
+            if (fieldValidate) {
+                errors[field] = null;
+                const isFieldValid = fieldValidate.doValidate();
+                if (isFieldValid === false) {
+                    errors[field] = _.get(fieldValidate, 'message');
+                }
+            }
+        });
+        this.setState({
+            error: errors,
+        }, () => {
+            let isValid = true;
+            this.setState({ disableBtn: true });
+            _.each(errors, (err) => {
+                if (err) {
+                    isValid = false;
+                    this.setState({ disableBtn: false });
+                }
+            });
+            callback(isValid);
+        })
+
+    }
+
+    handleSubmit = (type, e) => {
+        e.preventDefault();
+
+        const { userData } = this.state;
+        axios.defaults.headers.common['Authorization'] = jsCookie.get('jwtToken');
+        axios.post(apiUrl + 'account/update-payment-details', {
+            userData: userData,
+            type: type
+        }).then((result) => {
+            let successMsg = result.data.msg;
+            toast.success(successMsg, {
+                position: toast.POSITION.TOP_RIGHT,
+                toastId: 13
+            });
+        }).catch(error => {
+            let errorMsg = error.response.data.msg;
+            toast.error(errorMsg, {
+                position: toast.POSITION.TOP_RIGHT,
+                toastId: 13
+            });
+        });
+
+    }
 
     render() {
-        const { } = this.state;
+        const { error, userData } = this.state;
         return (
             <div>
                 <Head>
@@ -90,7 +228,7 @@ export default withRouter(class PaymentDetails extends Component {
                                             Optional: Payout by Skrill - (Free)
                                         </p>
                                         <div className="panel-block pan-border-color-cus">
-                                            <form className="is-fullwidth max-panel-bdy">
+                                            <span className="is-fullwidth max-panel-bdy">
 
                                                 <div className="field is-horizontal">
                                                     <div className="field-label is-normal">
@@ -99,7 +237,8 @@ export default withRouter(class PaymentDetails extends Component {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <div className="control">
-                                                                <input className="input" name="accountSkrillEmail" id="accountSkrillEmail" type="email" />
+                                                                <input className={"input " + (_.get(error, 'accountSkrillEmail') ? ' is-danger' : '')} value={userData.accountSkrillEmail} name="accountSkrillEmail" onChange={this.handleInputChange}  type="text" />
+                                                                <p className="help is-danger">{_.get(error, 'accountSkrillEmail')}</p>
                                                             </div>
                                                         </div>
 
@@ -107,12 +246,12 @@ export default withRouter(class PaymentDetails extends Component {
                                                 </div>
                                                 <div className="field is-horizontal">
                                                     <div className="field is-block cus-button-right-pd">
-                                                        <button name="skrillBut" type="submit" id="skrillBut" className="btn purple-btn mg-t20" value="Register">Submit</button>
+                                                        <button name="skrillBut" onClick={this.handleSubmit.bind(this, 1)} className="btn purple-btn mg-t20" value="Register">Submit</button>
                                                     </div>
                                                 </div>
 
 
-                                            </form>
+                                            </span>
                                         </div>
                                     </div>
 
@@ -122,7 +261,7 @@ export default withRouter(class PaymentDetails extends Component {
                                         <p className="panel-heading pan-border-color-cus bg-head">
                                             Optional: NETELLER - (Free)</p>
                                         <div className="panel-block pan-border-color-cus">
-                                            <form className="is-fullwidth max-panel-bdy">
+                                            <span className="is-fullwidth max-panel-bdy">
                                                 <input type="hidden" name="updateType" value="skrill" />
                                                 <div className="field is-horizontal">
                                                     <div className="field-label is-normal">
@@ -131,7 +270,8 @@ export default withRouter(class PaymentDetails extends Component {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <p className="control">
-                                                                <input className="input" name="accountNETELLEREmail" id="accountNETELLEREmail" type="email" />
+                                                                <input className={"input " + (_.get(error, 'accountNetellerEmail') ? ' is-danger' : '')} value={userData.accountNetellerEmail} name="accountNetellerEmail" onChange={this.handleInputChange}  type="text" />
+                                                                <p className="help is-danger">{_.get(error, 'accountNetellerEmail')}</p>
                                                             </p>
                                                         </div>
 
@@ -139,12 +279,12 @@ export default withRouter(class PaymentDetails extends Component {
                                                 </div>
                                                 <div className="field is-horizontal">
                                                     <div className="field is-block cus-button-right-pd">
-                                                        <button name="skrillBut" type="submit" id="skrillBut" className="btn purple-btn mg-t20" value="Register">Submit</button>
+                                                        <button name="skrillBut" onClick={this.handleSubmit.bind(this, 2)} id="skrillBut" className="btn purple-btn mg-t20" value="Register">Submit</button>
                                                     </div>
                                                 </div>
 
 
-                                            </form>
+                                            </span>
                                         </div>
                                     </div>
 
@@ -156,7 +296,7 @@ export default withRouter(class PaymentDetails extends Component {
                                             Optional: Payout by PayPal (Free)*
         </p>
                                         <div className="panel-block pan-border-color-cus">
-                                            <form className="is-fullwidth max-panel-bdy">
+                                            <span className="is-fullwidth max-panel-bdy">
                                                 <input type="hidden" name="updateType" value="skrill" />
                                                 <div className="pag-cont has-text-grey">
                                                     <p>*PayPal may charge a fee for certain PayPal accounts, such as Business and Premier accounts.</p><br />
@@ -170,7 +310,8 @@ export default withRouter(class PaymentDetails extends Component {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <p className="control">
-                                                                <input className="input" name="accountPayPalEmail" id="accountPayPalEmail" type="email" />
+                                                                <input className={"input " + (_.get(error, 'accountPaypalEmail') ? ' is-danger' : '')} value={userData.accountPaypalEmail} name="accountPaypalEmail" onChange={this.handleInputChange}  type="text" />
+                                                                <p className="help is-danger">{_.get(error, 'accountPaypalEmail')}</p>
                                                             </p>
                                                         </div>
 
@@ -178,12 +319,12 @@ export default withRouter(class PaymentDetails extends Component {
                                                 </div>
                                                 <div className="field is-horizontal">
                                                     <div className="field is-block cus-button-right-pd">
-                                                        <button name="skrillBut" type="submit" id="skrillBut" className="btn purple-btn mg-t20" value="Register">Submit</button>
+                                                        <button name="skrillBut" onClick={this.handleSubmit.bind(this, 3)} id="skrillBut" className="btn purple-btn mg-t20" value="Register">Submit</button>
                                                     </div>
                                                 </div>
 
 
-                                            </form>
+                                            </span>
                                         </div>
                                     </div>
 
@@ -195,7 +336,7 @@ export default withRouter(class PaymentDetails extends Component {
                                             Optional: Payout by bank transfer - BACS (Free)
         </p>
                                         <div className="panel-block pan-border-color-cus">
-                                            <form className="is-fullwidth max-panel-bdy">
+                                            <span className="is-fullwidth max-panel-bdy">
                                                 <input type="hidden" name="updateType" value="skrill" />
 
 
@@ -207,7 +348,8 @@ export default withRouter(class PaymentDetails extends Component {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <p className="control">
-                                                                <input className="input" name="accountHolderName" id="accountHolderName" type="text" />
+                                                            <input className={"input " + (_.get(error, 'bankAccountName') ? ' is-danger' : '')} value={userData.bankAccountName} name="bankAccountName" onChange={this.handleInputChange}  type="text" />
+                                                                <p className="help is-danger">{_.get(error, 'bankAccountName')}</p>
                                                             </p>
                                                         </div>
 
@@ -220,15 +362,11 @@ export default withRouter(class PaymentDetails extends Component {
                                                     </div>
                                                     <div className="field-body">
                                                         <div className="field">
-                                                            <p className="control shrt-box">
-                                                                <input className="input" name="accountHolderName" id="accountHolderName" type="text" />
+                                                            <p className="control ">
+                                                            <input className={"input " + (_.get(error, 'bankAccountSortCode') ? ' is-danger' : '')} value={userData.bankAccountSortCode} name="bankAccountSortCode" onChange={this.handleInputChange}  type="text" />
+                                                                <p className="help is-danger">{_.get(error, 'bankAccountSortCode')}</p>
                                                             </p>
-                                                            <p className="control shrt-box">
-                                                                <input className="input" name="accountHolderName" id="accountHolderName" type="text" />
-                                                            </p>
-                                                            <p className="control shrt-box">
-                                                                <input className="input" name="accountHolderName" id="accountHolderName" type="text" />
-                                                            </p>
+                                                            
                                                         </div>
 
                                                     </div>
@@ -241,7 +379,8 @@ export default withRouter(class PaymentDetails extends Component {
                                                     <div className="field-body">
                                                         <div className="field">
                                                             <p className="control">
-                                                                <input className="input" name="accountNumber" id="accountNumber" type="text" />
+                                                            <input className={"input " + (_.get(error, 'bankAccountNumber') ? ' is-danger' : '')} value={userData.bankAccountNumber} name="bankAccountNumber" onChange={this.handleInputChange}  type="text" />
+                                                                <p className="help is-danger">{_.get(error, 'bankAccountNumber')}</p>
                                                             </p>
                                                         </div>
 
@@ -249,14 +388,14 @@ export default withRouter(class PaymentDetails extends Component {
                                                 </div>
                                                 <div className="field is-horizontal">
                                                     <div className="field is-block cus-button-right-pd">
-                                                        <button name="skrillBut" type="submit" id="skrillBut" className="btn purple-btn mg-t20" value="Register">Submit</button>
+                                                        <button name="skrillBut" onClick={this.handleSubmit.bind(this, 4)} id="skrillBut" className="btn purple-btn mg-t20" value="Register">Submit</button>
                                                     </div>
                                                 </div>
                                                 <div className="pag-cont is-inline-block is-fullwidth has-text-grey">
                                                     <p>Please note that our payout system supports payouts to bank accounts with six-digit sort codes and eight-digit account numbers only. We cannot pay in to bank accounts with longer account numbers or those requiring a roll number or other additional information to identify them.</p>
                                                 </div>
 
-                                            </form>
+                                            </span>
 
                                         </div>
 
