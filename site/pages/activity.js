@@ -1,111 +1,173 @@
+import React, { Component } from 'react';
 import Head from 'next/head';
-import { site_name } from '../utils/Common';
+import axios from 'axios';
+import { site_name, apiUrl } from '../utils/Common';
+import { withRouter } from 'next/router';
+import Router from 'next/router';
 import HeaderIn from '../components/header-in';
 import Footer from '../components/footer';
 import MyAccountMidMenu from '../components/my-account/my-account-mid-menu';
-import MyAccountTop from'../components/my-account/my-account-top';
-
+import MyAccountTop from '../components/my-account/my-account-top';
 import Link from 'next/link';
+import jsCookie from 'js-cookie';
+import _ from 'lodash';
+import CustomLoader from '../components/custome-loader';
+import Pagination from "react-js-pagination";
+import { toast } from 'react-toastify';
+toast.configure();
+export default withRouter(class Activity extends Component {
 
-const Activity = (props) => (
-    <div>
-        <Head>
-            <meta charSet="utf-8" />
-            <title>{site_name} | Activity</title>
-            
-           
-        </Head>
+    constructor(props) {
+        super(props);
+        this.state = {
+            userData: [],
+            arrList: [],
+            activePage: 1,
+            totalRecords: 0,
+            pageLimit: 10,
+        }
+    }
+    componentDidMount = () => {
 
-        <HeaderIn />
-        <div className="container">
-        <div className="inner-brd-crmp">
-        <ul>
-            <li>
-            <Link href="/"><a>Home</a></Link></li>
-            <li>
-            <Link href="javascript:void(0);"><a>My Account</a></Link>
-            </li>
-        </ul>
-        </div>
-            {/* <div className="fwid banner-wrap inner-wrap">
-                <div className="innerban-text">
-                    <h4><a href="/">Home</a>&nbsp; / &nbsp;<b>Trunover Cashback</b>&nbsp; /&nbsp;<b>My Account</b></h4>
-                </div>
-                <div className="banner-layer innerban-layer">&nbsp;</div>
-                <div className="innerban-img"> <img src="/static/images/banner/eco-innerbanner.png" alt="Ecopayz Cashback Scheme" /></div>
-            </div> */}
-        </div>
+        axios.defaults.headers.common['Authorization'] = jsCookie.get('jwtToken');
+        axios.get(apiUrl + 'auth/check-auth')
+            .then(res => {
+                let userData = res.data;
+                this.setState({
+                    userData: userData,
+                });
+            }).catch(() => {
+                Router.push(`/signin`);
+            })
+        this.getList(1);
+    }
+    getList = (page) => {
+        const { pageLimit, status } = this.state;
+        this.setState({ loading: true });
+        axios.defaults.headers.common['Authorization'] = jsCookie.get('jwtToken');
+        let listUrl = apiUrl + 'account/user-activities?pageLimit=' + pageLimit + '&page=' + page;
+        if (status) { listUrl += '&status=' + status; }
+        axios.get(listUrl).then(res => {
+            this.setState({
+                arrList: res.data.results,
+                totalRecords: res.data.totalCount,
+                loading: false,
+            });
+        }).catch(() => {
 
-        <div className="inner-wrapper">
-            <div className="container">
-                <MyAccountTop />
-                <MyAccountMidMenu />
-                
-                
-                <div className="fwid mg-t-40">
-                <div className="fwid new-title has-text-left">
-                    <h1><span className="tables-title">Activity</span></h1>
-                </div>
-                <div className="bg-white is-inline-block is-fullwidth">
-                <div className="fwid mg-20 cus-border">
-                <div className="table-title text-left">
-                    <h4>Activity Schedule</h4>
-                </div>
-                <div className="table-sec table-responsive">
-                        <table className="table new-table emptys-tables table is-fullwidth" border="0" cellpadding="0" cellspacing="0">
-                          <thead>
-                            <tr>
-                              <td>Activites</td>
-                              <td>Date <span className="pending_img"></span></td>
-                              <td>Value <span className="confirmed_img"></span></td>
-                              <td>Status <span className="paid_img"></span></td>
-                             
-                            </tr>
-                          </thead>
-                          <tbody className="has-text-grey border-td">
-                              <tr>
-                                  <td>Cashback Payout Request</td>
-                                  <td>02/05/2019</td>
-                                  <td>£1.00</td>
-                                  <td><span className="tag is-warning">Pending</span></td>
-                              </tr>
-                              <tr>
-                                  <td>Cashback Payout Request</td>
-                                  <td>02/05/2019</td>
-                                  <td>£50.00</td>
-                                  <td><span className="tag is-danger">Cancelled</span></td>
-                              </tr>
-                              <tr>
-                                  <td>App Subscribtion Using Cashback</td>
-                                  <td>02/05/2019</td>
-                                  <td>£100.00</td>
-                                  <td><span className="tag is-info">Subscribed</span></td>
-                              </tr>
-                              <tr>
-                                  <td>Cashback Payout Request</td>
-                                  <td>02/05/2019</td>
-                                  <td>£1.00</td>
-                                  <td><span className="tag is-success">Confirmed</span></td>
-                              </tr>
-                              <tr>
-                                    <td colspan="5" style={{textAlign: 'center', display: 'none'}}>No records found</td>
-                              </tr>
-                                                        </tbody>
-                        </table>
-                      </div>
-                </div>
-                </div>
-                
-                </div>
-                
+        })
+    }
+    handlePageChange = (pageNumber) => {
+        this.setState({ activePage: pageNumber });
+        this.getList(pageNumber);
+    }
 
+    render() {
+        return (
+            <div>
+                <Head>
+                    <meta charSet="utf-8" />
+                    <title>{site_name} | Activity</title>
+
+
+                </Head>
+
+                <HeaderIn />
+                <div className="container">
+                    <div className="inner-brd-crmp">
+                        <ul>
+                            <li>
+                                <Link href="/"><a>Home</a></Link></li>
+                            <li>
+                                <Link href="javascript:void(0);"><a>My Account</a></Link>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div className="inner-wrapper">
+                    <div className="container">
+                        <MyAccountTop userData={this.state.userData} />
+                        <MyAccountMidMenu />
+
+
+                        <div className="fwid mg-t-40">
+                            <div className="fwid new-title has-text-left">
+                                <h1><span className="tables-title">Activity</span></h1>
+                            </div>
+                            <div className="bg-white is-inline-block is-fullwidth">
+                                <div className="fwid mg-20 cus-border">
+                                    <div className="table-title text-left">
+                                        <h4>Activity Schedule</h4>
+                                    </div>
+                                    <div className="table-sec table-responsive">
+                                        <table className="table new-table emptys-tables table is-fullwidth" border="0" cellpadding="0" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <td>Activites</td>
+                                                    <td>Date <span className="pending_img"></span></td>
+                                                    <td>Value <span className="confirmed_img"></span></td>
+                                                    <td>Status <span className="paid_img"></span></td>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody className="has-text-grey border-td">
+                                                {
+                                                    this.state.loading ?
+                                                        <tr>
+                                                            <td colspan="5" style={{ textAlign: 'center' }}>
+                                                                <CustomLoader type="list" />
+                                                            </td>
+                                                        </tr> :
+                                                        this.state.arrList.length > 0
+                                                            ?
+                                                            this.state.arrList.map(function (dataRow) {
+                                                                return <tr>
+
+                                                                    <td>{dataRow.activity_name ? dataRow.activity_name : ''} </td>
+                                                                    <td>{dataRow.activity_added ? dataRow.activity_added.slice(0, 10) : ''} </td>
+                                                                    <td>{`${dataRow.activity_type == 'RevenueCashbackClaims' && dataRow.activity_amount ? dataRow.activity_amount + '%' : '€' + dataRow.activity_amount}`}</td>
+                                                                    <td>{dataRow.activity_status ? dataRow.activity_status : '-'}</td>
+
+                                                                </tr>
+                                                            })
+                                                            :
+                                                            <tr>
+                                                                <td colspan="5" style={{ textAlign: 'center' }}>No records found</td>
+                                                            </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <nav className="pagination is-rounded" role="navigation" aria-label="pagination">
+                                    <Pagination
+                                        innerClass="pagination-list"
+                                        linkClass="pagination-link"
+                                        activeLinkClass="is-current"
+                                        activePage={this.state.activePage}
+                                        itemsCountPerPage={this.state.pageLimit}
+                                        totalItemsCount={this.state.totalRecords}
+                                        pageRangeDisplayed={5}
+                                        onChange={this.handlePageChange.bind(this)}
+                                    />
+                                </nav>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <Footer />
             </div>
+        )
+    }
+});
 
-        </div>
-
-        <Footer />
-    </div>
-)
-
-export default Activity;
 
