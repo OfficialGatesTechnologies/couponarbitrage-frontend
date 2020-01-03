@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import Head from 'next/head';
-import HomeIndex from '../components/landing-page/home-index';
+import HomeIndex from '../components/landing-page/Home-index';
 import { site_name, apiUrl } from '../utils/Common';
 import axios from 'axios';
 import { withRouter } from 'next/router';

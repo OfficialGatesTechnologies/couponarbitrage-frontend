@@ -5,11 +5,11 @@ import { site_name, apiUrl } from '../utils/Common';
 import { withRouter } from 'next/router';
 import Router from 'next/router'
 import Link from 'next/link';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
-import MyAccountMidMenu from '../components/my-account/my-account-mid-menu';
-import MyAccountTop from '../components/my-account/my-account-top';
-import CustomLoader from '../components/custome-loader';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
+import MyAccountMidMenu from '../components/my-account/My-account-mid-menu';
+import MyAccountTop from '../components/my-account/My-account-top';
+import CustomLoader from '../components/Custome-loader';
 import jsCookie from 'js-cookie';
 import { toast } from 'react-toastify';
 toast.configure();

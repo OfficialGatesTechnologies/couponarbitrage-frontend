@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import {site_name} from '../utils/Common';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
-import EuropeanHandicapsCalculatorTop from '../components/arbitrage-calculators/european-handicaps/european-handicaps-calculator-top';
-import EuropeanHandicapsCalculatorForm from '../components/arbitrage-calculators/european-handicaps/european-handicaps-calculator-form';
-import ArbitrageCalculatorsMenu from '../components/arbitrage-calculators/arbitrage-calculators-menu';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
+import EuropeanHandicapsCalculatorTop from '../components/arbitrage-calculators/european-handicaps/European-handicaps-calculator-top';
+import EuropeanHandicapsCalculatorForm from '../components/arbitrage-calculators/european-handicaps/European-handicaps-calculator-form';
+import ArbitrageCalculatorsMenu from '../components/arbitrage-calculators/Arbitrage-calculators-menu';
 
 import Link from 'next/link';
 

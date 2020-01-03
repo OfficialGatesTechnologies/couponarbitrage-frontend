@@ -6,8 +6,8 @@ import { withRouter } from 'next/router';
 import Router from 'next/router'
 import Link from 'next/link';
 import { site_name, apiUrl, siteUrl } from '../utils/Common';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
 import { toast } from 'react-toastify';
 import jsCookie from 'js-cookie';
 toast.configure();

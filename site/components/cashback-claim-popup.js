@@ -5,7 +5,7 @@ import axios from 'axios';
 import { site_name, apiUrl, siteUrl } from '../utils/Common';
 import Modal from 'react-responsive-modal';
 import ReactTooltip from 'react-tooltip';
-import CustomLoader from '../components/custome-loader';
+import CustomLoader from './Custome-loader';
 import _ from 'lodash';
 export default withRouter(
   class CashbackCliamPopup extends Component {

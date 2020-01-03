@@ -4,12 +4,12 @@ import Router from 'next/router'
 import Head from 'next/head';
 import axios from 'axios';
 import { site_name } from '../utils/Common';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
 import Link from 'next/link';
 import { apiUrl } from '../utils/Common';
 import jsCookie from 'js-cookie';
-import CustomLoader from '../components/custome-loader';
+import CustomLoader from '../components/Custome-loader';
 export default withRouter(class Reminder extends Component {
 
     constructor(props) {

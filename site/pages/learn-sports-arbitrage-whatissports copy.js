@@ -9,7 +9,7 @@ import LearnSportsArbitrage_Top from '../components/Learn-sports-arbitrage-top';
 import ArticleArbitrage from '../components/Article-arbitrage';
 import { apiUrl } from '../utils/Common';
 import Link from 'next/link';
-import renderHTML from 'react-render-html';
+
 export default withRouter(class LearnSportsArbitrage_whatissports extends Component {
     constructor(props) {
         super(props);
@@ -20,25 +20,14 @@ export default withRouter(class LearnSportsArbitrage_whatissports extends Compon
             metakey: '',
             metadesc: '',
             metadata: '',
-            submenus: [],
-            submenuRow: [],
-            articleList: [],
+            submenus: []
 
 
         }
     }
     componentDidMount = () => {
-        const url_key = this.props.router.query.url_key;
-
         this.getMenusList();
 
-        if (url_key) {
-            this.setState({ url_key: url_key, submenuRow: [] });
-
-            setTimeout(() => { this.getSubMenusList(); }, 500);
-        } else {
-            Router.push(`/`);
-        }
     }
     getMenusList = () => {
         let listUrl = apiUrl + 'common/menu-row?link=' + this.state.menuUrl;
@@ -52,25 +41,13 @@ export default withRouter(class LearnSportsArbitrage_whatissports extends Compon
                     metaTitle: results.metatitle,
                     metakey: results.metakey,
                     metadesc: results.metadesc,
+
                 });
             }).catch(() => {
                 Router.push(`/`);
             })
     }
-    getSubMenusList = () => {
-        let listUrl = apiUrl + 'common/menu-row?link=' + this.state.url_key;
-        axios.get(listUrl)
-            .then(res => {
-                var results = res.data.results;
-                console.log(results.articleList);
-                this.setState({
-                    submenuRow: results,
-                    articleList: results.articleList
-                });
-            }).catch(() => {
-                Router.push(`/`);
-            })
-    }
+
 
     render() {
         return (
@@ -87,8 +64,7 @@ export default withRouter(class LearnSportsArbitrage_whatissports extends Compon
                         <ul>
                             <li><Link href="/"><a>Home</a></Link></li>
 
-                            <li><Link href="/learn-sports-arbitrage"><a>Learn Sports Arbitrage</a>
-                            </Link></li>
+                            <li><Link href="/learn-sports-arbitrage"><a>Learn Sports Arbitrage</a></Link></li>
                             <li><Link href="javascript:void(0);"><a>What is Sports Arbitrage?</a></Link></li>
                         </ul>
                     </div>
@@ -104,37 +80,34 @@ export default withRouter(class LearnSportsArbitrage_whatissports extends Compon
                                 <div className="row">
                                     <div className="fwid two-box bread-crumbs">
                                         <h3 className="bread-title">Learn Sports Arbitrage</h3>
-                                        <h5><a>Learn Sports Arbitrage</a> &gt; {this.state.submenuRow ? this.state.submenuRow.name : ''}</h5>
+                                        <h5><a>Learn Sports Arbitrage</a> &gt; What is Sports Arbitrage?</h5>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="fwid two-box">
-                                        <h1><i className="icon-learnbox">&nbsp;</i> {this.state.submenuRow ? this.state.submenuRow.name : ''}</h1>
-                                        {this.state.submenuRow.description ? renderHTML(this.state.submenuRow.description) : ''}</div>
+                                        <h1><i className="icon-learnbox">&nbsp;</i> What is Sports Arbitrage?</h1>
+                                        <p>Sports Arbitrage Trading or <em>arbing</em> is the process of placing a number of sports bets, with different bookmakers, in order to lock in a profit regardless of which team wins or outcome occurs. Browse the articles below to learn more.</p></div>
                                 </div>
                             </div>
                         </div>
 
-                        {
-                            this.state.articleList && (this.state.articleList).length > 0 ? <div className="fwid bg-white is-clearfix">
-                                <div className="learn-box-list">
-                                    <ul className="no-style">
-                                        {
-                                            (this.state.articleList).map(function (dataRow) {
-                                                return <li>
-                                                    <div className="fwid learn-sublinks">
-                                                        <Link href={`/article/${dataRow.title_alias}`}><a>{dataRow.title}</a></Link>
-                                                    </div>
-                                                </li>
-                                            })
-                                        }
-                                    </ul>
-                                </div>
-                            </div> : ''
-                        }
-
-
-                      
+                        <div className="fwid bg-white is-clearfix">
+                            <div className="learn-box-list">
+                                <ul className="no-style">
+                                    <li>
+                                        <div className="fwid learn-sublinks">
+                                            <a >How much can you earn from sports arbitrage?</a> -
+                    </div>
+                                    </li>
+                                    <li>
+                                        <div className="fwid learn-sublinks">
+                                            <a >Introduction to sports arbitrage</a> -
+                    </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <ArticleArbitrage />
                     </div>
 
                 </div>

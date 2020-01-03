@@ -10,6 +10,7 @@ import ArticleArbitrage from '../components/Article-arbitrage';
 import { apiUrl } from '../utils/Common';
 import Link from 'next/link';
 import renderHTML from 'react-render-html';
+
 export default withRouter(class LearnSportsArbitrage_whatissports extends Component {
     constructor(props) {
         super(props);
@@ -21,9 +22,9 @@ export default withRouter(class LearnSportsArbitrage_whatissports extends Compon
             metadesc: '',
             metadata: '',
             submenus: [],
-            submenuRow: [],
-            articleList: [],
-
+            submenuRow:[],
+            articleRow:[],
+            parentRow: [],
 
         }
     }
@@ -31,11 +32,11 @@ export default withRouter(class LearnSportsArbitrage_whatissports extends Compon
         const url_key = this.props.router.query.url_key;
 
         this.getMenusList();
-
+      
         if (url_key) {
             this.setState({ url_key: url_key, submenuRow: [] });
 
-            setTimeout(() => { this.getSubMenusList(); }, 500);
+            setTimeout(() => { this.getArticleRow(); }, 500);
         } else {
             Router.push(`/`);
         }
@@ -54,18 +55,18 @@ export default withRouter(class LearnSportsArbitrage_whatissports extends Compon
                     metadesc: results.metadesc,
                 });
             }).catch(() => {
-                Router.push(`/`);
+               
             })
     }
-    getSubMenusList = () => {
-        let listUrl = apiUrl + 'common/menu-row?link=' + this.state.url_key;
+    getArticleRow = () => {
+        let listUrl = apiUrl + 'common/article-row?link=' + this.state.url_key;
         axios.get(listUrl)
             .then(res => {
                 var results = res.data.results;
-                console.log(results.articleList);
+                console.log(results);
                 this.setState({
-                    submenuRow: results,
-                    articleList: results.articleList
+                    articleRow: results,
+                    parentRow: results.parentRow
                 });
             }).catch(() => {
                 Router.push(`/`);
@@ -87,9 +88,9 @@ export default withRouter(class LearnSportsArbitrage_whatissports extends Compon
                         <ul>
                             <li><Link href="/"><a>Home</a></Link></li>
 
-                            <li><Link href="/learn-sports-arbitrage"><a>Learn Sports Arbitrage</a>
-                            </Link></li>
-                            <li><Link href="javascript:void(0);"><a>What is Sports Arbitrage?</a></Link></li>
+                            <li><Link href="/learn-sports-arbitrage"><a>Learn Sports Arbitrage</a></Link></li>
+                            <li><Link href="javascript:void(0);"><a>{this.state.parentRow.name}</a></Link></li>
+                            <li><Link href="javascript:void(0);"><a>{this.state.articleRow.title}</a></Link></li>
                         </ul>
                     </div>
                 </div>
@@ -104,37 +105,21 @@ export default withRouter(class LearnSportsArbitrage_whatissports extends Compon
                                 <div className="row">
                                     <div className="fwid two-box bread-crumbs">
                                         <h3 className="bread-title">Learn Sports Arbitrage</h3>
-                                        <h5><a>Learn Sports Arbitrage</a> &gt; {this.state.submenuRow ? this.state.submenuRow.name : ''}</h5>
+                                        <h5><a>Learn Sports Arbitrage</a> &gt; <a>{this.state.parentRow ? this.state.parentRow.name : ''} </a>&gt; {this.state.articleRow ? this.state.articleRow.title : ''}</h5>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="fwid two-box">
-                                        <h1><i className="icon-learnbox">&nbsp;</i> {this.state.submenuRow ? this.state.submenuRow.name : ''}</h1>
-                                        {this.state.submenuRow.description ? renderHTML(this.state.submenuRow.description) : ''}</div>
+                                        <h1><i className="icon-learnbox">&nbsp;</i> {this.state.parentRow ? this.state.parentRow.name : ''}</h1>
+                                        {this.state.parentRow.description ? renderHTML(this.state.parentRow.description):''}</div>
                                 </div>
                             </div>
                         </div>
 
-                        {
-                            this.state.articleList && (this.state.articleList).length > 0 ? <div className="fwid bg-white is-clearfix">
-                                <div className="learn-box-list">
-                                    <ul className="no-style">
-                                        {
-                                            (this.state.articleList).map(function (dataRow) {
-                                                return <li>
-                                                    <div className="fwid learn-sublinks">
-                                                        <Link href={`/article/${dataRow.title_alias}`}><a>{dataRow.title}</a></Link>
-                                                    </div>
-                                                </li>
-                                            })
-                                        }
-                                    </ul>
-                                </div>
-                            </div> : ''
-                        }
+ 
+                        
 
-
-                      
+                        <ArticleArbitrage articleRow={this.state.articleRow} />
                     </div>
 
                 </div>

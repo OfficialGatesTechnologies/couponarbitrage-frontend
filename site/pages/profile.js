@@ -4,10 +4,10 @@ import axios from 'axios';
 import { site_name, apiUrl, getCountries } from '../utils/Common';
 import { withRouter } from 'next/router';
 import Router from 'next/router';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
-import MyAccountMidMenu from '../components/my-account/my-account-mid-menu';
-import MyAccountTop from '../components/my-account/my-account-top';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
+import MyAccountMidMenu from '../components/my-account/My-account-mid-menu';
+import MyAccountTop from '../components/my-account/My-account-top';
 import Link from 'next/link';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import jsCookie from 'js-cookie';
@@ -91,8 +91,6 @@ export default withRouter(class Profile extends Component {
                 doValidate: () => {
                     const upassword = _.trim(_.get(userData, 'upassword', ""));
                     const vcpassword = _.trim(_.get(userData, 'cpassword', ""));
-                    console.log('upassword.length',upassword.length);
-                    console.log('userData',userData);
                     if (upassword.length > 0 && upassword != vcpassword) {
                         return false;
                     }

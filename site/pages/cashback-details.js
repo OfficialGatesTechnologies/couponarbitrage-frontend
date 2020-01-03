@@ -4,17 +4,17 @@ import Head from 'next/head';
 import axios from 'axios';
 import _ from 'lodash';
 import { site_name } from '../utils/Common';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
 import Link from 'next/link';
 import { apiUrl } from '../utils/Common';
-import CashbackCategories from '../components/cashback-offfers/cashback-details-categories';
-import SimilarStores from '../components/cashback-offfers/similar-stores';
-import CashbackOffers from '../components/cashback-offfers/cashback-offers';
-import CashbackVouchers from '../components/cashback-offfers/cashback-vouchers';
-import CashbackCliamPopup from '../components/cashback-claim-popup';
-import ReviewPopup from '../components/review-popup';
-import CustomLoader from '../components/custome-loader';
+import CashbackCategories from '../components/cashback-offfers/Cashback-details-categories';
+import SimilarStores from '../components/cashback-offfers/Similar-stores';
+import CashbackOffers from '../components/cashback-offfers/Cashback-offers';
+import CashbackVouchers from '../components/cashback-offfers/Cashback-vouchers';
+import CashbackCliamPopup from '../components/Cashback-claim-popup';
+import ReviewPopup from '../components/Review-popup';
+import CustomLoader from '../components/Custome-loader';
 import jsCookie from 'js-cookie';
 import { toast } from 'react-toastify';
 import {
@@ -86,18 +86,24 @@ export default withRouter(class Cashback_Bonuses extends Component {
         axios.get(apiUrl + 'auth/check-auth')
             .then(res => {
                 popupData['cbname'] = res.data.name;
-
                 this.setState({ loading: false, userRow: res.data, popupData: popupData, loggedUserId: res.data._id });
             }).catch((error) => {
                 this.setState({ loading: false });
             })
     }
-    componentWillReceiveProps = (nextProps) => {
-        const url_key = nextProps.router.query.url_key;
+    static getDerivedStateFromProps = (nextProps, prevState) => {
+  
+        const url_key = nextProps.router.asPath;
         if (url_key) {
-            this.setState({ url_key: url_key });
-            setTimeout(() => { this.getStoreRow(); }, 100);
+            return { url_key: url_key.replace(/\//g, "")};
         }
+    }
+    componentDidUpdate = (nextProps) =>{
+        const { url_key } = this.state;
+        if (url_key) {
+           setTimeout(() => { this.getStoreRow(); }, 100);
+        }
+  
     }
     getStoreRow = () => {
         const { cashbackRow,loggedUserId } = this.state;
@@ -121,7 +127,7 @@ export default withRouter(class Cashback_Bonuses extends Component {
                     cb_type: cashbackRow.cat_id && cashbackRow.cat_id.cat_parent && cashbackRow.cat_id.cat_parent.link === 'cashback-bonuses' ? 3 : 2
                 });
             }).catch(() => {
-                Router.push(`/`);
+               // Router.push(`/`);
             })
     }
     showCode = (e) => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
 import axios from 'axios';
 import '../styles/styles.scss'
 import { withRouter } from 'next/router';

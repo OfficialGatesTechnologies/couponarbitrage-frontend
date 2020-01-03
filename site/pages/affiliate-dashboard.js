@@ -1,18 +1,70 @@
-
-
+import React, { Component } from 'react';
 import Head from 'next/head';
-
+import { withRouter } from 'next/router';
 import {site_name} from '../utils/Common';
-
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
 import Link from 'next/link';
-const AffiliatesDashboard = (props) => (
+import Highcharts from 'highcharts';
+import HighchartsExporting from 'highcharts/modules/exporting'
+import HighchartsReact from 'highcharts-react-official';
+if (typeof Highcharts === 'object') {
+    HighchartsExporting(Highcharts)
+}
+ 
+export default withRouter(class AffiliatesDashboard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            options: {
+                chart: {
+                  type: 'column'
+                },
+                data: {
+                    table: 'datatable'
+                },
+                title: {
+                  text: 'Period Comparison'
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">Date : {point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },plotOptions: {
+                    column: {
+                        pointPadding: 0.1,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Cashback Count',
+                    data: []
+            
+                }, {
+                    name: 'App Subscriptions',
+                    data: []
+            
+                }]   
+            }
+        }
+    }
+    getAffliateComm = () =>{
+        
+        const { options } = this.state;
+        let  option = {
+          };
+          
+    }
+    render() {
+        const {  options} = this.state;
+        return (
     <div>
         <Head>
             <meta charSet="utf-8" />
             <title>{site_name} | Affiliate Dashboard</title>
-
         </Head>
         <HeaderIn />
         <div className="container">
@@ -29,13 +81,10 @@ const AffiliatesDashboard = (props) => (
                   </li>
                   <li><Link href="/affiliate-payout"><a>Payout</a></Link>
                   </li>
-
               </ul>
-              
           </div>
           </div>
-            
-            </div>
+        </div>
         </div>
           </div>
           <div className="container">
@@ -52,7 +101,7 @@ const AffiliatesDashboard = (props) => (
                             <th colSpan="4">Quick Stats</th>
 
                             <th className="lst-mth">
-                                <select d="quiState" onchange="getAffliateComm(this.value)">
+                                <select >
                                     <option value="month">MTD</option>
                                     <option value="year">YTD</option>
                                     <option value="today">TODAY</option>
@@ -61,9 +110,7 @@ const AffiliatesDashboard = (props) => (
                                 </select></th>
                         </tr>
                     </thead>
-                    {/* <tbody id="getchartComm">
-                        <ion-spinner icon="lines" className="spinner-calm"></ion-spinner>
-                    </tbody> */}
+           
                     <tbody id="getchartComm"><tr style={{background: 'transparent'}}>
                                           <th style={{border: '0px'}}>&nbsp;</th>
                                           <th style={{border: '0px'}}>&nbsp;</th>
@@ -102,7 +149,7 @@ const AffiliatesDashboard = (props) => (
                             <th colSpan="4">Period Stats</th>
 
                             <th className="lst-mth" style={{width: '20%'}}>
-                                <select d="quiState" onchange="getAffliate(this.value)">
+                                <select onChange={this.getAffliateComm}>
                                     <option value="month">MTD</option>
                                     <option value="year">YTD</option>
                                     <option value="today">TODAY</option>
@@ -114,20 +161,18 @@ const AffiliatesDashboard = (props) => (
                     </thead>
                     
                 </table>
+                <HighchartsReact highcharts={Highcharts} options={options} />
             </div>
             <div className="tab-top">
-            <table className="table is-striped is-bordered mg-b-20 text-center-table" style={{width: '100%'}}>
+            <table id="datatable" className="table is-striped is-bordered mg-b-20 text-center-table" style={{width: '100%'}}>
                     <thead>
                         <tr>
                             <th></th>
                             <th>Cashback Count</th>
                             <th>App Subscriptions</th>
-                           
-                        </tr>
-                        
+                        </tr>       
                     </thead>
                     <tbody>
-
                     <tr>
                         <td>01</td>
                         <td>0</td>
@@ -138,28 +183,8 @@ const AffiliatesDashboard = (props) => (
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr>
-                        <td>03</td>
-                        <td>0</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>04</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>05</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>06</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    </tbody>
-                    
+                   
+                    </tbody>      
                 </table>
             </div>
               </div>
@@ -213,6 +238,6 @@ const AffiliatesDashboard = (props) => (
 
          <Footer />
     </div>
-  )
-
-export default AffiliatesDashboard;
+         )
+        }
+    });

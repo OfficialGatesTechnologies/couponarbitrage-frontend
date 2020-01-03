@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../styles/styles.scss'
 import { withRouter } from 'next/router';
-import BannerForm from './banner-form';
+import BannerForm from './Banner-form';
 export default withRouter(class BannerImg extends Component {
 
     state = {

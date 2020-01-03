@@ -4,14 +4,14 @@ import axios from 'axios';
 import { site_name } from '../utils/Common';
 import { withRouter } from 'next/router';
 import Link from 'next/link';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
-import CashbackScheme from '../components/turnover-cashback/cashback-scheme';
-import CashbackSlider from '../components/turnover-cashback/cashback-slider';
-import CashbackForm from '../components/turnover-cashback/cashback-form';
-import CashbackFaqs from '../components/turnover-cashback/cashback-faqs';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
+import CashbackScheme from '../components/turnover-cashback/Cashback-scheme';
+import CashbackSlider from '../components/turnover-cashback/Cashback-slider';
+import CashbackForm from '../components/turnover-cashback/Cashback-form';
+import CashbackFaqs from '../components/turnover-cashback/Cashback-faqs';
 import { apiUrl } from '../utils/Common';
-import CustomLoader from '../components/custome-loader';
+import CustomLoader from '../components/Custome-loader';
 const horizontalLabels = {
     0: '0',
     250000: '250000'

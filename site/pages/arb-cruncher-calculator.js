@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import {site_name} from '../utils/Common';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
-import ArbCruncherCalculatorTop from '../components/arbitrage-calculators/arb-cruncher/arb-cruncher-calculator-top';
-import ArbCruncherCalculatorForm from '../components/arbitrage-calculators/arb-cruncher/arb-cruncher-calculator-form';
-import ArbitrageCalculatorsMenu from '../components/arbitrage-calculators/arbitrage-calculators-menu';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
+import ArbCruncherCalculatorTop from '../components/arbitrage-calculators/arb-cruncher/Arb-cruncher-calculator-top';
+import ArbCruncherCalculatorForm from '../components/arbitrage-calculators/arb-cruncher/Arb-cruncher-calculator-form';
+import ArbitrageCalculatorsMenu from '../components/arbitrage-calculators/Arbitrage-calculators-menu';
 
 import Link from 'next/link';
 

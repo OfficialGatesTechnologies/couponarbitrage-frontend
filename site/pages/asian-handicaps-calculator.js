@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import {site_name} from '../utils/Common';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
-import AsianHandicapsCalculatorTop from '../components/arbitrage-calculators/asian-handicaps/asian-handicaps-calculator-top';
-import AsianHandicapsCalculatorForm from '../components/arbitrage-calculators/asian-handicaps/asian-handicaps-calculator-form';
-import ArbitrageCalculatorsMenu from '../components/arbitrage-calculators/arbitrage-calculators-menu';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
+import AsianHandicapsCalculatorTop from '../components/arbitrage-calculators/asian-handicaps/Asian-handicaps-calculator-top';
+import AsianHandicapsCalculatorForm from '../components/arbitrage-calculators/asian-handicaps/Asian-handicaps-calculator-form';
+import ArbitrageCalculatorsMenu from '../components/arbitrage-calculators/Arbitrage-calculators-menu';
 
 import Link from 'next/link';
 

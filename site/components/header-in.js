@@ -18,7 +18,6 @@ export default withRouter(class Header extends Component {
     }
     componentDidMount = () => {
         this.getMenusList();
-
         this.setState({ jwtToken: jsCookie.get('jwtToken') });
     }
     getMenusList = () => {
@@ -154,8 +153,9 @@ const SubMenuContent = (props) => {
     return <div>
         {
             props.subMenus.map(function (dataRow, i) {
+                let link = (dataRow.parent == '5b7a49f8049ac11419000056') ? "learn-sports-arbitrage/" + dataRow.link : dataRow.link;
                 return <div>
-                    <Link href={`/${dataRow.link}`}><a className="navbar-item">{dataRow.name}</a></Link>
+                    <Link href={`/${link}`}><a className="navbar-item">{dataRow.name}</a></Link>
                     <hr className="dropdown-divider has-background-light"></hr>
                 </div>
             })

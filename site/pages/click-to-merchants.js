@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import { site_name } from '../utils/Common';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
-import MyAccountMidMenu from '../components/my-account/my-account-mid-menu';
-import MyAccountTop from'../components/my-account/my-account-top';
-import NavigationWhyNotTry from '../components/my-account/myaccountsitenav';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
+import MyAccountMidMenu from '../components/my-account/My-account-mid-menu';
+import MyAccountTop from'../components/my-account/My-account-top';
+import NavigationWhyNotTry from '../components/my-account/Myaccountsitenav';
 import Link from 'next/link';
 
 const ClickToMerchants = (props) => (

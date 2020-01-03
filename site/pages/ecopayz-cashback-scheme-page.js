@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { site_name } from '../utils/Common';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
-import EcopayzCashbackScheme from '../components/turnover-cashback/ecopayz-cashback-scheme';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
+import EcopayzCashbackScheme from '../components/turnover-cashback/Ecopayz-cashback-scheme';
 import {
     Accordion,
     AccordionItem,
@@ -11,7 +11,7 @@ import {
     AccordionItemPanel,
 } from 'react-accessible-accordion';
  
-import RangeSliderTop from '../components/range-slider';
+import RangeSliderTop from '../components/Range-slider';
 import Link from 'next/link';
 
 const EcopayzCashbackScheme_page = (props) => (

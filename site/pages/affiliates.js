@@ -1,13 +1,11 @@
-
-
 import Head from 'next/head';
-
 import {site_name} from '../utils/Common';
-
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
 import Link from 'next/link';
+import jsCookie from 'js-cookie';
 const Affiliates = (props) => (
+    
     <div>
         <Head>
             <meta charSet="utf-8" />
@@ -19,7 +17,7 @@ const Affiliates = (props) => (
         <div className="container">
         <div className="inner-wrapper full-width">
             <div className="aff-wrap">
-                <div className="aff-ttl">Coupon Arbitrage Affiliates</div>
+                <div className="aff-ttl">Coupon Arbitrage Affiliates  </div>
                 <div className="aff-sec-01">
                     <div className="aff-banner">
                     <div className="columns is-vcentered is-gapless">
@@ -29,7 +27,9 @@ const Affiliates = (props) => (
                             <h4>5% ON REFERRALS CASHBACK | 20% ON SHARBING APP SUBSCRIPTIONS</h4>
                             <h1>EARN UP TO 20% COMMISSION</h1>
                             <h4>ON EVERY REFERRED CUSTOMER FOR LIFE</h4>
-                            <Link href="/affiliate-dashboard"><a className="jo-btn">DASHBOARD</a></Link>
+                            {
+                                jsCookie.get('jwtToken')?  <Link href="/affiliate-dashboard"><a className="jo-btn">DASHBOARD</a></Link>: <Link href="/signin"><a className="jo-btn">Join Now</a></Link>
+                            }
                         </div>
                         </div>
                         </div>
@@ -75,7 +75,12 @@ const Affiliates = (props) => (
                                 <li>Our subscription packages range from £10 to £449 and you will earn 20% of any sbuscription that come from your referrals</li>
                                 <li>That means by promoting our sharbing app you could earn as much as £90 per referral!</li>
                             </ul>
-                            <Link href="/login"><a className="jo-btn">Join Now</a></Link>
+                            {
+                                jsCookie.get('jwtToken')?  <Link href="/affiliate-dashboard"><a className="jo-btn">DASHBOARD</a></Link>: <Link href="/signin"><a className="jo-btn">Join Now</a></Link>
+                            }
+
+                           
+
                         </div>
                         <div className="column has-text-centered">
                         <img src="static/images/others/sharb-app.png"/>
@@ -91,7 +96,9 @@ const Affiliates = (props) => (
                                 <li>By using our links instead of going direct to the gaming site, your refferals will earn a very generous cashback bonus</li>
                                 <li>You will earn 5% of any cashback generated, for life!</li>
                             </ul>
-                            <Link href="/login"><a className="jo-btn">Join Now</a></Link>
+                            {
+                                jsCookie.get('jwtToken')?  <Link href="/affiliate-dashboard"><a className="jo-btn">DASHBOARD</a></Link>: <Link href="/signin"><a className="jo-btn">Join Now</a></Link>
+                            }
                         </div>
                         <div className="column has-text-centered">
                         <img src="static/images/others/gamb-off.png"/>

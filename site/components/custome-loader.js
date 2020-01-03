@@ -31,6 +31,9 @@ const CustomerLoader = (props) => (
 
                 <rect x="0" y="260" width="70" height="10" />
                 <rect x="80" y="260" width="400" height="10" />
+
+                
+                
             </ContentLoader> : ''
         }
         {

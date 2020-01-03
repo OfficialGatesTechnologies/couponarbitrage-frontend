@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import Head from 'next/head';
 import { site_name, apiUrl } from '../utils/Common';
 import axios from 'axios';
-import HeaderIn from '../components/header-in';
-import Footer from '../components/footer';
+import HeaderIn from '../components/Header-in';
+import Footer from '../components/Footer';
 import Link from 'next/link';
 import { withRouter } from 'next/router';
 import Router from 'next/router'
