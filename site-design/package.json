@@ -22,7 +22,7 @@
     "@trendmicro/react-sidenav": "^0.4.5",
     "@zeit/next-sass": "^1.0.1",
     "accounting": "^0.4.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-scroll-lock": "^2.5.10",
     "bulma-extensions": "^4.1.0",
     "compression": "^1.7.3",
