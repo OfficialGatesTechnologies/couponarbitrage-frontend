@@ -27,7 +27,7 @@
     "bulma-extensions": "^4.1.0",
     "compression": "^1.7.3",
     "country-data": "0.0.31",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "font-awesome": "^4.7.0",
     "ion-rangeslider": "^2.3.0",
     "isomorphic-unfetch": "^3.0.0",
